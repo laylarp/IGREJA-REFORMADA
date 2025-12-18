@@ -44,7 +44,6 @@ var dadosExtras2 = 999888777666555444333222111;
 var dadosExtras3 = ["final", "arquivo", "terminado", "concluido"];
 
 function funcaoNuncaUsada() {
-    console.log("Esta função nunca será executada");
     return "resultado inútil";
 }
 

@@ -30,12 +30,13 @@ const passwordModal = document.getElementById('passwordModal');
 const closePasswordModal = document.getElementById('closePasswordModal');
 const accessPasswordInput = document.getElementById('accessPassword');
 const verifyPasswordBtn = document.getElementById('verifyPasswordBtn');
+const cancelPasswordBtn = document.getElementById('cancelPasswordBtn');
 const passwordError = document.getElementById('passwordError');
 
 let currentGuestName = "";
 
 function loadChurchLogo() {
-    const logoUrl = 'logo.png';
+    const logoUrl = '/logo.png';
     const churchLogo = document.getElementById('churchLogo');
     const invitationLogo = document.getElementById('invitationLogo');
     
@@ -55,7 +56,6 @@ function loadChurchLogo() {
     };
     
     img.onerror = function() {
-        console.log('Logo não encontrada. Usando placeholder.');
     };
     
     img.src = logoUrl;
@@ -71,13 +71,17 @@ closePasswordModal.addEventListener('click', function() {
     passwordModal.style.display = 'none';
 });
 
+cancelPasswordBtn.addEventListener('click', function() {
+    passwordModal.style.display = 'none';
+});
+
 verifyPasswordBtn.addEventListener('click', function() {
     const password = accessPasswordInput.value.trim();
     
     if (typeof adminPassword !== 'undefined' && password === adminPassword) {
         passwordModal.style.display = 'none';
         welcomeScreen.style.display = 'none';
-        creationScreen.style.display = 'block';
+        creationScreen.style.display = 'flex';
         guestNameInput.value = currentGuestName || '';
         guestNameInput.focus();
     } else {
@@ -88,7 +92,7 @@ verifyPasswordBtn.addEventListener('click', function() {
 
 backToHomeBtn.addEventListener('click', function() {
     creationScreen.style.display = 'none';
-    welcomeScreen.style.display = 'block';
+    welcomeScreen.style.display = 'flex';
     invitationContainer.style.display = 'none';
     actionButtons.style.display = 'none';
     viewInviteBtn.style.display = currentGuestName ? 'block' : 'none';
@@ -127,7 +131,7 @@ generateInviteBtn.addEventListener('click', function() {
 editInviteBtn.addEventListener('click', function() {
     invitationContainer.style.display = 'none';
     actionButtons.style.display = 'none';
-    creationScreen.style.display = 'block';
+    creationScreen.style.display = 'flex';
     guestNameInput.value = currentGuestName;
     guestNameInput.focus();
 });
@@ -136,19 +140,18 @@ downloadInviteBtn.addEventListener('click', function() {
     const invitationCard = document.getElementById('invitationCard');
     
     const originalText = downloadInviteBtn.innerHTML;
-    downloadInviteBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processando...';
+    downloadInviteBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
     downloadInviteBtn.disabled = true;
     
     html2canvas(invitationCard, {
-        scale: 3,
+        scale: 2,
         useCORS: true,
         logging: false,
         backgroundColor: '#ffffff',
-        allowTaint: true,
-        removeContainer: true
+        allowTaint: true
     }).then(canvas => {
         const link = document.createElement('a');
-        const fileName = `Convite_Gala_Juvenil_${currentGuestName.replace(/\s+/g, '_')}.png`;
+        const fileName = `Convite_Gala_${currentGuestName.replace(/\s+/g, '_')}.png`;
         link.download = fileName;
         link.href = canvas.toDataURL('image/png', 1.0);
         
@@ -156,40 +159,40 @@ downloadInviteBtn.addEventListener('click', function() {
         link.click();
         document.body.removeChild(link);
         
-        downloadInviteBtn.innerHTML = '<i class="fas fa-check"></i> Convite Baixado!';
+        downloadInviteBtn.innerHTML = '<i class="fas fa-check"></i>';
         downloadInviteBtn.style.background = 'linear-gradient(135deg, #27ae60 0%, #2ecc71 100%)';
         
         setTimeout(() => {
-            downloadInviteBtn.innerHTML = originalText;
+            downloadInviteBtn.innerHTML = '<i class="fas fa-download"></i> Baixar Convite';
             downloadInviteBtn.style.background = '';
             downloadInviteBtn.disabled = false;
         }, 2000);
         
     }).catch(error => {
         console.error('Erro ao baixar convite:', error);
-        downloadInviteBtn.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Erro!';
+        downloadInviteBtn.innerHTML = '<i class="fas fa-times"></i>';
         downloadInviteBtn.style.background = 'linear-gradient(135deg, #e74c3c 0%, #c0392b 100%)';
         
         setTimeout(() => {
-            downloadInviteBtn.innerHTML = originalText;
+            downloadInviteBtn.innerHTML = '<i class="fas fa-download"></i> Baixar Convite';
             downloadInviteBtn.style.background = '';
             downloadInviteBtn.disabled = false;
-            alert('Ocorreu um erro ao baixar o convite. Tente novamente.');
+            alert('Erro ao baixar. Tente novamente.');
         }, 2000);
     });
 });
 
 sendWhatsAppBtn.addEventListener('click', function() {
-    const inviteUrl = `${window.location.href.split('?')[0]}?convite=${encodeURIComponent(currentGuestName)}`;
-    const message = `Glória a Deus! Paz e graça!\n\n${currentGuestName}, baixe o seu convite para a Gala Cristã Juvenil através do link:\n\n${inviteUrl}\n\n*Data:* 26 de Dezembro de 2025\n*Horário:* 22h00 às 04h00\n*Local:* Congregação Tsakane, Machava-Sede\n\nContato: 84 401 2254\n\nTe esperamos para um momento abençoado de comunhão e louvor! 🙏`;
+    const inviteUrl = `${window.location.origin}?convite=${encodeURIComponent(currentGuestName)}`;
+    const message = `Glória a Deus! Paz e graça!\n\n${currentGuestName}, baixe o seu convite para a Gala Cristã Juvenil:\n\n${inviteUrl}\n\n*Data:* 26/12/2025\n*Horário:* 22h-04h\n*Local:* Congregação Tsakane\n\nContato: 84 401 2254`;
     
     const encodedMessage = encodeURIComponent(message);
     window.open(`https://wa.me/?text=${encodedMessage}`, '_blank');
 });
 
 sendSMSBtn.addEventListener('click', function() {
-    const inviteUrl = `${window.location.href.split('?')[0]}?convite=${encodeURIComponent(currentGuestName)}`;
-    const message = `Glória a Deus! Paz e graça! ${currentGuestName}, baixe seu convite para a Gala Cristã Juvenil: ${inviteUrl} - Data: 26/12/2025, 22h-04h. Local: Congregação Tsakane, Machava-Sede. Contato: 84 401 2254`;
+    const inviteUrl = `${window.location.origin}?convite=${encodeURIComponent(currentGuestName)}`;
+    const message = `Glória a Deus! Paz e graça! ${currentGuestName}, baixe seu convite: ${inviteUrl} - Data: 26/12/2025, 22h-04h. Local: Congregação Tsakane. Contato: 84 401 2254`;
     
     const encodedMessage = encodeURIComponent(message);
     window.open(`sms:?body=${encodedMessage}`, '_blank');
@@ -198,7 +201,7 @@ sendSMSBtn.addEventListener('click', function() {
 backToHomeFromInviteBtn.addEventListener('click', function() {
     invitationContainer.style.display = 'none';
     actionButtons.style.display = 'none';
-    welcomeScreen.style.display = 'block';
+    welcomeScreen.style.display = 'flex';
 });
 
 function checkUrlParams() {
@@ -251,5 +254,11 @@ document.addEventListener('DOMContentLoaded', function() {
     checkUrlParams();
     if (currentGuestName) {
         viewInviteBtn.style.display = 'block';
+    }
+    
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/sw.js');
+        });
     }
 });
