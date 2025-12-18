@@ -4,13 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gala Juvenil - Convite Eletrônico</title>
-    <link rel="manifest" href="manifest.json">
-    <link rel="icon" type="image/png" href="logo.png">
-    <meta name="theme-color" content="#8B4513">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Gala Juvenil">
-    <link rel="apple-touch-icon" href="logo.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&family=Dancing+Script:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
@@ -72,7 +65,7 @@
                         <i class="fas fa-check-circle"></i> Gerar Convite Personalizado
                     </button>
                     <button class="btn btn-back" id="backToHomeBtn">
-                        <i class="fas fa-arrow-left"></i> Voltar
+                        <i class="fas fa-arrow-left"></i> Voltar para o Início
                     </button>
                 </div>
                 
@@ -120,6 +113,7 @@
                             <div class="detail-card-content">
                                 <p><strong>26 de Dezembro de 2025</strong></p>
                                 <p>Sexta-feira</p>
+                                <p>Ano Novo Litúrgico</p>
                             </div>
                         </div>
 
@@ -130,7 +124,7 @@
                             <h3>Horário</h3>
                             <div class="detail-card-content">
                                 <p><strong>22:00 às 04:00</strong></p>
-                                <p>Noite de adoração</p>
+                                <p>Noite de adoração e oração</p>
                             </div>
                         </div>
 
@@ -142,6 +136,7 @@
                             <div class="detail-card-content">
                                 <p><strong>Congregação Tsakane</strong></p>
                                 <p>Machava-Sede</p>
+                                <p>Rua da Mulher</p>
                             </div>
                         </div>
                     </div>
@@ -159,14 +154,14 @@
                         <div class="contact-phone">
                             <i class="fas fa-phone-alt"></i> 84 401 2254
                         </div>
-                        <p class="contact-note">Disponível para esclarecimentos</p>
+                        <p class="contact-note">Disponível para esclarecimentos e confirmações</p>
                     </div>
 
                     <div class="church-signature">
                         <div class="church-name-footer">Igreja Reformada</div>
                         <div class="event-name-footer">Gala Juvenil 2025</div>
                         <div class="signature-line"></div>
-                        <p class="signature-text">Comissão Organizadora</p>
+                        <p class="signature-text">Comissão Organizadora da Gala Juvenil</p>
                     </div>
                 </div>
             </div>
@@ -174,19 +169,19 @@
         
             <div class="action-buttons" id="actionButtons">
                 <button class="btn btn-primary" id="downloadInviteBtn">
-                    <i class="fas fa-download"></i> Baixar Convite
+                    <i class="fas fa-download"></i> Baixar Convite (Imagem)
                 </button>
                 <button class="btn btn-secondary" id="sendWhatsAppBtn">
-                    <i class="fab fa-whatsapp"></i> WhatsApp
+                    <i class="fab fa-whatsapp"></i> Enviar por WhatsApp
                 </button>
                 <button class="btn btn-primary" id="sendSMSBtn">
-                    <i class="fas fa-sms"></i> SMS
+                    <i class="fas fa-sms"></i> Enviar por SMS
                 </button>
                 <button class="btn btn-back" id="editInviteBtn">
-                    <i class="fas fa-edit"></i> Editar
+                    <i class="fas fa-edit"></i> Editar Nome
                 </button>
                 <button class="btn btn-back" id="backToHomeFromInviteBtn">
-                    <i class="fas fa-home"></i> Início
+                    <i class="fas fa-arrow-left"></i> Voltar para o Início
                 </button>
             </div>
         </div>
@@ -196,19 +191,18 @@
     <div class="modal-overlay" id="passwordModal">
         <div class="modal">
             <button class="modal-close" id="closePasswordModal">&times;</button>
-            <h2><i class="fas fa-lock"></i> Acesso</h2>
+            <h2><i class="fas fa-lock"></i> Acesso ao Criador de Convites</h2>
             
             <div id="passwordSection">
                 <div class="input-group">
-                    <label for="accessPassword">Digite a senha:</label>
+                    <label for="accessPassword">Digite a senha de acesso:</label>
                     <input type="password" id="accessPassword" placeholder="Digite a senha">
                 </div>
                 <div class="form-buttons">
                     <button class="btn btn-primary" id="verifyPasswordBtn">Acessar</button>
-                    <button class="btn btn-back" id="cancelPasswordBtn">Cancelar</button>
                 </div>
                 <div class="error-message" id="passwordError">
-                    <i class="fas fa-exclamation-triangle"></i> Senha incorreta.
+                    <i class="fas fa-exclamation-triangle"></i> Senha incorreta. Tente novamente.
                 </div>
             </div>
         </div>
@@ -220,17 +214,5 @@
     <script src="lixo.js"></script>
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <script src="script.js"></script>
-    
-    <script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', function() {
-                navigator.serviceWorker.register('/sw.js').then(function(registration) {
-                    console.log('ServiceWorker registration successful');
-                }, function(err) {
-                    console.log('ServiceWorker registration failed: ', err);
-                });
-            });
-        }
-    </script>
 </body>
 </html>
