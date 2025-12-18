@@ -5,19 +5,22 @@
 }
 
 :root {
-    --primary-brown: #8B4513;
-    --light-brown: #A0522D;
-    --gold: #B8860B;
-    --light-gold: #DAA520;
-    --cream: #FFF8DC;
-    --light-cream: #FDF5E6;
-    --dark-text: #3E2723;
-    --light-text: #5D4037;
+    --primary-brown: #A0522D; /* Mais vibrante que o marrom original */
+    --light-brown: #CD853F; /* Tom mais quente */
+    --gold: #FFD700; /* Ouro mais brilhante */
+    --light-gold: #FFEC8B; /* Ouro claro mais vivo */
+    --cream: #FFF8DC; /* Mantido */
+    --light-cream: #FFFEF0; /* Mais claro e brilhante */
+    --dark-text: #4A2C1D; /* Mais rico e profundo */
+    --light-text: #7A4F32; /* Mais quente */
+    --accent-red: #C41E3A; /* Vermelho para realce */
+    --accent-green: #228B22; /* Verde vibrante */
+    --shadow-color: rgba(160, 82, 45, 0.25); /* Sombra mais definida */
 }
 
 body {
     font-family: 'Montserrat', sans-serif;
-    background: linear-gradient(135deg, #f9f3e9 0%, #f5eddf 100%);
+    background: linear-gradient(135deg, #FFF9F0 0%, #FFEEDD 100%); /* Fundo mais quente */
     color: var(--dark-text);
     min-height: 100vh;
     display: flex;
@@ -32,9 +35,10 @@ body {
 .christian-decoration {
     position: fixed;
     z-index: -1;
-    opacity: 0.07;
-    color: var(--primary-brown);
-    font-size: 14px;
+    opacity: 0.1; /* Aumentada a opacidade */
+    color: var(--gold); /* Mudado para ouro */
+    font-size: 16px; /* Ligeiramente maior */
+    text-shadow: 0 0 8px rgba(255, 215, 0, 0.3); /* Brilho suave */
 }
 
 .cross-top-left {
@@ -65,6 +69,7 @@ body {
     top: 10%;
     left: 50%;
     transform: translateX(-50%);
+    font-size: 20px; /* Pomba maior */
 }
 
 .container {
@@ -76,16 +81,22 @@ body {
 
 .welcome-screen {
     text-align: center;
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 10px;
-    padding: 20px 15px;
-    box-shadow: 0 6px 20px rgba(139, 69, 19, 0.12);
-    backdrop-filter: blur(8px);
-    border: 1px solid rgba(139, 69, 19, 0.08);
+    background: rgba(255, 255, 255, 0.98); /* Mais opaco */
+    border-radius: 12px; /* Bordas mais arredondadas */
+    padding: 25px 20px; /* Mais padding */
+    box-shadow: 0 8px 30px rgba(160, 82, 45, 0.2); /* Sombra mais intensa */
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 215, 0, 0.2); /* Borda dourada sutil */
     max-width: 450px;
-    margin: 10px auto;
+    margin: 15px auto; /* Mais margem */
     position: relative;
     overflow: hidden;
+    animation: floatCard 3s ease-in-out infinite; /* Animação flutuante */
+}
+
+@keyframes floatCard {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
 }
 
 .welcome-screen::before {
@@ -94,103 +105,129 @@ body {
     top: 0;
     left: 0;
     right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, var(--primary-brown) 0%, var(--gold) 50%, var(--primary-brown) 100%);
+    height: 4px; /* Mais grossa */
+    background: linear-gradient(90deg, var(--gold) 0%, var(--primary-brown) 50%, var(--gold) 100%);
+    box-shadow: 0 2px 8px rgba(255, 215, 0, 0.4); /* Brilho na borda */
 }
 
 .church-header {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 15px;
+    margin-bottom: 20px; /* Mais espaço */
 }
 
 .church-logo {
-    width: 70px;
-    height: 70px;
-    margin-bottom: 8px;
-    border-radius: 8px;
-    background: white;
+    width: 80px; /* Maior */
+    height: 80px;
+    margin-bottom: 12px; /* Mais espaço */
+    border-radius: 12px; /* Mais arredondado */
+    background: linear-gradient(135deg, white 0%, var(--light-cream) 100%);
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 2px solid var(--primary-brown);
-    box-shadow: 0 3px 8px rgba(139, 69, 19, 0.15);
-    padding: 4px;
+    border: 3px solid var(--gold); /* Borda mais grossa */
+    box-shadow: 0 5px 15px rgba(160, 82, 45, 0.3); /* Sombra mais intensa */
+    padding: 6px;
     overflow: hidden;
+    transition: transform 0.3s ease; /* Animação de hover */
+}
+
+.church-logo:hover {
+    transform: scale(1.05); /* Efeito de aumento */
 }
 
 .church-logo img {
     max-width: 100%;
     max-height: 100%;
     object-fit: contain;
-    border-radius: 5px;
+    border-radius: 8px; /* Mais arredondado */
 }
 
 .logo-placeholder {
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     color: var(--dark-text);
-    font-weight: bold;
+    font-weight: 800; /* Mais negrito */
     text-align: center;
-    line-height: 1.1;
+    line-height: 1.2;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .church-name {
     font-family: 'Playfair Display', serif;
     color: var(--primary-brown);
-    font-size: 1.1rem;
-    margin-bottom: 3px;
-    letter-spacing: 0.2px;
+    font-size: 1.3rem; /* Maior */
+    margin-bottom: 5px;
+    letter-spacing: 0.3px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .church-subtitle {
     color: var(--gold);
-    font-size: 0.9rem;
-    margin-bottom: 4px;
-    font-weight: 400;
+    font-size: 1.1rem; /* Maior */
+    margin-bottom: 6px;
+    font-weight: 600; /* Mais negrito */
     font-family: 'Dancing Script', cursive;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.15);
 }
 
 .event-year {
     color: var(--light-text);
-    font-size: 0.7rem;
-    letter-spacing: 1.5px;
-    margin-bottom: 12px;
+    font-size: 0.85rem; /* Maior */
+    letter-spacing: 2px; /* Mais espaçado */
+    margin-bottom: 15px;
+    font-weight: 600;
+    background: linear-gradient(135deg, var(--light-cream) 0%, #FFEEDD 100%);
+    padding: 4px 12px;
+    border-radius: 20px;
+    display: inline-block;
+    border: 1px solid rgba(255, 215, 0, 0.3);
 }
 
 .welcome-message {
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     color: var(--light-text);
-    line-height: 1.4;
-    font-size: 0.8rem;
-    max-width: 350px;
+    line-height: 1.6; /* Mais espaçado */
+    font-size: 0.85rem; /* Maior */
+    max-width: 380px; /* Mais largo */
     margin-left: auto;
     margin-right: auto;
-    padding: 0 10px;
+    padding: 0 15px;
+    text-align: center;
+}
+
+.welcome-message p {
+    margin-bottom: 10px;
+    padding: 8px;
+    background: rgba(255, 253, 245, 0.7);
+    border-radius: 8px;
+    border-left: 3px solid var(--gold);
 }
 
 .welcome-buttons {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    margin-top: 12px;
+    gap: 12px; /* Mais espaço */
+    margin-top: 15px;
 }
 
 .btn {
-    padding: 10px 16px;
+    padding: 12px 20px; /* Mais padding */
     border: none;
-    border-radius: 6px;
-    font-size: 0.8rem;
-    font-weight: 600;
+    border-radius: 8px; /* Mais arredondado */
+    font-size: 0.9rem; /* Maior */
+    font-weight: 700; /* Mais negrito */
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.4s ease; /* Transição mais suave */
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 6px;
+    gap: 8px; /* Mais espaço entre ícone e texto */
     position: relative;
     overflow: hidden;
     white-space: nowrap;
+    text-transform: uppercase; /* Texto em maiúsculas */
+    letter-spacing: 0.5px;
 }
 
 .btn::before {
@@ -200,7 +237,7 @@ body {
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
     transition: left 0.7s;
 }
 
@@ -208,36 +245,45 @@ body {
     left: 100%;
 }
 
+.btn:hover {
+    transform: translateY(-4px) scale(1.02); /* Mais movimento no hover */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Sombra mais intensa */
+}
+
 .btn-primary {
-    background: linear-gradient(135deg, var(--primary-brown) 0%, var(--light-brown) 100%);
+    background: linear-gradient(135deg, var(--primary-brown) 0%, var(--accent-red) 100%); /* Gradiente mais vibrante */
     color: white;
-    box-shadow: 0 3px 8px rgba(139, 69, 19, 0.3);
+    box-shadow: 0 5px 15px rgba(160, 82, 45, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(139, 69, 19, 0.4);
+    background: linear-gradient(135deg, var(--light-brown) 0%, #D32F2F 100%);
+    box-shadow: 0 8px 25px rgba(160, 82, 45, 0.6);
 }
 
 .btn-secondary {
-    background: linear-gradient(135deg, var(--gold) 0%, var(--light-gold) 100%);
+    background: linear-gradient(135deg, var(--gold) 0%, #FFA500 100%); /* Gradiente laranja-ouro */
     color: white;
-    box-shadow: 0 3px 8px rgba(184, 134, 11, 0.3);
+    box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .btn-secondary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(184, 134, 11, 0.4);
+    background: linear-gradient(135deg, var(--light-gold) 0%, #FF8C00 100%);
+    box-shadow: 0 8px 25px rgba(255, 215, 0, 0.6);
 }
 
 .btn-back {
-    background: #6c757d;
+    background: linear-gradient(135deg, #5D4037 0%, #3E2723 100%);
     color: white;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 .btn-back:hover {
-    background: #5a6268;
-    transform: translateY(-2px);
+    background: linear-gradient(135deg, #6D4C41 0%, #4E342E 100%);
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
 }
 
 .creation-screen {
@@ -247,16 +293,17 @@ body {
 
 .creation-card {
     background: white;
-    border-radius: 10px;
-    padding: 20px 15px;
-    box-shadow: 0 6px 20px rgba(139, 69, 19, 0.12);
-    margin-bottom: 10px;
-    max-width: 400px;
+    border-radius: 12px; /* Mais arredondado */
+    padding: 25px 20px; /* Mais padding */
+    box-shadow: 0 8px 30px rgba(160, 82, 45, 0.2); /* Sombra mais intensa */
+    margin-bottom: 15px;
+    max-width: 420px; /* Mais largo */
     margin-left: auto;
     margin-right: auto;
-    border: 1px solid rgba(139, 69, 19, 0.1);
+    border: 2px solid rgba(255, 215, 0, 0.2);
     position: relative;
     overflow: hidden;
+    animation: floatCard 3s ease-in-out infinite; /* Animação flutuante */
 }
 
 .creation-card::before {
@@ -265,77 +312,89 @@ body {
     top: 0;
     left: 0;
     right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, var(--primary-brown) 0%, var(--gold) 100%);
+    height: 4px; /* Mais grossa */
+    background: linear-gradient(90deg, var(--gold) 0%, var(--primary-brown) 100%);
+    box-shadow: 0 2px 8px rgba(255, 215, 0, 0.4);
 }
 
 .creation-header {
     text-align: center;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 
 .creation-header h2 {
     color: var(--primary-brown);
     font-family: 'Playfair Display', serif;
-    font-size: 1.1rem;
-    margin-bottom: 6px;
+    font-size: 1.3rem; /* Maior */
+    margin-bottom: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 6px;
+    gap: 10px; /* Mais espaço */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .creation-header p {
     color: var(--light-text);
-    font-size: 0.75rem;
-    max-width: 280px;
+    font-size: 0.85rem; /* Maior */
+    max-width: 320px; /* Mais largo */
     margin: 0 auto;
+    padding: 10px;
+    background: var(--light-cream);
+    border-radius: 8px;
+    border-left: 3px solid var(--gold);
 }
 
 .input-group {
-    margin-bottom: 12px;
+    margin-bottom: 15px; /* Mais espaço */
 }
 
 .input-group label {
     display: block;
-    margin-bottom: 4px;
+    margin-bottom: 6px; /* Mais espaço */
     color: var(--dark-text);
-    font-weight: 600;
-    font-size: 0.8rem;
+    font-weight: 700; /* Mais negrito */
+    font-size: 0.9rem; /* Maior */
 }
 
 .input-group input {
     width: 100%;
-    padding: 10px;
-    border: 2px solid #e6d8c6;
-    border-radius: 6px;
-    font-size: 0.8rem;
+    padding: 12px 15px; /* Mais padding */
+    border: 2px solid var(--gold); /* Borda dourada */
+    border-radius: 8px; /* Mais arredondado */
+    font-size: 0.9rem; /* Maior */
     transition: all 0.3s;
     background: var(--light-cream);
     color: var(--dark-text);
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
 .input-group input:focus {
     border-color: var(--primary-brown);
     outline: none;
-    box-shadow: 0 0 0 2px rgba(139, 69, 19, 0.1);
+    box-shadow: 0 0 0 3px rgba(160, 82, 45, 0.2), inset 0 2px 5px rgba(0, 0, 0, 0.05);
+    transform: translateY(-2px);
 }
 
 .input-hint {
-    font-size: 0.7rem;
-    color: #888;
-    margin-top: 4px;
+    font-size: 0.75rem;
+    color: var(--light-text);
+    margin-top: 6px;
     font-style: italic;
     display: flex;
     align-items: center;
-    gap: 3px;
+    gap: 5px;
+    padding: 5px 10px;
+    background: rgba(255, 215, 0, 0.1);
+    border-radius: 5px;
+    border-left: 2px solid var(--gold);
 }
 
 .form-buttons {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    margin-top: 15px;
+    gap: 12px; /* Mais espaço */
+    margin-top: 20px;
 }
 
 .invitation-container, .download-only-screen {
@@ -345,26 +404,28 @@ body {
 
 .invitation-card {
     background: white;
-    border-radius: 10px;
+    border-radius: 15px; /* Mais arredondado */
     overflow: hidden;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-    margin-bottom: 10px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2); /* Sombra mais intensa */
+    margin-bottom: 15px;
     position: relative;
-    border: 1px solid rgba(139, 69, 19, 0.1);
-    max-width: 750px;
+    border: 3px solid var(--gold); /* Borda dourada mais grossa */
+    max-width: 780px; /* Mais largo */
     margin-left: auto;
     margin-right: auto;
     width: 100%;
     height: auto;
     min-height: auto;
+    animation: floatCard 3s ease-in-out infinite; /* Animação flutuante */
 }
 
 .invitation-header {
-    background: linear-gradient(135deg, var(--primary-brown) 0%, #5D4037 100%);
-    padding: 20px 15px 12px;
+    background: linear-gradient(135deg, var(--primary-brown) 0%, #8B0000 100%); /* Gradiente mais vibrante */
+    padding: 25px 20px 15px; /* Mais padding */
     text-align: center;
     color: white;
     position: relative;
+    overflow: hidden;
 }
 
 .invitation-header::before {
@@ -374,59 +435,78 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23fff' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
-    opacity: 0.3;
+    background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23fff' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+    opacity: 0.4; /* Mais visível */
 }
 
 .invitation-logo {
-    width: 60px;
-    height: 60px;
-    margin: 0 auto 8px;
-    border-radius: 8px;
-    background: white;
+    width: 70px; /* Maior */
+    height: 70px;
+    margin: 0 auto 12px; /* Mais espaço */
+    border-radius: 12px; /* Mais arredondado */
+    background: linear-gradient(135deg, white 0%, var(--light-cream) 100%);
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 2px solid var(--gold);
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
-    padding: 4px;
+    border: 3px solid var(--gold); /* Borda mais grossa */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Sombra mais intensa */
+    padding: 6px;
+    transform: rotate(5deg); /* Pequena rotação para estilo */
+    transition: transform 0.3s ease;
+}
+
+.invitation-logo:hover {
+    transform: rotate(0deg) scale(1.1); /* Animação no hover */
 }
 
 .invitation-logo img {
     max-width: 100%;
     max-height: 100%;
     object-fit: contain;
-    border-radius: 5px;
+    border-radius: 8px;
 }
 
 .invitation-title {
     font-family: 'Playfair Display', serif;
-    font-size: 1.5rem;
-    margin-bottom: 4px;
-    letter-spacing: 0.8px;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    font-size: 2rem; /* Maior */
+    margin-bottom: 8px;
+    letter-spacing: 1.2px; /* Mais espaçado */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Sombra mais intensa */
+    color: var(--gold); /* Ouro vibrante */
+    animation: glow 2s ease-in-out infinite alternate; /* Animação de brilho */
+}
+
+@keyframes glow {
+    from { text-shadow: 0 0 10px rgba(255, 215, 0, 0.7); }
+    to { text-shadow: 0 0 20px rgba(255, 215, 0, 0.9), 0 0 30px rgba(255, 215, 0, 0.5); }
 }
 
 .invitation-subtitle {
     font-family: 'Great Vibes', cursive;
-    font-size: 1.3rem;
+    font-size: 1.8rem; /* Maior */
     font-weight: normal;
-    margin-bottom: 3px;
+    margin-bottom: 8px;
     color: var(--light-cream);
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 .invitation-year {
-    font-size: 0.7rem;
-    letter-spacing: 1.5px;
-    opacity: 0.9;
+    font-size: 0.9rem; /* Maior */
+    letter-spacing: 2px; /* Mais espaçado */
+    opacity: 0.95;
+    background: rgba(255, 255, 255, 0.15);
+    padding: 5px 15px;
+    border-radius: 20px;
+    display: inline-block;
+    border: 1px solid rgba(255, 215, 0, 0.3);
 }
 
 .invitation-body {
-    padding: 15px 20px;
-    background: white;
+    padding: 20px 25px; /* Mais padding */
+    background: linear-gradient(135deg, #FFFEF5 0%, #FFF8E1 100%); /* Gradiente sutil */
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 15px; /* Mais espaço */
 }
 
 .invitation-text {
@@ -434,22 +514,34 @@ body {
 }
 
 .invitation-text p {
-    font-size: 0.8rem;
-    line-height: 1.4;
+    font-size: 0.9rem; /* Maior */
+    line-height: 1.6; /* Mais espaçado */
     color: var(--light-text);
-    margin-bottom: 8px;
+    margin-bottom: 12px; /* Mais espaço */
     text-align: center;
+    padding: 10px 15px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+    border-left: 4px solid var(--gold);
 }
 
 .guest-name-card {
-    background: linear-gradient(135deg, var(--cream) 0%, var(--light-cream) 100%);
-    border-radius: 6px;
-    padding: 12px 10px;
+    background: linear-gradient(135deg, var(--gold) 0%, var(--light-gold) 100%); /* Gradiente dourado */
+    border-radius: 10px; /* Mais arredondado */
+    padding: 20px 15px; /* Mais padding */
     text-align: center;
-    border: 1px solid var(--gold);
-    box-shadow: 0 4px 10px rgba(184, 134, 11, 0.1);
+    border: 3px solid var(--primary-brown); /* Borda marrom */
+    box-shadow: 0 6px 20px rgba(184, 134, 11, 0.3); /* Sombra mais intensa */
     position: relative;
     overflow: hidden;
+    animation: pulse 2s infinite; /* Animação de pulsação */
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 6px 20px rgba(184, 134, 11, 0.3); }
+    50% { box-shadow: 0 6px 30px rgba(184, 134, 11, 0.6); }
+    100% { box-shadow: 0 6px 20px rgba(184, 134, 11, 0.3); }
 }
 
 .guest-name-card::before {
@@ -458,79 +550,90 @@ body {
     top: 0;
     left: 0;
     right: 0;
-    height: 1px;
+    height: 2px; /* Mais grossa */
     background: linear-gradient(90deg, var(--primary-brown) 0%, var(--gold) 100%);
 }
 
 .guest-name-label {
     display: block;
     color: var(--primary-brown);
-    font-size: 0.75rem;
-    margin-bottom: 6px;
-    font-weight: 600;
-    letter-spacing: 0.4px;
+    font-size: 0.85rem; /* Maior */
+    margin-bottom: 10px; /* Mais espaço */
+    font-weight: 700; /* Mais negrito */
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
 }
 
 .guest-name {
     font-family: 'Dancing Script', cursive;
-    font-size: 1.5rem;
+    font-size: 2.2rem; /* Muito maior */
     color: var(--primary-brown);
     line-height: 1.2;
     text-transform: capitalize;
     word-wrap: break-word;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    font-weight: 700; /* Mais negrito */
 }
 
 .event-details-container {
     display: flex;
     flex-wrap: nowrap;
-    gap: 10px;
-    margin: 12px 0;
+    gap: 12px; /* Mais espaço */
+    margin: 15px 0; /* Mais espaço */
     justify-content: center;
 }
 
 .detail-card {
-    background: white;
-    border-radius: 6px;
-    padding: 12px 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-    border: 1px solid rgba(139, 69, 19, 0.1);
+    background: linear-gradient(135deg, white 0%, var(--light-cream) 100%);
+    border-radius: 10px; /* Mais arredondado */
+    padding: 15px 12px; /* Mais padding */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12); /* Sombra mais intensa */
+    border: 2px solid var(--gold); /* Borda dourada */
     text-align: center;
-    min-width: 150px;
+    min-width: 160px; /* Mais largo */
     flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.detail-card:hover {
+    transform: translateY(-5px) scale(1.03); /* Efeito de elevação */
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
 }
 
 .detail-card-icon {
-    width: 35px;
-    height: 35px;
-    background: linear-gradient(135deg, var(--cream) 0%, #f5eddf 100%);
+    width: 45px; /* Maior */
+    height: 45px;
+    background: linear-gradient(135deg, var(--gold) 0%, var(--light-gold) 100%);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto 8px;
-    font-size: 0.9rem;
-    color: var(--primary-brown);
-    border: 1px solid var(--gold);
+    margin: 0 auto 12px; /* Mais espaço */
+    font-size: 1.1rem; /* Maior */
+    color: white;
+    border: 2px solid white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .detail-card h3 {
     color: var(--primary-brown);
     font-family: 'Playfair Display', serif;
-    font-size: 0.9rem;
-    margin-bottom: 6px;
-    min-height: 30px;
+    font-size: 1rem; /* Maior */
+    margin-bottom: 10px; /* Mais espaço */
+    min-height: 35px; /* Mais alto */
     display: flex;
     align-items: center;
     justify-content: center;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .detail-card-content {
     color: var(--light-text);
-    font-size: 0.75rem;
-    line-height: 1.3;
+    font-size: 0.85rem; /* Maior */
+    line-height: 1.4; /* Mais espaçado */
     flex-grow: 1;
     display: flex;
     flex-direction: column;
@@ -538,108 +641,133 @@ body {
 }
 
 .detail-card-content p {
-    margin-bottom: 4px;
+    margin-bottom: 6px; /* Mais espaço */
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 4px;
+    gap: 6px; /* Mais espaço */
+    font-weight: 600; /* Mais negrito */
+}
+
+.detail-card-content strong {
+    color: var(--primary-brown);
+    font-weight: 700;
 }
 
 .invitation-footer {
-    background: var(--cream);
-    padding: 15px 20px;
+    background: linear-gradient(135deg, var(--cream) 0%, #FFEEDD 100%); /* Gradiente */
+    padding: 20px 25px; /* Mais padding */
     text-align: center;
-    border-top: 1px solid rgba(139, 69, 19, 0.1);
+    border-top: 3px solid var(--gold); /* Borda mais grossa */
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 12px;
+    gap: 15px; /* Mais espaço */
 }
 
 .contact-info {
     background: white;
-    border-radius: 6px;
-    padding: 12px;
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
-    border: 1px solid var(--gold);
-    max-width: 300px;
+    border-radius: 10px; /* Mais arredondado */
+    padding: 15px; /* Mais padding */
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1); /* Sombra mais intensa */
+    border: 2px solid var(--gold);
+    max-width: 350px; /* Mais largo */
     width: 100%;
+    transition: transform 0.3s ease;
+}
+
+.contact-info:hover {
+    transform: translateY(-3px);
 }
 
 .contact-info h4 {
     color: var(--primary-brown);
-    font-size: 0.9rem;
-    margin-bottom: 8px;
+    font-size: 1rem; /* Maior */
+    margin-bottom: 12px; /* Mais espaço */
     font-family: 'Playfair Display', serif;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .contact-phone {
-    font-size: 1rem;
+    font-size: 1.2rem; /* Maior */
     color: var(--primary-brown);
-    font-weight: bold;
+    font-weight: 800; /* Mais negrito */
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 6px;
-    margin-bottom: 6px;
+    gap: 10px; /* Mais espaço */
+    margin-bottom: 10px; /* Mais espaço */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .contact-note {
     color: var(--light-text);
-    font-size: 0.7rem;
+    font-size: 0.75rem;
     font-style: italic;
+    padding: 5px;
+    background: rgba(255, 215, 0, 0.1);
+    border-radius: 5px;
 }
 
 .church-signature {
-    margin-top: 8px;
-    padding-top: 8px;
-    border-top: 1px solid rgba(139, 69, 19, 0.1);
+    margin-top: 12px; /* Mais espaço */
+    padding-top: 12px;
+    border-top: 2px solid rgba(139, 69, 19, 0.2);
     width: 100%;
 }
 
 .church-name-footer {
     font-family: 'Playfair Display', serif;
     color: var(--primary-brown);
-    font-size: 1rem;
-    margin-bottom: 4px;
+    font-size: 1.1rem; /* Maior */
+    margin-bottom: 6px; /* Mais espaço */
+    font-weight: 700;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .event-name-footer {
     color: var(--light-text);
-    font-size: 0.8rem;
-    margin-bottom: 8px;
+    font-size: 0.9rem; /* Maior */
+    margin-bottom: 10px; /* Mais espaço */
+    font-weight: 600;
 }
 
 .signature-line {
     display: inline-block;
-    width: 100px;
-    height: 1px;
-    background: var(--light-text);
-    margin: 6px 0;
+    width: 150px; /* Mais largo */
+    height: 2px; /* Mais grossa */
+    background: linear-gradient(90deg, transparent, var(--primary-brown), transparent);
+    margin: 8px 0; /* Mais espaço */
 }
 
 .signature-text {
     color: var(--light-text);
     font-style: italic;
-    margin-top: 8px;
-    font-size: 0.75rem;
+    margin-top: 12px; /* Mais espaço */
+    font-size: 0.8rem;
+    font-weight: 600;
 }
 
-
+/* ===== BOTÕES EM LINHA - CÓDIGO REVISADO ===== */
 .action-buttons {
     display: flex !important;
     flex-direction: row !important;
     flex-wrap: wrap !important;
     justify-content: center !important;
     align-items: center !important;
-    gap: 8px !important;
+    gap: 10px !important; /* Mais espaço */
     width: 100% !important;
-    max-width: 750px !important;
-    margin: 15px auto !important;
-    padding: 8px 0 !important;
+    max-width: 780px !important; /* Mais largo */
+    margin: 20px auto !important; /* Mais espaço */
+    padding: 10px 0 !important; /* Mais padding */
     overflow-x: visible !important;
     overflow-y: visible !important;
     position: relative !important;
+    background: linear-gradient(135deg, rgba(255, 253, 245, 0.9) 0%, rgba(255, 248, 225, 0.9) 100%);
+    border-radius: 12px;
+    border: 2px solid var(--gold);
+    box-shadow: 0 5px 20px rgba(160, 82, 45, 0.15);
 }
 
 .action-buttons .btn {
@@ -647,53 +775,63 @@ body {
     align-items: center !important;
     justify-content: center !important;
     flex: 1 0 auto !important;
-    min-width: 130px !important;
-    max-width: 150px !important;
+    min-width: 150px !important; /* Mais largo */
+    max-width: 170px !important; /* Mais largo */
     margin: 0 !important;
-    padding: 8px 12px !important;
-    font-size: 0.75rem !important;
+    padding: 12px 15px !important; /* Mais padding */
+    font-size: 0.85rem !important; /* Maior */
     white-space: nowrap !important;
     text-align: center !important;
     height: auto !important;
     line-height: 1.2 !important;
+    border-radius: 10px !important; /* Mais arredondado */
+    font-weight: 800 !important; /* Mais negrito */
+    text-transform: uppercase !important;
+    letter-spacing: 0.8px !important;
 }
 
-
-.action-buttons .btn,
-.action-buttons {
-    float: none !important;
-    clear: none !important;
-    display: flex !important;
+.action-buttons .btn:hover {
+    transform: translateY(-5px) scale(1.05) !important; /* Mais movimento */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3) !important;
 }
 
-
+/* Cores dos botões específicos */
 .action-buttons .btn-primary {
-    background: linear-gradient(135deg, var(--primary-brown) 0%, var(--light-brown) 100%) !important;
+    background: linear-gradient(135deg, var(--primary-brown) 0%, #C41E3A 100%) !important;
+    box-shadow: 0 5px 20px rgba(160, 82, 45, 0.5) !important;
+    border: 2px solid rgba(255, 255, 255, 0.3) !important;
 }
 
 .action-buttons .btn-secondary {
-    background: linear-gradient(135deg, var(--gold) 0%, var(--light-gold) 100%) !important;
+    background: linear-gradient(135deg, var(--gold) 0%, #FF8C00 100%) !important;
+    box-shadow: 0 5px 20px rgba(255, 215, 0, 0.5) !important;
+    border: 2px solid rgba(255, 255, 255, 0.3) !important;
 }
 
 .action-buttons .btn-back {
-    background: #6c757d !important;
+    background: linear-gradient(135deg, #5D4037 0%, #3E2723 100%) !important;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4) !important;
+    border: 2px solid rgba(255, 255, 255, 0.2) !important;
 }
 
 .download-only-screen {
     text-align: center;
-    max-width: 750px;
+    max-width: 780px; /* Mais largo */
     margin: 0 auto;
     width: 100%;
 }
 
 .download-only-button {
-    margin-top: 12px;
+    margin-top: 20px; /* Mais espaço */
 }
 
 .download-only-button .btn {
     width: 100%;
-    max-width: 200px;
+    max-width: 250px; /* Mais largo */
     margin: 0 auto;
+    padding: 15px 25px; /* Mais padding */
+    font-size: 1rem; /* Maior */
+    font-weight: 800;
 }
 
 .modal-overlay {
@@ -702,7 +840,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.85);
+    background-color: rgba(0, 0, 0, 0.9); /* Mais escuro */
     display: none;
     justify-content: center;
     align-items: center;
@@ -710,14 +848,20 @@ body {
 }
 
 .modal {
-    background: white;
-    border-radius: 10px;
-    padding: 20px 15px;
-    max-width: 300px;
+    background: linear-gradient(135deg, white 0%, var(--light-cream) 100%);
+    border-radius: 15px; /* Mais arredondado */
+    padding: 25px 20px; /* Mais padding */
+    max-width: 350px; /* Mais largo */
     width: 90%;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4); /* Sombra mais intensa */
     position: relative;
-    border: 1px solid rgba(139, 69, 19, 0.1);
+    border: 3px solid var(--gold); /* Borda dourada */
+    animation: modalAppear 0.5s ease-out; /* Animação de entrada */
+}
+
+@keyframes modalAppear {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
 }
 
 .modal::before {
@@ -726,91 +870,161 @@ body {
     top: 0;
     left: 0;
     right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, var(--primary-brown) 0%, #2C3E50 100%);
-    border-radius: 10px 10px 0 0;
+    height: 4px; /* Mais grossa */
+    background: linear-gradient(90deg, var(--gold) 0%, var(--primary-brown) 100%);
+    border-radius: 15px 15px 0 0;
 }
 
 .modal h2 {
     color: var(--primary-brown);
-    margin-bottom: 12px;
+    margin-bottom: 15px; /* Mais espaço */
     font-family: 'Playfair Display', serif;
     text-align: center;
-    font-size: 1.1rem;
+    font-size: 1.3rem; /* Maior */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .modal-close {
     position: absolute;
-    top: 10px;
-    right: 10px;
-    background: none;
+    top: 12px;
+    right: 12px;
+    background: var(--gold);
     border: none;
-    font-size: 1.1rem;
+    font-size: 1.3rem; /* Maior */
     cursor: pointer;
-    color: #777;
-    transition: color 0.3s;
-    width: 20px;
-    height: 20px;
+    color: white;
+    transition: all 0.3s;
+    width: 30px; /* Maior */
+    height: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 50%;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
 }
 
 .modal-close:hover {
-    color: var(--primary-brown);
-    background: rgba(139, 69, 19, 0.05);
+    background: var(--primary-brown);
+    transform: rotate(90deg) scale(1.1);
 }
 
 .error-message {
-    color: #e74c3c;
-    margin-top: 6px;
+    color: #FF0000; /* Vermelho mais vibrante */
+    margin-top: 8px; /* Mais espaço */
     text-align: center;
     display: none;
-    padding: 6px;
-    background: rgba(231, 76, 60, 0.1);
-    border-radius: 4px;
-    border-left: 2px solid #e74c3c;
-    font-size: 0.75rem;
+    padding: 8px 12px; /* Mais padding */
+    background: rgba(255, 0, 0, 0.1);
+    border-radius: 8px;
+    border-left: 4px solid #FF0000;
+    font-size: 0.8rem;
+    font-weight: 600;
 }
 
 .success-message {
-    color: #27ae60;
-    margin-top: 6px;
+    color: #00AA00; /* Verde mais vibrante */
+    margin-top: 8px;
     text-align: center;
     display: none;
-    padding: 6px;
-    background: rgba(39, 174, 96, 0.1);
-    border-radius: 4px;
-    border-left: 2px solid #27ae60;
-    font-size: 0.75rem;
+    padding: 8px 12px;
+    background: rgba(0, 170, 0, 0.1);
+    border-radius: 8px;
+    border-left: 4px solid #00AA00;
+    font-size: 0.8rem;
+    font-weight: 600;
 }
 
+/* ===== FOOTER DO SITE ===== */
+.site-footer {
+    width: 100%;
+    padding: 20px 15px; /* Mais padding */
+    background: linear-gradient(135deg, var(--primary-brown) 0%, #8B0000 100%); /* Gradiente vibrante */
+    color: white;
+    text-align: center;
+    margin-top: 30px; /* Mais espaço */
+    border-top: 4px solid var(--gold); /* Borda mais grossa */
+    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.2); /* Sombra mais intensa */
+    position: relative;
+    z-index: 10;
+    overflow: hidden;
+}
 
+.site-footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.5), transparent);
+}
+
+.footer-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 15px;
+    position: relative;
+    z-index: 2;
+}
+
+.footer-content p {
+    margin: 8px 0; /* Mais espaço */
+    font-size: 0.9rem; /* Maior */
+    line-height: 1.5;
+    opacity: 0.95;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.footer-content strong {
+    color: var(--gold); /* Ouro vibrante */
+    font-weight: 800;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+.footer-sub {
+    font-size: 0.8rem !important;
+    opacity: 0.8 !important;
+    font-style: italic;
+    padding: 5px 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    display: inline-block;
+    margin-top: 5px;
+}
+
+/* ===== RESPONSIVIDADE ===== */
 @media (min-width: 1200px) {
     .action-buttons {
-        gap: 10px !important;
+        gap: 12px !important;
     }
     
     .action-buttons .btn {
-        min-width: 140px !important;
-        max-width: 160px !important;
-        font-size: 0.8rem !important;
-        padding: 9px 14px !important;
+        min-width: 160px !important;
+        max-width: 180px !important;
+        font-size: 0.9rem !important;
+        padding: 14px 18px !important;
     }
 }
 
 @media (max-width: 992px) {
     .action-buttons .btn {
-        min-width: 120px !important;
-        max-width: 140px !important;
+        min-width: 140px !important;
+        max-width: 160px !important;
+    }
+    
+    .invitation-title {
+        font-size: 1.8rem;
+    }
+    
+    .guest-name {
+        font-size: 2rem;
     }
 }
 
 @media (max-width: 768px) {
     .container {
         max-width: 100%;
-        padding: 0 6px;
+        padding: 0 8px; /* Mais padding */
     }
     
     .invitation-card {
@@ -819,146 +1033,202 @@ body {
     
     .event-details-container {
         flex-wrap: wrap;
-        gap: 8px;
+        gap: 10px; /* Mais espaço */
     }
     
     .detail-card {
-        min-width: calc(33.333% - 8px);
-        flex: 0 0 calc(33.333% - 8px);
+        min-width: calc(33.333% - 10px);
+        flex: 0 0 calc(33.333% - 10px);
     }
     
-   
     .action-buttons {
         flex-wrap: wrap !important;
-        gap: 6px !important;
+        gap: 8px !important;
+        padding: 15px 10px !important;
+        border-radius: 10px;
     }
     
     .action-buttons .btn {
-        flex: 0 0 calc(33.333% - 6px) !important;
-        min-width: calc(33.333% - 6px) !important;
-        max-width: calc(33.333% - 6px) !important;
-        margin-bottom: 2px !important;
+        flex: 0 0 calc(33.333% - 8px) !important;
+        min-width: calc(33.333% - 8px) !important;
+        max-width: calc(33.333% - 8px) !important;
+        margin-bottom: 3px !important;
+        padding: 10px 8px !important;
+        font-size: 0.75rem !important;
     }
     
     .invitation-body {
-        padding: 12px 15px;
-        gap: 10px;
+        padding: 15px 20px;
+        gap: 12px;
     }
     
     .invitation-title {
-        font-size: 1.3rem;
+        font-size: 1.6rem;
     }
     
     .invitation-subtitle {
-        font-size: 1.1rem;
+        font-size: 1.4rem;
     }
     
     .guest-name {
-        font-size: 1.3rem;
+        font-size: 1.8rem;
     }
     
     .contact-phone {
-        font-size: 0.9rem;
+        font-size: 1.1rem;
+    }
+    
+    .site-footer {
+        padding: 15px 10px;
+        margin-top: 20px;
     }
 }
 
 @media (max-width: 600px) {
-    
     .action-buttons {
         flex-wrap: nowrap !important;
         overflow-x: auto !important;
         overflow-y: hidden !important;
         justify-content: flex-start !important;
-        padding-bottom: 10px !important;
+        padding-bottom: 15px !important;
         -webkit-overflow-scrolling: touch !important;
         scrollbar-width: thin !important;
-        scrollbar-color: var(--primary-brown) transparent !important;
+        scrollbar-color: var(--gold) transparent !important;
     }
     
     .action-buttons::-webkit-scrollbar {
-        height: 4px !important;
+        height: 6px !important; /* Mais grossa */
     }
     
     .action-buttons::-webkit-scrollbar-track {
-        background: transparent !important;
+        background: rgba(255, 215, 0, 0.1) !important;
+        border-radius: 3px;
     }
     
     .action-buttons::-webkit-scrollbar-thumb {
-        background-color: var(--primary-brown) !important;
-        border-radius: 2px !important;
+        background-color: var(--gold) !important;
+        border-radius: 3px !important;
     }
     
     .action-buttons .btn {
         flex: 0 0 auto !important;
-        min-width: 140px !important;
-        max-width: 140px !important;
-        margin: 0 2px !important;
+        min-width: 160px !important;
+        max-width: 160px !important;
+        margin: 0 4px !important;
+        padding: 12px 10px !important;
     }
     
+    .event-details-container {
+        flex-direction: column;
+    }
     
-    .action-buttons .btn {
-        white-space: nowrap !important;
-        overflow: hidden !important;
-        text-overflow: ellipsis !important;
+    .detail-card {
+        min-width: 100%;
+        margin-bottom: 10px;
     }
 }
 
 @media (max-width: 480px) {
     body {
-        padding: 6px;
+        padding: 8px;
         font-size: 12px;
     }
     
     .church-name {
-        font-size: 1rem;
+        font-size: 1.2rem;
     }
     
     .invitation-title {
-        font-size: 1.1rem;
+        font-size: 1.4rem;
     }
     
     .invitation-subtitle {
-        font-size: 1rem;
+        font-size: 1.2rem;
     }
     
     .guest-name {
-        font-size: 1.1rem;
+        font-size: 1.6rem;
     }
     
     .detail-card {
-        min-width: calc(50% - 8px);
-        flex: 0 0 calc(50% - 8px);
+        min-width: 100%;
+        margin-bottom: 10px;
     }
     
     .detail-card-icon {
-        width: 30px;
-        height: 30px;
-        font-size: 0.8rem;
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
     }
     
-   
     .action-buttons .btn {
-        min-width: 130px !important;
-        max-width: 130px !important;
-        padding: 7px 10px !important;
+        min-width: 150px !important;
+        max-width: 150px !important;
+        padding: 10px 8px !important;
         font-size: 0.7rem !important;
     }
     
     .btn {
-        padding: 8px 12px;
-        font-size: 0.75rem;
+        padding: 10px 15px;
+        font-size: 0.8rem;
     }
     
     .invitation-text p {
-        font-size: 0.75rem;
+        font-size: 0.8rem;
+    }
+    
+    .site-footer {
+        padding: 12px 8px;
+    }
+    
+    .footer-content p {
+        font-size: 0.8rem;
+    }
+    
+    .footer-sub {
+        font-size: 0.75rem !important;
     }
 }
 
-
+/* Forçar a exibição correta */
 #actionButtons {
     display: flex !important;
 }
 
 #actionButtons .btn {
     display: inline-flex !important;
+}
+
+/* Efeitos especiais */
+.floating {
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.pulse {
+    animation: pulse 2s infinite;
+}
+
+.shimmer {
+    position: relative;
+    overflow: hidden;
+}
+
+.shimmer::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    100% { left: 100%; }
 }
