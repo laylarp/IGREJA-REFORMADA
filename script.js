@@ -1,16 +1,3 @@
-function formatName(name) {
-    return name.toLowerCase()
-        .split(' ')
-        .map(word => {
-            const connectors = ['da', 'de', 'do', 'dos', 'das', 'e'];
-            if (connectors.includes(word)) {
-                return word;
-            }
-            return word.charAt(0).toUpperCase() + word.slice(1);
-        })
-        .join(' ');
-}
-
 const welcomeScreen = document.getElementById('welcomeScreen');
 const creationScreen = document.getElementById('creationScreen');
 const invitationContainer = document.getElementById('invitationContainer');
@@ -30,13 +17,25 @@ const passwordModal = document.getElementById('passwordModal');
 const closePasswordModal = document.getElementById('closePasswordModal');
 const accessPasswordInput = document.getElementById('accessPassword');
 const verifyPasswordBtn = document.getElementById('verifyPasswordBtn');
-const cancelPasswordBtn = document.getElementById('cancelPasswordBtn');
 const passwordError = document.getElementById('passwordError');
 
 let currentGuestName = "";
 
+function formatName(name) {
+    return name.toLowerCase()
+        .split(' ')
+        .map(word => {
+            const connectors = ['da', 'de', 'do', 'dos', 'das', 'e'];
+            if (connectors.includes(word)) {
+                return word;
+            }
+            return word.charAt(0).toUpperCase() + word.slice(1);
+        })
+        .join(' ');
+}
+
 function loadChurchLogo() {
-    const logoUrl = '/logo.png';
+    const logoUrl = 'logo.png';
     const churchLogo = document.getElementById('churchLogo');
     const invitationLogo = document.getElementById('invitationLogo');
     
@@ -56,6 +55,7 @@ function loadChurchLogo() {
     };
     
     img.onerror = function() {
+        console.log('Logo não encontrada. Usando placeholder.');
     };
     
     img.src = logoUrl;
@@ -71,17 +71,13 @@ closePasswordModal.addEventListener('click', function() {
     passwordModal.style.display = 'none';
 });
 
-cancelPasswordBtn.addEventListener('click', function() {
-    passwordModal.style.display = 'none';
-});
-
 verifyPasswordBtn.addEventListener('click', function() {
     const password = accessPasswordInput.value.trim();
     
     if (typeof adminPassword !== 'undefined' && password === adminPassword) {
         passwordModal.style.display = 'none';
         welcomeScreen.style.display = 'none';
-        creationScreen.style.display = 'flex';
+        creationScreen.style.display = 'block';
         guestNameInput.value = currentGuestName || '';
         guestNameInput.focus();
     } else {
@@ -92,10 +88,9 @@ verifyPasswordBtn.addEventListener('click', function() {
 
 backToHomeBtn.addEventListener('click', function() {
     creationScreen.style.display = 'none';
-    welcomeScreen.style.display = 'flex';
+    welcomeScreen.style.display = 'block';
     invitationContainer.style.display = 'none';
     actionButtons.style.display = 'none';
-    viewInviteBtn.style.display = currentGuestName ? 'block' : 'none';
 });
 
 viewInviteBtn.addEventListener('click', function() {
@@ -131,7 +126,7 @@ generateInviteBtn.addEventListener('click', function() {
 editInviteBtn.addEventListener('click', function() {
     invitationContainer.style.display = 'none';
     actionButtons.style.display = 'none';
-    creationScreen.style.display = 'flex';
+    creationScreen.style.display = 'block';
     guestNameInput.value = currentGuestName;
     guestNameInput.focus();
 });
@@ -140,18 +135,19 @@ downloadInviteBtn.addEventListener('click', function() {
     const invitationCard = document.getElementById('invitationCard');
     
     const originalText = downloadInviteBtn.innerHTML;
-    downloadInviteBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+    downloadInviteBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processando...';
     downloadInviteBtn.disabled = true;
     
     html2canvas(invitationCard, {
-        scale: 2,
+        scale: 3,
         useCORS: true,
         logging: false,
         backgroundColor: '#ffffff',
-        allowTaint: true
+        allowTaint: true,
+        removeContainer: true
     }).then(canvas => {
         const link = document.createElement('a');
-        const fileName = `Convite_Gala_${currentGuestName.replace(/\s+/g, '_')}.png`;
+        const fileName = `Convite_Gala_Juvenil_${currentGuestName.replace(/\s+/g, '_')}.png`;
         link.download = fileName;
         link.href = canvas.toDataURL('image/png', 1.0);
         
@@ -159,40 +155,40 @@ downloadInviteBtn.addEventListener('click', function() {
         link.click();
         document.body.removeChild(link);
         
-        downloadInviteBtn.innerHTML = '<i class="fas fa-check"></i>';
+        downloadInviteBtn.innerHTML = '<i class="fas fa-check"></i> Convite Baixado!';
         downloadInviteBtn.style.background = 'linear-gradient(135deg, #27ae60 0%, #2ecc71 100%)';
         
         setTimeout(() => {
-            downloadInviteBtn.innerHTML = '<i class="fas fa-download"></i> Baixar Convite';
+            downloadInviteBtn.innerHTML = originalText;
             downloadInviteBtn.style.background = '';
             downloadInviteBtn.disabled = false;
         }, 2000);
         
     }).catch(error => {
         console.error('Erro ao baixar convite:', error);
-        downloadInviteBtn.innerHTML = '<i class="fas fa-times"></i>';
+        downloadInviteBtn.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Erro!';
         downloadInviteBtn.style.background = 'linear-gradient(135deg, #e74c3c 0%, #c0392b 100%)';
         
         setTimeout(() => {
-            downloadInviteBtn.innerHTML = '<i class="fas fa-download"></i> Baixar Convite';
+            downloadInviteBtn.innerHTML = originalText;
             downloadInviteBtn.style.background = '';
             downloadInviteBtn.disabled = false;
-            alert('Erro ao baixar. Tente novamente.');
+            alert('Ocorreu um erro ao baixar o convite. Tente novamente.');
         }, 2000);
     });
 });
 
 sendWhatsAppBtn.addEventListener('click', function() {
-    const inviteUrl = `${window.location.origin}?convite=${encodeURIComponent(currentGuestName)}`;
-    const message = `Glória a Deus! Paz e graça!\n\n${currentGuestName}, baixe o seu convite para a Gala Cristã Juvenil:\n\n${inviteUrl}\n\n*Data:* 26/12/2025\n*Horário:* 22h-04h\n*Local:* Congregação Tsakane\n\nContato: 84 401 2254`;
+    const inviteUrl = `${window.location.href.split('?')[0]}?convite=${encodeURIComponent(currentGuestName)}`;
+    const message = `Glória a Deus! Paz e graça!\n\n${currentGuestName}, baixe o seu convite para a Gala Cristã Juvenil através do link:\n\n${inviteUrl}`;
     
     const encodedMessage = encodeURIComponent(message);
     window.open(`https://wa.me/?text=${encodedMessage}`, '_blank');
 });
 
 sendSMSBtn.addEventListener('click', function() {
-    const inviteUrl = `${window.location.origin}?convite=${encodeURIComponent(currentGuestName)}`;
-    const message = `Glória a Deus! Paz e graça! ${currentGuestName}, baixe seu convite: ${inviteUrl} - Data: 26/12/2025, 22h-04h. Local: Congregação Tsakane. Contato: 84 401 2254`;
+    const inviteUrl = `${window.location.href.split('?')[0]}?convite=${encodeURIComponent(currentGuestName)}`;
+    const message = `Glória a Deus! Paz e graça! ${currentGuestName}, baixe seu convite para a Gala Cristã Juvenil: ${inviteUrl}`;
     
     const encodedMessage = encodeURIComponent(message);
     window.open(`sms:?body=${encodedMessage}`, '_blank');
@@ -201,7 +197,7 @@ sendSMSBtn.addEventListener('click', function() {
 backToHomeFromInviteBtn.addEventListener('click', function() {
     invitationContainer.style.display = 'none';
     actionButtons.style.display = 'none';
-    welcomeScreen.style.display = 'flex';
+    welcomeScreen.style.display = 'block';
 });
 
 function checkUrlParams() {
@@ -254,11 +250,5 @@ document.addEventListener('DOMContentLoaded', function() {
     checkUrlParams();
     if (currentGuestName) {
         viewInviteBtn.style.display = 'block';
-    }
-    
-    if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-            navigator.serviceWorker.register('/sw.js');
-        });
     }
 });
