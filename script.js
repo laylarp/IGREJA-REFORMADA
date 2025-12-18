@@ -1,6 +1,7 @@
 const welcomeScreen = document.getElementById('welcomeScreen');
 const creationScreen = document.getElementById('creationScreen');
 const invitationContainer = document.getElementById('invitationContainer');
+const downloadOnlyScreen = document.getElementById('downloadOnlyScreen');
 const actionButtons = document.getElementById('actionButtons');
 const viewInviteBtn = document.getElementById('viewInviteBtn');
 const createInviteBtn = document.getElementById('createInviteBtn');
@@ -8,7 +9,9 @@ const backToHomeBtn = document.getElementById('backToHomeBtn');
 const generateInviteBtn = document.getElementById('generateInviteBtn');
 const guestNameInput = document.getElementById('guestName');
 const displayName = document.getElementById('displayName');
+const downloadDisplayName = document.getElementById('downloadDisplayName');
 const downloadInviteBtn = document.getElementById('downloadInviteBtn');
+const downloadOnlyBtn = document.getElementById('downloadOnlyBtn');
 const sendWhatsAppBtn = document.getElementById('sendWhatsAppBtn');
 const sendSMSBtn = document.getElementById('sendSMSBtn');
 const editInviteBtn = document.getElementById('editInviteBtn');
@@ -37,7 +40,7 @@ function formatName(name) {
 function loadChurchLogo() {
     const logoUrl = 'logo.png';
     const churchLogo = document.getElementById('churchLogo');
-    const invitationLogo = document.getElementById('invitationLogo');
+    const invitationLogos = document.querySelectorAll('.invitation-logo');
     
     const img = new Image();
     img.onload = function() {
@@ -47,11 +50,13 @@ function loadChurchLogo() {
         logoImg1.alt = 'Logo Igreja Reformada';
         churchLogo.appendChild(logoImg1);
         
-        invitationLogo.innerHTML = '';
-        const logoImg2 = document.createElement('img');
-        logoImg2.src = logoUrl;
-        logoImg2.alt = 'Logo Igreja Reformada';
-        invitationLogo.appendChild(logoImg2);
+        invitationLogos.forEach(invitationLogo => {
+            invitationLogo.innerHTML = '';
+            const logoImg2 = document.createElement('img');
+            logoImg2.src = logoUrl;
+            logoImg2.alt = 'Logo Igreja Reformada';
+            invitationLogo.appendChild(logoImg2);
+        });
     };
     
     img.onerror = function() {
@@ -90,12 +95,14 @@ backToHomeBtn.addEventListener('click', function() {
     creationScreen.style.display = 'none';
     welcomeScreen.style.display = 'block';
     invitationContainer.style.display = 'none';
+    downloadOnlyScreen.style.display = 'none';
     actionButtons.style.display = 'none';
 });
 
 viewInviteBtn.addEventListener('click', function() {
     welcomeScreen.style.display = 'none';
     creationScreen.style.display = 'none';
+    downloadOnlyScreen.style.display = 'none';
     invitationContainer.style.display = 'block';
     actionButtons.style.display = 'grid';
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -117,6 +124,7 @@ generateInviteBtn.addEventListener('click', function() {
     localStorage.setItem('galaInviteName', currentGuestName);
     
     creationScreen.style.display = 'none';
+    downloadOnlyScreen.style.display = 'none';
     invitationContainer.style.display = 'block';
     actionButtons.style.display = 'grid';
     viewInviteBtn.style.display = 'block';
@@ -125,29 +133,28 @@ generateInviteBtn.addEventListener('click', function() {
 
 editInviteBtn.addEventListener('click', function() {
     invitationContainer.style.display = 'none';
+    downloadOnlyScreen.style.display = 'none';
     actionButtons.style.display = 'none';
     creationScreen.style.display = 'block';
     guestNameInput.value = currentGuestName;
     guestNameInput.focus();
 });
 
-downloadInviteBtn.addEventListener('click', function() {
-    const invitationCard = document.getElementById('invitationCard');
-    
-    const originalText = downloadInviteBtn.innerHTML;
-    downloadInviteBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processando...';
-    downloadInviteBtn.disabled = true;
+function downloadInvite(cardId, fileNamePrefix) {
+    const invitationCard = document.getElementById(cardId);
     
     html2canvas(invitationCard, {
-        scale: 3,
+        scale: 2,
         useCORS: true,
         logging: false,
         backgroundColor: '#ffffff',
         allowTaint: true,
-        removeContainer: true
+        removeContainer: true,
+        width: invitationCard.offsetWidth,
+        height: invitationCard.offsetHeight
     }).then(canvas => {
         const link = document.createElement('a');
-        const fileName = `Convite_Gala_Juvenil_${currentGuestName.replace(/\s+/g, '_')}.png`;
+        const fileName = `${fileNamePrefix}_${currentGuestName.replace(/\s+/g, '_')}.png`;
         link.download = fileName;
         link.href = canvas.toDataURL('image/png', 1.0);
         
@@ -155,27 +162,18 @@ downloadInviteBtn.addEventListener('click', function() {
         link.click();
         document.body.removeChild(link);
         
-        downloadInviteBtn.innerHTML = '<i class="fas fa-check"></i> Convite Baixado!';
-        downloadInviteBtn.style.background = 'linear-gradient(135deg, #27ae60 0%, #2ecc71 100%)';
-        
-        setTimeout(() => {
-            downloadInviteBtn.innerHTML = originalText;
-            downloadInviteBtn.style.background = '';
-            downloadInviteBtn.disabled = false;
-        }, 2000);
-        
     }).catch(error => {
         console.error('Erro ao baixar convite:', error);
-        downloadInviteBtn.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Erro!';
-        downloadInviteBtn.style.background = 'linear-gradient(135deg, #e74c3c 0%, #c0392b 100%)';
-        
-        setTimeout(() => {
-            downloadInviteBtn.innerHTML = originalText;
-            downloadInviteBtn.style.background = '';
-            downloadInviteBtn.disabled = false;
-            alert('Ocorreu um erro ao baixar o convite. Tente novamente.');
-        }, 2000);
+        alert('Ocorreu um erro ao baixar o convite. Tente novamente.');
     });
+}
+
+downloadInviteBtn.addEventListener('click', function() {
+    downloadInvite('invitationCard', 'Convite_Gala_Juvenil');
+});
+
+downloadOnlyBtn.addEventListener('click', function() {
+    downloadInvite('downloadInvitationCard', 'Convite_Gala_Juvenil');
 });
 
 sendWhatsAppBtn.addEventListener('click', function() {
@@ -196,6 +194,7 @@ sendSMSBtn.addEventListener('click', function() {
 
 backToHomeFromInviteBtn.addEventListener('click', function() {
     invitationContainer.style.display = 'none';
+    downloadOnlyScreen.style.display = 'none';
     actionButtons.style.display = 'none';
     welcomeScreen.style.display = 'block';
 });
@@ -207,14 +206,14 @@ function checkUrlParams() {
     if (inviteName) {
         const decodedName = decodeURIComponent(inviteName);
         currentGuestName = formatName(decodedName);
+        downloadDisplayName.textContent = currentGuestName;
         
         welcomeScreen.style.display = 'none';
         creationScreen.style.display = 'none';
-        invitationContainer.style.display = 'block';
-        actionButtons.style.display = 'grid';
-        displayName.textContent = currentGuestName;
-        
-        localStorage.setItem('galaInviteName', currentGuestName);
+        invitationContainer.style.display = 'none';
+        actionButtons.style.display = 'none';
+        downloadOnlyScreen.style.display = 'block';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 }
 
