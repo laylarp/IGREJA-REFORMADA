@@ -23,10 +23,10 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 10px;
+    padding: 8px;
     position: relative;
     overflow-x: hidden;
-    font-size: 14px;
+    font-size: 13px;
 }
 
 .christian-decoration {
@@ -34,41 +34,41 @@ body {
     z-index: -1;
     opacity: 0.07;
     color: var(--primary-brown);
-    font-size: 16px;
+    font-size: 14px;
 }
 
 .cross-top-left {
-    top: 5%;
-    left: 5%;
+    top: 3%;
+    left: 3%;
     transform: rotate(15deg);
 }
 
 .cross-top-right {
-    top: 8%;
-    right: 8%;
+    top: 5%;
+    right: 5%;
     transform: rotate(-10deg);
 }
 
 .cross-bottom-left {
-    bottom: 10%;
-    left: 7%;
+    bottom: 5%;
+    left: 5%;
     transform: rotate(-20deg);
 }
 
 .cross-bottom-right {
-    bottom: 5%;
-    right: 5%;
+    bottom: 3%;
+    right: 3%;
     transform: rotate(5deg);
 }
 
 .dove-decoration {
-    top: 15%;
+    top: 10%;
     left: 50%;
     transform: translateX(-50%);
 }
 
 .container {
-    max-width: 850px;
+    max-width: 800px;
     width: 100%;
     margin: 0 auto;
     z-index: 1;
@@ -77,13 +77,13 @@ body {
 .welcome-screen {
     text-align: center;
     background: rgba(255, 255, 255, 0.95);
-    border-radius: 12px;
-    padding: 25px 20px;
-    box-shadow: 0 8px 25px rgba(139, 69, 19, 0.12);
+    border-radius: 10px;
+    padding: 20px 15px;
+    box-shadow: 0 6px 20px rgba(139, 69, 19, 0.12);
     backdrop-filter: blur(8px);
     border: 1px solid rgba(139, 69, 19, 0.08);
-    max-width: 500px;
-    margin: 15px auto;
+    max-width: 450px;
+    margin: 10px auto;
     position: relative;
     overflow: hidden;
 }
@@ -94,7 +94,7 @@ body {
     top: 0;
     left: 0;
     right: 0;
-    height: 4px;
+    height: 3px;
     background: linear-gradient(90deg, var(--primary-brown) 0%, var(--gold) 50%, var(--primary-brown) 100%);
 }
 
@@ -102,21 +102,21 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 .church-logo {
-    width: 90px;
-    height: 90px;
-    margin-bottom: 12px;
-    border-radius: 10px;
+    width: 70px;
+    height: 70px;
+    margin-bottom: 8px;
+    border-radius: 8px;
     background: white;
     display: flex;
     align-items: center;
     justify-content: center;
     border: 2px solid var(--primary-brown);
-    box-shadow: 0 4px 12px rgba(139, 69, 19, 0.15);
-    padding: 6px;
+    box-shadow: 0 3px 8px rgba(139, 69, 19, 0.15);
+    padding: 4px;
     overflow: hidden;
 }
 
@@ -124,72 +124,73 @@ body {
     max-width: 100%;
     max-height: 100%;
     object-fit: contain;
-    border-radius: 6px;
+    border-radius: 5px;
 }
 
 .logo-placeholder {
-    font-size: 1rem;
+    font-size: 0.85rem;
     color: var(--dark-text);
     font-weight: bold;
     text-align: center;
-    line-height: 1.2;
+    line-height: 1.1;
 }
 
 .church-name {
     font-family: 'Playfair Display', serif;
     color: var(--primary-brown);
-    font-size: 1.3rem;
-    margin-bottom: 4px;
-    letter-spacing: 0.3px;
+    font-size: 1.1rem;
+    margin-bottom: 3px;
+    letter-spacing: 0.2px;
 }
 
 .church-subtitle {
     color: var(--gold);
-    font-size: 1rem;
-    margin-bottom: 6px;
+    font-size: 0.9rem;
+    margin-bottom: 4px;
     font-weight: 400;
     font-family: 'Dancing Script', cursive;
 }
 
 .event-year {
     color: var(--light-text);
-    font-size: 0.8rem;
-    letter-spacing: 2px;
-    margin-bottom: 15px;
+    font-size: 0.7rem;
+    letter-spacing: 1.5px;
+    margin-bottom: 12px;
 }
 
 .welcome-message {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     color: var(--light-text);
-    line-height: 1.5;
-    font-size: 0.9rem;
-    max-width: 400px;
+    line-height: 1.4;
+    font-size: 0.8rem;
+    max-width: 350px;
     margin-left: auto;
     margin-right: auto;
-    padding: 0 12px;
+    padding: 0 10px;
 }
 
 .welcome-buttons {
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    margin-top: 15px;
+    gap: 10px;
+    margin-top: 12px;
 }
 
 .btn {
-    padding: 12px 20px;
+    padding: 10px 16px;
     border: none;
-    border-radius: 8px;
-    font-size: 0.9rem;
+    border-radius: 6px;
+    font-size: 0.8rem;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 6px;
     position: relative;
     overflow: hidden;
+    white-space: nowrap;
 }
 
 .btn::before {
@@ -210,23 +211,23 @@ body {
 .btn-primary {
     background: linear-gradient(135deg, var(--primary-brown) 0%, var(--light-brown) 100%);
     color: white;
-    box-shadow: 0 4px 12px rgba(139, 69, 19, 0.3);
+    box-shadow: 0 3px 8px rgba(139, 69, 19, 0.3);
 }
 
 .btn-primary:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 16px rgba(139, 69, 19, 0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(139, 69, 19, 0.4);
 }
 
 .btn-secondary {
     background: linear-gradient(135deg, var(--gold) 0%, var(--light-gold) 100%);
     color: white;
-    box-shadow: 0 4px 12px rgba(184, 134, 11, 0.3);
+    box-shadow: 0 3px 8px rgba(184, 134, 11, 0.3);
 }
 
 .btn-secondary:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 16px rgba(184, 134, 11, 0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(184, 134, 11, 0.4);
 }
 
 .btn-back {
@@ -236,7 +237,7 @@ body {
 
 .btn-back:hover {
     background: #5a6268;
-    transform: translateY(-3px);
+    transform: translateY(-2px);
 }
 
 .creation-screen {
@@ -246,11 +247,11 @@ body {
 
 .creation-card {
     background: white;
-    border-radius: 12px;
-    padding: 25px 20px;
-    box-shadow: 0 8px 25px rgba(139, 69, 19, 0.12);
-    margin-bottom: 15px;
-    max-width: 450px;
+    border-radius: 10px;
+    padding: 20px 15px;
+    box-shadow: 0 6px 20px rgba(139, 69, 19, 0.12);
+    margin-bottom: 10px;
+    max-width: 400px;
     margin-left: auto;
     margin-right: auto;
     border: 1px solid rgba(139, 69, 19, 0.1);
@@ -264,51 +265,51 @@ body {
     top: 0;
     left: 0;
     right: 0;
-    height: 3px;
+    height: 2px;
     background: linear-gradient(90deg, var(--primary-brown) 0%, var(--gold) 100%);
 }
 
 .creation-header {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 .creation-header h2 {
     color: var(--primary-brown);
     font-family: 'Playfair Display', serif;
-    font-size: 1.3rem;
-    margin-bottom: 8px;
+    font-size: 1.1rem;
+    margin-bottom: 6px;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 6px;
 }
 
 .creation-header p {
     color: var(--light-text);
-    font-size: 0.85rem;
-    max-width: 300px;
+    font-size: 0.75rem;
+    max-width: 280px;
     margin: 0 auto;
 }
 
 .input-group {
-    margin-bottom: 15px;
+    margin-bottom: 12px;
 }
 
 .input-group label {
     display: block;
-    margin-bottom: 6px;
+    margin-bottom: 4px;
     color: var(--dark-text);
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
 }
 
 .input-group input {
     width: 100%;
-    padding: 12px;
+    padding: 10px;
     border: 2px solid #e6d8c6;
-    border-radius: 8px;
-    font-size: 0.9rem;
+    border-radius: 6px;
+    font-size: 0.8rem;
     transition: all 0.3s;
     background: var(--light-cream);
     color: var(--dark-text);
@@ -317,24 +318,24 @@ body {
 .input-group input:focus {
     border-color: var(--primary-brown);
     outline: none;
-    box-shadow: 0 0 0 3px rgba(139, 69, 19, 0.1);
+    box-shadow: 0 0 0 2px rgba(139, 69, 19, 0.1);
 }
 
 .input-hint {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     color: #888;
-    margin-top: 6px;
+    margin-top: 4px;
     font-style: italic;
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 3px;
 }
 
 .form-buttons {
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    margin-top: 20px;
+    gap: 10px;
+    margin-top: 15px;
 }
 
 .invitation-container, .download-only-screen {
@@ -344,13 +345,13 @@ body {
 
 .invitation-card {
     background: white;
-    border-radius: 12px;
+    border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
-    margin-bottom: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    margin-bottom: 10px;
     position: relative;
     border: 1px solid rgba(139, 69, 19, 0.1);
-    max-width: 800px;
+    max-width: 750px;
     margin-left: auto;
     margin-right: auto;
     width: 100%;
@@ -360,7 +361,7 @@ body {
 
 .invitation-header {
     background: linear-gradient(135deg, var(--primary-brown) 0%, #5D4037 100%);
-    padding: 25px 20px 15px;
+    padding: 20px 15px 12px;
     text-align: center;
     color: white;
     position: relative;
@@ -378,54 +379,54 @@ body {
 }
 
 .invitation-logo {
-    width: 70px;
-    height: 70px;
-    margin: 0 auto 12px;
-    border-radius: 10px;
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 8px;
+    border-radius: 8px;
     background: white;
     display: flex;
     align-items: center;
     justify-content: center;
     border: 2px solid var(--gold);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    padding: 6px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+    padding: 4px;
 }
 
 .invitation-logo img {
     max-width: 100%;
     max-height: 100%;
     object-fit: contain;
-    border-radius: 6px;
+    border-radius: 5px;
 }
 
 .invitation-title {
     font-family: 'Playfair Display', serif;
-    font-size: 1.8rem;
-    margin-bottom: 6px;
-    letter-spacing: 1px;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    font-size: 1.5rem;
+    margin-bottom: 4px;
+    letter-spacing: 0.8px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 .invitation-subtitle {
     font-family: 'Great Vibes', cursive;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-weight: normal;
-    margin-bottom: 4px;
+    margin-bottom: 3px;
     color: var(--light-cream);
 }
 
 .invitation-year {
-    font-size: 0.8rem;
-    letter-spacing: 2px;
+    font-size: 0.7rem;
+    letter-spacing: 1.5px;
     opacity: 0.9;
 }
 
 .invitation-body {
-    padding: 20px 25px;
+    padding: 15px 20px;
     background: white;
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 12px;
 }
 
 .invitation-text {
@@ -433,20 +434,20 @@ body {
 }
 
 .invitation-text p {
-    font-size: 0.9rem;
-    line-height: 1.5;
+    font-size: 0.8rem;
+    line-height: 1.4;
     color: var(--light-text);
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     text-align: center;
 }
 
 .guest-name-card {
     background: linear-gradient(135deg, var(--cream) 0%, var(--light-cream) 100%);
-    border-radius: 8px;
-    padding: 15px 12px;
+    border-radius: 6px;
+    padding: 12px 10px;
     text-align: center;
-    border: 2px solid var(--gold);
-    box-shadow: 0 6px 16px rgba(184, 134, 11, 0.1);
+    border: 1px solid var(--gold);
+    box-shadow: 0 4px 10px rgba(184, 134, 11, 0.1);
     position: relative;
     overflow: hidden;
 }
@@ -457,22 +458,22 @@ body {
     top: 0;
     left: 0;
     right: 0;
-    height: 2px;
+    height: 1px;
     background: linear-gradient(90deg, var(--primary-brown) 0%, var(--gold) 100%);
 }
 
 .guest-name-label {
     display: block;
     color: var(--primary-brown);
-    font-size: 0.85rem;
-    margin-bottom: 8px;
+    font-size: 0.75rem;
+    margin-bottom: 6px;
     font-weight: 600;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.4px;
 }
 
 .guest-name {
     font-family: 'Dancing Script', cursive;
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     color: var(--primary-brown);
     line-height: 1.2;
     text-transform: capitalize;
@@ -482,19 +483,19 @@ body {
 .event-details-container {
     display: flex;
     flex-wrap: nowrap;
-    gap: 12px;
-    margin: 15px 0;
+    gap: 10px;
+    margin: 12px 0;
     justify-content: center;
 }
 
 .detail-card {
     background: white;
-    border-radius: 8px;
-    padding: 15px 12px;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+    border-radius: 6px;
+    padding: 12px 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
     border: 1px solid rgba(139, 69, 19, 0.1);
     text-align: center;
-    min-width: 180px;
+    min-width: 150px;
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -502,25 +503,25 @@ body {
 }
 
 .detail-card-icon {
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
     background: linear-gradient(135deg, var(--cream) 0%, #f5eddf 100%);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto 10px;
-    font-size: 1rem;
+    margin: 0 auto 8px;
+    font-size: 0.9rem;
     color: var(--primary-brown);
-    border: 2px solid var(--gold);
+    border: 1px solid var(--gold);
 }
 
 .detail-card h3 {
     color: var(--primary-brown);
     font-family: 'Playfair Display', serif;
-    font-size: 1rem;
-    margin-bottom: 8px;
-    min-height: 35px;
+    font-size: 0.9rem;
+    margin-bottom: 6px;
+    min-height: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -528,8 +529,8 @@ body {
 
 .detail-card-content {
     color: var(--light-text);
-    font-size: 0.8rem;
-    line-height: 1.4;
+    font-size: 0.75rem;
+    line-height: 1.3;
     flex-grow: 1;
     display: flex;
     flex-direction: column;
@@ -537,61 +538,61 @@ body {
 }
 
 .detail-card-content p {
-    margin-bottom: 6px;
+    margin-bottom: 4px;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 6px;
+    gap: 4px;
 }
 
 .invitation-footer {
     background: var(--cream);
-    padding: 20px 25px;
+    padding: 15px 20px;
     text-align: center;
     border-top: 1px solid rgba(139, 69, 19, 0.1);
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 15px;
+    gap: 12px;
 }
 
 .contact-info {
     background: white;
-    border-radius: 8px;
-    padding: 15px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border-radius: 6px;
+    padding: 12px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
     border: 1px solid var(--gold);
-    max-width: 350px;
+    max-width: 300px;
     width: 100%;
 }
 
 .contact-info h4 {
     color: var(--primary-brown);
-    font-size: 1rem;
-    margin-bottom: 10px;
+    font-size: 0.9rem;
+    margin-bottom: 8px;
     font-family: 'Playfair Display', serif;
 }
 
 .contact-phone {
-    font-size: 1.1rem;
+    font-size: 1rem;
     color: var(--primary-brown);
     font-weight: bold;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    margin-bottom: 8px;
+    gap: 6px;
+    margin-bottom: 6px;
 }
 
 .contact-note {
     color: var(--light-text);
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     font-style: italic;
 }
 
 .church-signature {
-    margin-top: 10px;
-    padding-top: 10px;
+    margin-top: 8px;
+    padding-top: 8px;
     border-top: 1px solid rgba(139, 69, 19, 0.1);
     width: 100%;
 }
@@ -599,54 +600,99 @@ body {
 .church-name-footer {
     font-family: 'Playfair Display', serif;
     color: var(--primary-brown);
-    font-size: 1.1rem;
-    margin-bottom: 6px;
+    font-size: 1rem;
+    margin-bottom: 4px;
 }
 
 .event-name-footer {
     color: var(--light-text);
-    font-size: 0.85rem;
-    margin-bottom: 10px;
+    font-size: 0.8rem;
+    margin-bottom: 8px;
 }
 
 .signature-line {
     display: inline-block;
-    width: 120px;
+    width: 100px;
     height: 1px;
     background: var(--light-text);
-    margin: 8px 0;
+    margin: 6px 0;
 }
 
 .signature-text {
     color: var(--light-text);
     font-style: italic;
-    margin-top: 10px;
-    font-size: 0.8rem;
+    margin-top: 8px;
+    font-size: 0.75rem;
 }
 
+
 .action-buttons {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin: 20px auto;
-    max-width: 800px;
-    justify-content: center;
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 8px !important;
+    width: 100% !important;
+    max-width: 750px !important;
+    margin: 15px auto !important;
+    padding: 8px 0 !important;
+    overflow-x: visible !important;
+    overflow-y: visible !important;
+    position: relative !important;
+}
+
+.action-buttons .btn {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex: 1 0 auto !important;
+    min-width: 130px !important;
+    max-width: 150px !important;
+    margin: 0 !important;
+    padding: 8px 12px !important;
+    font-size: 0.75rem !important;
+    white-space: nowrap !important;
+    text-align: center !important;
+    height: auto !important;
+    line-height: 1.2 !important;
+}
+
+
+.action-buttons .btn,
+.action-buttons {
+    float: none !important;
+    clear: none !important;
+    display: flex !important;
+}
+
+
+.action-buttons .btn-primary {
+    background: linear-gradient(135deg, var(--primary-brown) 0%, var(--light-brown) 100%) !important;
+}
+
+.action-buttons .btn-secondary {
+    background: linear-gradient(135deg, var(--gold) 0%, var(--light-gold) 100%) !important;
+}
+
+.action-buttons .btn-back {
+    background: #6c757d !important;
 }
 
 .download-only-screen {
     text-align: center;
-    max-width: 800px;
+    max-width: 750px;
     margin: 0 auto;
     width: 100%;
 }
 
 .download-only-button {
-    margin-top: 15px;
+    margin-top: 12px;
 }
 
 .download-only-button .btn {
     width: 100%;
-    max-width: 250px;
+    max-width: 200px;
     margin: 0 auto;
 }
 
@@ -665,11 +711,11 @@ body {
 
 .modal {
     background: white;
-    border-radius: 12px;
-    padding: 25px 20px;
-    max-width: 350px;
+    border-radius: 10px;
+    padding: 20px 15px;
+    max-width: 300px;
     width: 90%;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
     position: relative;
     border: 1px solid rgba(139, 69, 19, 0.1);
 }
@@ -680,31 +726,31 @@ body {
     top: 0;
     left: 0;
     right: 0;
-    height: 3px;
+    height: 2px;
     background: linear-gradient(90deg, var(--primary-brown) 0%, #2C3E50 100%);
-    border-radius: 12px 12px 0 0;
+    border-radius: 10px 10px 0 0;
 }
 
 .modal h2 {
     color: var(--primary-brown);
-    margin-bottom: 15px;
+    margin-bottom: 12px;
     font-family: 'Playfair Display', serif;
     text-align: center;
-    font-size: 1.3rem;
+    font-size: 1.1rem;
 }
 
 .modal-close {
     position: absolute;
-    top: 12px;
-    right: 12px;
+    top: 10px;
+    right: 10px;
     background: none;
     border: none;
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     cursor: pointer;
     color: #777;
     transition: color 0.3s;
-    width: 25px;
-    height: 25px;
+    width: 20px;
+    height: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -718,32 +764,53 @@ body {
 
 .error-message {
     color: #e74c3c;
-    margin-top: 8px;
+    margin-top: 6px;
     text-align: center;
     display: none;
-    padding: 8px;
+    padding: 6px;
     background: rgba(231, 76, 60, 0.1);
-    border-radius: 6px;
+    border-radius: 4px;
     border-left: 2px solid #e74c3c;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
 }
 
 .success-message {
     color: #27ae60;
-    margin-top: 8px;
+    margin-top: 6px;
     text-align: center;
     display: none;
-    padding: 8px;
+    padding: 6px;
     background: rgba(39, 174, 96, 0.1);
-    border-radius: 6px;
+    border-radius: 4px;
     border-left: 2px solid #27ae60;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
+}
+
+
+@media (min-width: 1200px) {
+    .action-buttons {
+        gap: 10px !important;
+    }
+    
+    .action-buttons .btn {
+        min-width: 140px !important;
+        max-width: 160px !important;
+        font-size: 0.8rem !important;
+        padding: 9px 14px !important;
+    }
+}
+
+@media (max-width: 992px) {
+    .action-buttons .btn {
+        min-width: 120px !important;
+        max-width: 140px !important;
+    }
 }
 
 @media (max-width: 768px) {
     .container {
         max-width: 100%;
-        padding: 0 8px;
+        padding: 0 6px;
     }
     
     .invitation-card {
@@ -752,79 +819,146 @@ body {
     
     .event-details-container {
         flex-wrap: wrap;
-        gap: 10px;
+        gap: 8px;
     }
     
     .detail-card {
-        min-width: calc(50% - 10px);
-        flex: 0 0 calc(50% - 10px);
+        min-width: calc(33.333% - 8px);
+        flex: 0 0 calc(33.333% - 8px);
     }
     
+   
     .action-buttons {
-        grid-template-columns: 1fr;
-        gap: 10px;
+        flex-wrap: wrap !important;
+        gap: 6px !important;
+    }
+    
+    .action-buttons .btn {
+        flex: 0 0 calc(33.333% - 6px) !important;
+        min-width: calc(33.333% - 6px) !important;
+        max-width: calc(33.333% - 6px) !important;
+        margin-bottom: 2px !important;
     }
     
     .invitation-body {
-        padding: 15px 20px;
+        padding: 12px 15px;
+        gap: 10px;
     }
     
     .invitation-title {
-        font-size: 1.5rem;
-    }
-    
-    .invitation-subtitle {
         font-size: 1.3rem;
     }
     
+    .invitation-subtitle {
+        font-size: 1.1rem;
+    }
+    
     .guest-name {
-        font-size: 1.5rem;
+        font-size: 1.3rem;
     }
     
     .contact-phone {
-        font-size: 1rem;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 600px) {
+    
+    .action-buttons {
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        justify-content: flex-start !important;
+        padding-bottom: 10px !important;
+        -webkit-overflow-scrolling: touch !important;
+        scrollbar-width: thin !important;
+        scrollbar-color: var(--primary-brown) transparent !important;
+    }
+    
+    .action-buttons::-webkit-scrollbar {
+        height: 4px !important;
+    }
+    
+    .action-buttons::-webkit-scrollbar-track {
+        background: transparent !important;
+    }
+    
+    .action-buttons::-webkit-scrollbar-thumb {
+        background-color: var(--primary-brown) !important;
+        border-radius: 2px !important;
+    }
+    
+    .action-buttons .btn {
+        flex: 0 0 auto !important;
+        min-width: 140px !important;
+        max-width: 140px !important;
+        margin: 0 2px !important;
+    }
+    
+    
+    .action-buttons .btn {
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
     }
 }
 
 @media (max-width: 480px) {
     body {
-        padding: 8px;
-        font-size: 13px;
+        padding: 6px;
+        font-size: 12px;
     }
     
     .church-name {
-        font-size: 1.1rem;
+        font-size: 1rem;
     }
     
     .invitation-title {
-        font-size: 1.3rem;
-    }
-    
-    .invitation-subtitle {
         font-size: 1.1rem;
     }
     
+    .invitation-subtitle {
+        font-size: 1rem;
+    }
+    
     .guest-name {
-        font-size: 1.3rem;
+        font-size: 1.1rem;
     }
     
     .detail-card {
-        min-width: 100%;
-        flex: 0 0 100%;
+        min-width: calc(50% - 8px);
+        flex: 0 0 calc(50% - 8px);
     }
     
     .detail-card-icon {
-        width: 35px;
-        height: 35px;
-        font-size: 0.9rem;
+        width: 30px;
+        height: 30px;
+        font-size: 0.8rem;
+    }
+    
+   
+    .action-buttons .btn {
+        min-width: 130px !important;
+        max-width: 130px !important;
+        padding: 7px 10px !important;
+        font-size: 0.7rem !important;
     }
     
     .btn {
-        padding: 10px 16px;
-        font-size: 0.85rem;
+        padding: 8px 12px;
+        font-size: 0.75rem;
     }
     
     .invitation-text p {
-        font-size: 0.85rem;
+        font-size: 0.75rem;
     }
+}
+
+
+#actionButtons {
+    display: flex !important;
+}
+
+#actionButtons .btn {
+    display: inline-flex !important;
 }
