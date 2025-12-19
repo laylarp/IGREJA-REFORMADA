@@ -1,190 +1,231 @@
-const SELECTORS = {
-  homeCard: document.getElementById('homeCard'),
-  btnCreate: document.getElementById('btnCreate'),
-  btnView: document.getElementById('btnView'),
-  passwordModal: document.getElementById('passwordModal'),
-  passwordInput: document.getElementById('passwordInput'),
-  btnPassAccess: document.getElementById('btnPassAccess'),
-  btnPassCancel: document.getElementById('btnPassCancel'),
-  nameCard: document.getElementById('nameCard'),
-  nameInput: document.getElementById('nameInput'),
-  btnGenerate: document.getElementById('btnGenerate'),
-  backFromName: document.getElementById('backFromName'),
-  inviteCard: document.getElementById('inviteCard'),
-  invitePreview: document.getElementById('invitePreview'),
-  inviteName: document.getElementById('inviteName'),
-  btnDownload: document.getElementById('btnDownload'),
-  btnWhats: document.getElementById('btnWhats'),
-  btnEditName: document.getElementById('btnEditName'),
-  backFromInvite: document.getElementById('backFromInvite')
-};
-
-const APP = {
+// APP SIMPLES E FUNCIONAL
+const App = {
   PASSWORD: 'irm3022irm',
-  LAST_KEY: 'convitelRM_last',
-  NAME_KEY: 'convitelRM_name',
-  init(){
-    this.bind();
-    const url = new URL(location.href);
-    if(url.searchParams.get('view') === 'last'){
-      this.showLastInviteView();
+  
+  init() {
+    this.cacheElements();
+    this.bindEvents();
+    this.checkUrlParams();
+  },
+  
+  cacheElements() {
+    // Telas
+    this.screens = {
+      home: document.getElementById('homeCard'),
+      password: document.getElementById('passwordScreen'),
+      name: document.getElementById('nameScreen'),
+      invite: document.getElementById('inviteScreen')
+    };
+    
+    // Botões
+    this.buttons = {
+      create: document.getElementById('btnCreate'),
+      view: document.getElementById('btnView'),
+      access: document.getElementById('btnAccess'),
+      cancel: document.getElementById('btnCancel'),
+      generate: document.getElementById('btnGenerate'),
+      download: document.getElementById('btnDownload'),
+      whatsapp: document.getElementById('btnWhats'),
+      edit: document.getElementById('btnEditName')
+    };
+    
+    // Voltar
+    this.backButtons = {
+      password: document.getElementById('backFromPassword'),
+      name: document.getElementById('backFromName'),
+      invite: document.getElementById('backFromInvite')
+    };
+    
+    // Inputs
+    this.inputs = {
+      password: document.getElementById('passwordInput'),
+      name: document.getElementById('nameInput')
+    };
+    
+    // Nome no convite
+    this.inviteName = document.getElementById('inviteName');
+  },
+  
+  bindEvents() {
+    // Navegação principal
+    this.buttons.create.addEventListener('click', () => this.showScreen('password'));
+    this.buttons.view.addEventListener('click', () => this.showLastInvite());
+    this.buttons.cancel.addEventListener('click', () => this.showScreen('home'));
+    
+    // Acesso com senha
+    this.buttons.access.addEventListener('click', () => this.checkPassword());
+    this.inputs.password.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') this.checkPassword();
+    });
+    
+    // Gerar convite
+    this.buttons.generate.addEventListener('click', () => this.generateInvite());
+    this.inputs.name.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') this.generateInvite();
+    });
+    
+    // Botões de voltar
+    this.backButtons.password.addEventListener('click', () => this.showScreen('home'));
+    this.backButtons.name.addEventListener('click', () => this.showScreen('password'));
+    this.backButtons.invite.addEventListener('click', () => this.showScreen('home'));
+    
+    // Ações do convite
+    this.buttons.download.addEventListener('click', () => this.downloadInvite());
+    this.buttons.whatsapp.addEventListener('click', () => this.shareWhatsApp());
+    this.buttons.edit.addEventListener('click', () => this.showScreen('name'));
+  },
+  
+  showScreen(screenName) {
+    // Esconder todas as telas
+    Object.values(this.screens).forEach(screen => {
+      screen.classList.remove('active');
+    });
+    
+    // Mostrar tela solicitada
+    this.screens[screenName].classList.add('active');
+    
+    // Limpar inputs quando necessário
+    if (screenName === 'password') {
+      this.inputs.password.value = '';
+      setTimeout(() => this.inputs.password.focus(), 300);
+    } else if (screenName === 'name') {
+      const savedName = localStorage.getItem('galaName');
+      if (savedName) this.inputs.name.value = savedName;
+      setTimeout(() => this.inputs.name.focus(), 300);
     }
   },
-  bind(){
-    SELECTORS.btnCreate.addEventListener('click', ()=> this.openPassword());
-    SELECTORS.btnView.addEventListener('click', ()=> this.showLastInviteView());
-    SELECTORS.btnPassCancel.addEventListener('click', ()=> this.closePassword());
-    SELECTORS.btnPassAccess.addEventListener('click', ()=> this.checkPassword());
-    SELECTORS.btnGenerate.addEventListener('click', ()=> this.generateInvite());
-    SELECTORS.backFromName.addEventListener('click', ()=> this.showHome());
-    SELECTORS.backFromInvite.addEventListener('click', ()=> this.showHome());
-    SELECTORS.btnDownload.addEventListener('click', ()=> this.downloadInvite());
-    SELECTORS.btnWhats.addEventListener('click', ()=> this.shareWhatsApp());
-    SELECTORS.btnEditName.addEventListener('click', ()=> this.editNameFromInvite());
-  },
-  openPassword(){
-    SELECTORS.passwordModal.classList.remove('hidden');
-    SELECTORS.passwordInput.value = '';
-    SELECTORS.passwordInput.focus();
-  },
-  closePassword(){
-    SELECTORS.passwordModal.classList.add('hidden');
-  },
-  checkPassword(){
-    const val = SELECTORS.passwordInput.value.trim();
-    if(val === this.PASSWORD){
-      this.closePassword();
-      this.showNameCard();
+  
+  checkPassword() {
+    const password = this.inputs.password.value.trim();
+    if (password === this.PASSWORD) {
+      this.showScreen('name');
     } else {
-      alert('Senha incorreta');
+      alert('Senha incorreta!');
+      this.inputs.password.value = '';
+      this.inputs.password.focus();
     }
   },
-  showHome(){
-    this.hideAll();
-    SELECTORS.homeCard.classList.remove('hidden');
-  },
-  showNameCard(){
-    this.hideAll();
-    SELECTORS.nameCard.classList.remove('hidden');
-    const cachedName = localStorage.getItem(this.NAME_KEY);
-    if(cachedName) SELECTORS.nameInput.value = cachedName;
-    SELECTORS.nameInput.focus();
-  },
-  showInviteCard(editable=true){
-    this.hideAll();
-    SELECTORS.inviteCard.classList.remove('hidden');
-    const name = localStorage.getItem(this.NAME_KEY) || 'Convidado';
-    SELECTORS.inviteName.textContent = name;
-    SELECTORS.btnEditName.style.display = editable ? 'inline-flex' : 'none';
-  },
-  hideAll(){
-    SELECTORS.homeCard.classList.add('hidden');
-    SELECTORS.passwordModal.classList.add('hidden');
-    SELECTORS.nameCard.classList.add('hidden');
-    SELECTORS.inviteCard.classList.add('hidden');
-  },
-  generateInvite(){
-    const rawName = SELECTORS.nameInput.value.trim();
-    if(!rawName){
-      alert('Por favor escreva o nome completo.');
+  
+  generateInvite() {
+    const rawName = this.inputs.name.value.trim();
+    
+    if (!rawName) {
+      alert('Por favor, digite seu nome.');
+      this.inputs.name.focus();
       return;
     }
-    const formatted = rawName.split(' ').filter(Boolean).map(p => p[0]?.toUpperCase() + p.slice(1).toLowerCase()).join(' ');
-    localStorage.setItem(this.NAME_KEY, formatted);
-    SELECTORS.inviteName.textContent = formatted;
-    setTimeout(()=> {
-      this.showInviteCard(true);
-      this.renderInviteToImage(true);
-    }, 150);
+    
+    // Formatar nome (primeira letra maiúscula)
+    const formattedName = rawName
+      .split(' ')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+      .join(' ');
+    
+    // Salvar nome
+    localStorage.setItem('galaName', formattedName);
+    
+    // Atualizar convite
+    this.inviteName.textContent = formattedName;
+    
+    // Gerar imagem do convite
+    this.generateInviteImage();
+    
+    // Mostrar tela do convite
+    this.showScreen('invite');
   },
-  renderInviteToImage(saveToLocal=true){
-    const node = document.getElementById('invitePreview');
+  
+  generateInviteImage() {
+    const inviteElement = document.getElementById('invitePreview');
     
-    // Definir dimensões fixas para a imagem (proporção similar a cartão)
-    const originalWidth = node.offsetWidth;
-    const originalHeight = node.offsetHeight;
-    
-    // Definir uma proporção bonita para celular (mais quadrada)
-    const targetWidth = 1200; // Largura maior para qualidade
-    const targetHeight = Math.floor(targetWidth * (originalHeight / originalWidth));
-    
-    html2canvas(node, { 
+    // Configurações para celular
+    const options = {
       scale: 2,
       useCORS: true,
       backgroundColor: '#fffef9',
-      width: targetWidth,
-      height: targetHeight,
-      windowWidth: targetWidth,
-      windowHeight: targetHeight,
-      logging: false
-    }).then(canvas => {
-      // Adicionar margens brancas ao redor
-      const margin = 50;
-      const finalCanvas = document.createElement('canvas');
-      finalCanvas.width = canvas.width + (margin * 2);
-      finalCanvas.height = canvas.height + (margin * 2);
-      
-      const ctx = finalCanvas.getContext('2d');
-      ctx.fillStyle = '#fffef9';
-      ctx.fillRect(0, 0, finalCanvas.width, finalCanvas.height);
-      ctx.drawImage(canvas, margin, margin);
-      
-      const dataUrl = finalCanvas.toDataURL('image/png', 1.0);
-      
-      if(saveToLocal){
-        localStorage.setItem(this.LAST_KEY, dataUrl);
-      }
-      this._lastDataUrl = dataUrl;
-    }).catch(err=>{
-      console.error(err);
-      alert('Erro ao gerar imagem do convite.');
-    });
+      logging: false,
+      width: 375, // Largura fixa para celular
+      height: inviteElement.scrollHeight * 1.2,
+      windowWidth: 375,
+      windowHeight: inviteElement.scrollHeight * 1.2
+    };
+    
+    html2canvas(inviteElement, options)
+      .then(canvas => {
+        // Adicionar margens brancas
+        const margin = 30;
+        const finalCanvas = document.createElement('canvas');
+        finalCanvas.width = canvas.width + (margin * 2);
+        finalCanvas.height = canvas.height + (margin * 2);
+        
+        const ctx = finalCanvas.getContext('2d');
+        ctx.fillStyle = '#fffef9';
+        ctx.fillRect(0, 0, finalCanvas.width, finalCanvas.height);
+        ctx.drawImage(canvas, margin, margin);
+        
+        // Salvar para download
+        this.lastImageUrl = finalCanvas.toDataURL('image/png');
+        localStorage.setItem('lastInviteImage', this.lastImageUrl);
+      })
+      .catch(error => {
+        console.error('Erro ao gerar imagem:', error);
+      });
   },
-  downloadInvite(){
-    const dataUrl = this._lastDataUrl || localStorage.getItem(this.LAST_KEY);
-    if(!dataUrl){
-      alert('Nenhum convite gerado ainda.');
+  
+  downloadInvite() {
+    const imageUrl = this.lastImageUrl || localStorage.getItem('lastInviteImage');
+    
+    if (!imageUrl) {
+      alert('Gere o convite primeiro!');
       return;
     }
+    
     const link = document.createElement('a');
-    link.href = dataUrl;
-    const nomeArquivo = `Convite-Gala-Juvenil-${(new Date()).toISOString().slice(0,10)}.png`;
-    link.download = nomeArquivo;
+    link.href = imageUrl;
+    link.download = `Convite-Gala-Juvenil-${new Date().toISOString().slice(0,10)}.png`;
     document.body.appendChild(link);
     link.click();
-    link.remove();
+    document.body.removeChild(link);
   },
-  shareWhatsApp(){
-    const shareUrl = location.origin + location.pathname + '?view=last';
-    const text = `✨ Gloria a Deus! ✨\n\nRecebeu o convite para participar da Gala Juvenil 2025.\n\nBaixe seu convite personalizado aqui:\n${shareUrl}\n\nSenha de acesso: ${this.PASSWORD}\n\nQue Deus abençoe!`;
-    const wa = `https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`;
-    window.open(wa, '_blank');
+  
+  shareWhatsApp() {
+    const name = localStorage.getItem('galaName') || 'Convidado';
+    const shareUrl = window.location.origin + window.location.pathname;
+    const message = `✨ Gloria a Deus! ✨\n\nOlá! ${name} convida você para a Gala Juvenil 2025!\n\nData: 26 de Dezembro\nHorário: 22:00 às 04:00\nLocal: Congregação Tsakane - Machava-Sede\n\nSenha para baixar convite: ${this.PASSWORD}\n\nQue Deus abençoe nossa comunhão!`;
+    
+    const url = `https://wa.me/?text=${encodeURIComponent(message)}`;
+    window.open(url, '_blank');
   },
-  editNameFromInvite(){
-    this.showNameCard();
-  },
-  showLastInviteView(){
-    const last = localStorage.getItem(this.LAST_KEY);
-    const name = localStorage.getItem(this.NAME_KEY);
-    if(!last || !name){
-      alert('Nenhum convite salvo. Gere um convite primeiro.');
-      this.showHome();
+  
+  showLastInvite() {
+    const savedName = localStorage.getItem('galaName');
+    const savedImage = localStorage.getItem('lastInviteImage');
+    
+    if (!savedName || !savedImage) {
+      alert('Nenhum convite salvo. Crie um convite primeiro!');
       return;
     }
-    SELECTORS.inviteName.textContent = name;
-    this._lastDataUrl = last;
-    this.showInviteCard(false);
+    
+    this.inviteName.textContent = savedName;
+    this.lastImageUrl = savedImage;
+    this.showScreen('invite');
+  },
+  
+  checkUrlParams() {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('view') === 'last') {
+      this.showLastInvite();
+    }
   }
 };
 
-// Iniciar com animação
+// Iniciar app quando carregar
 document.addEventListener('DOMContentLoaded', () => {
+  App.init();
+  
+  // Animação suave de entrada
+  document.body.style.opacity = '0';
   setTimeout(() => {
-    APP.init();
+    document.body.style.transition = 'opacity 0.5s ease';
     document.body.style.opacity = '1';
   }, 100);
 });
-
-// Efeito de entrada suave
-document.body.style.opacity = '0';
-document.body.style.transition = 'opacity 0.5s ease';
