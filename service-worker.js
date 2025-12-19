@@ -1,4 +1,4 @@
-const CACHE = 'convitelrm-v1';
+const CACHE = 'convitelrm-v2';
 const FILES = [
   '/',
   '/index.html',
@@ -6,6 +6,7 @@ const FILES = [
   '/script.js',
   '/logo.png',
   'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js',
+  'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css',
   'https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600;700&display=swap'
 ];
 

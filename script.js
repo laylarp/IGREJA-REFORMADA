@@ -1,6 +1,3 @@
-// Comportamento da SPA: controle de telas, senha, geração do convite (html2canvas), download e compartilhamento via WhatsApp.
-// Senha definida: "irm3022irm"
-
 const SELECTORS = {
   homeCard: document.getElementById('homeCard'),
   btnCreate: document.getElementById('btnCreate'),
@@ -78,7 +75,7 @@ const APP = {
     SELECTORS.inviteCard.classList.remove('hidden');
     const name = localStorage.getItem(this.NAME_KEY) || 'Convidado';
     SELECTORS.inviteName.textContent = name;
-    SELECTORS.btnEditName.style.display = editable ? 'inline-block' : 'none';
+    SELECTORS.btnEditName.style.display = editable ? 'inline-flex' : 'none';
   },
   hideAll(){
     SELECTORS.homeCard.classList.add('hidden');
@@ -102,8 +99,38 @@ const APP = {
   },
   renderInviteToImage(saveToLocal=true){
     const node = document.getElementById('invitePreview');
-    html2canvas(node, { scale: 2, useCORS: true, backgroundColor: null }).then(canvas => {
-      const dataUrl = canvas.toDataURL('image/png');
+    
+    // Definir dimensões fixas para a imagem (proporção similar a cartão)
+    const originalWidth = node.offsetWidth;
+    const originalHeight = node.offsetHeight;
+    
+    // Definir uma proporção bonita para celular (mais quadrada)
+    const targetWidth = 1200; // Largura maior para qualidade
+    const targetHeight = Math.floor(targetWidth * (originalHeight / originalWidth));
+    
+    html2canvas(node, { 
+      scale: 2,
+      useCORS: true,
+      backgroundColor: '#fffef9',
+      width: targetWidth,
+      height: targetHeight,
+      windowWidth: targetWidth,
+      windowHeight: targetHeight,
+      logging: false
+    }).then(canvas => {
+      // Adicionar margens brancas ao redor
+      const margin = 50;
+      const finalCanvas = document.createElement('canvas');
+      finalCanvas.width = canvas.width + (margin * 2);
+      finalCanvas.height = canvas.height + (margin * 2);
+      
+      const ctx = finalCanvas.getContext('2d');
+      ctx.fillStyle = '#fffef9';
+      ctx.fillRect(0, 0, finalCanvas.width, finalCanvas.height);
+      ctx.drawImage(canvas, margin, margin);
+      
+      const dataUrl = finalCanvas.toDataURL('image/png', 1.0);
+      
       if(saveToLocal){
         localStorage.setItem(this.LAST_KEY, dataUrl);
       }
@@ -121,7 +148,7 @@ const APP = {
     }
     const link = document.createElement('a');
     link.href = dataUrl;
-    const nomeArquivo = `convite-gala-${(new Date()).toISOString().slice(0,10)}.png`;
+    const nomeArquivo = `Convite-Gala-Juvenil-${(new Date()).toISOString().slice(0,10)}.png`;
     link.download = nomeArquivo;
     document.body.appendChild(link);
     link.click();
@@ -129,7 +156,7 @@ const APP = {
   },
   shareWhatsApp(){
     const shareUrl = location.origin + location.pathname + '?view=last';
-    const text = `Gloria a Deus. Voce recebeu o convite para participar, baixe seu convite: ${shareUrl}  senha: ${this.PASSWORD}`;
+    const text = `✨ Gloria a Deus! ✨\n\nRecebeu o convite para participar da Gala Juvenil 2025.\n\nBaixe seu convite personalizado aqui:\n${shareUrl}\n\nSenha de acesso: ${this.PASSWORD}\n\nQue Deus abençoe!`;
     const wa = `https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`;
     window.open(wa, '_blank');
   },
@@ -150,4 +177,14 @@ const APP = {
   }
 };
 
-APP.init();
+// Iniciar com animação
+document.addEventListener('DOMContentLoaded', () => {
+  setTimeout(() => {
+    APP.init();
+    document.body.style.opacity = '1';
+  }, 100);
+});
+
+// Efeito de entrada suave
+document.body.style.opacity = '0';
+document.body.style.transition = 'opacity 0.5s ease';
