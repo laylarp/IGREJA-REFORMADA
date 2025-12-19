@@ -1,13 +1,12 @@
-const CACHE_NAME = 'gala-juvenil-v1';
+const CACHE_NAME = 'gala-juvenil-mobile-v1';
 const urlsToCache = [
-  '',
-  'index.html',
-  'styles.css',
-  'script.js',
-  'lixo.js',
-  'logo.png',
+  './',
+  './index.html',
+  './styles.css',
+  './script.js',
+  './logo.png',
   'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css',
-  'https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&family=Dancing+Script:wght@400;600&display=swap',
+  'https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600&family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@400;700&display=swap',
   'https://html2canvas.hertzen.com/dist/html2canvas.min.js'
 ];
 
@@ -29,19 +28,5 @@ self.addEventListener('fetch', function(event) {
         }
         return fetch(event.request);
       })
-  );
-});
-
-self.addEventListener('activate', function(event) {
-  event.waitUntil(
-    caches.keys().then(function(cacheNames) {
-      return Promise.all(
-        cacheNames.map(function(cacheName) {
-          if (cacheName !== CACHE_NAME) {
-            return caches.delete(cacheName);
-          }
-        })
-      );
-    })
   );
 });

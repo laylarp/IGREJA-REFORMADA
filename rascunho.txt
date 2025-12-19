@@ -2,14 +2,14 @@
 <html lang="pt">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>Gala Juvenil - Convite Eletrônico</title>
+    <link rel="manifest" href="/manifest.json">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&family=Dancing+Script:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    
     <div class="christian-decoration cross-top-left">✝</div>
     <div class="christian-decoration cross-top-right">✝</div>
     <div class="christian-decoration cross-bottom-left">✝</div>
@@ -17,257 +17,255 @@
     <div class="christian-decoration dove-decoration">🕊</div>
 
     <div class="container">
-        
         <div class="welcome-screen" id="welcomeScreen">
             <div class="church-header">
                 <div class="church-logo" id="churchLogo">
                     <div class="logo-placeholder">IGREJA<br>REFORMADA</div>
                 </div>
-                
                 <h1 class="church-name">Igreja Reformada de Moçambique</h1>
                 <p class="church-subtitle">Gala Juvenil 2025</p>
                 <p class="event-year">26 DE DEZEMBRO</p>
             </div>
-            
             <div class="welcome-message">
-                <p>Seja bem-vindo(a) ao sistema de convites eletrônicos para a <strong>Gala Juvenil 2025</strong>.</p>
-                <p>Crie seu convite personalizado e faça parte deste momento especial de comunhão, louvor e confraternização.</p>
+                <h>Seja bem-vindo(a) ao sistema de convites eletrônicos para a <strong>Gala Juvenil 2025</strong>.</h>
+                <p>Crie seu convite personalizado e compartilhe com seus amigos.</p>
             </div>
-            
             <div class="welcome-buttons">
                 <button class="btn btn-primary" id="createInviteBtn">
-                    <i class="fas fa-ticket-alt"></i> Criar  Convite
+                    <i class="fas fa-ticket-alt"></i> Criar Convite
                 </button>
                 <button class="btn btn-secondary" id="viewInviteBtn" style="display: none;">
-                    <i class="fas fa-eye"></i> Ver  Convite
+                    <i class="fas fa-eye"></i> Ver Meu Convite
                 </button>
             </div>
         </div>
 
-        
         <div class="creation-screen" id="creationScreen">
             <div class="creation-card">
                 <div class="creation-header">
                     <h2><i class="fas fa-gift"></i> Personalize Seu Convite</h2>
-                    <p>Insira seu nome completo para gerar um convite personalizado para a Gala Juvenil 2025</p>
+                    <p>Insira seu nome  para gerar um convite personalizado para a Gala Juvenil 2025</p>
                 </div>
-                
                 <div class="input-group">
-                    <label for="guestName">Nome Completo do Convidado:</label>
-                    <input type="text" id="guestName" placeholder="Ex: João Carlos da Silva" maxlength="60">
+                    <label for="guestName">Nome do Convidado:</label>
+                    <input type="text" id="guestName" placeholder="Ex: João Carlos " maxlength="60">
                     <div class="input-hint">
                         <i class="fas fa-info-circle"></i> O nome será formatado automaticamente (primeira letra maiúscula)
                     </div>
                 </div>
-                
                 <div class="form-buttons">
                     <button class="btn btn-primary" id="generateInviteBtn">
-                        <i class="fas fa-check-circle"></i> Gerar Convite Personalizado
+                        <i class="fas fa-check-circle"></i> Gerar Convite 
                     </button>
                     <button class="btn btn-back" id="backToHomeBtn">
-                        <i class="fas fa-arrow-left"></i> Voltar para o Início
+                        <i class="fas fa-arrow-left"></i> Voltar 
                     </button>
                 </div>
-                
                 <div class="error-message" id="nameError">
                     <i class="fas fa-exclamation-circle"></i> Por favor, insira um nome válido.
                 </div>
             </div>
         </div>
 
-        
         <div class="invitation-container" id="invitationContainer">
             <div class="invitation-card" id="invitationCard">
-                
                 <div class="invitation-header">
-                    <div class="invitation-logo" id="invitationLogo">
-                        
+                    <div class="invitation-logo-fixed" id="invitationLogo">
+                        <div class="logo-placeholder">IGREJA<br>REFORMADA</div>
                     </div>
                     <h1 class="invitation-title">GALA JUVENIL</h1>
                     <h2 class="invitation-subtitle">Convite Especial</h2>
                     <div class="invitation-year">2025</div>
                 </div>
-
                 <div class="invitation-body">
                     <div class="invitation-text">
-                        <p>A COMISSÃO ORGANIZADORA DA GALA JUVENIL TEM A HONRA DE CONVIDAR</p>
+                      <p>A Comissão Organizadora da Gala Juvenil tem a honra de convidar a(o) irmã(o)</p>
                     </div>
-
+                    
                     <div class="guest-name-card">
-                        <span class="guest-name-label">PARA PARTICIPAR DA GALA JUVENIL 2025</span>
                         <div class="guest-name" id="displayName">[NOME DO CONVIDADO]</div>
                     </div>
 
-                    <div class="invitation-text">
-                        <p>QUE SE REALIZARÁ EM UM AMBIENTE ESPECIAL DE COMUNHÃO, LOUVOR E CONFRATERNIZAÇÃO FRATERNA.</p>
-                        <p>SERÁ UMA OCASIÃO MARCANTE DE COMUNHÃO ESPIRITUAL, ENRIQUECIDA POR MOMENTOS DE ORAÇÃO, CÂNTICOS E CELEBRAÇÃO CONJUNTA.</p>
-                    </div>
-
-            
-                    <div class="event-details-container">
-                        <div class="detail-card">
-                            <div class="detail-card-icon">
-                                <i class="fas fa-calendar-alt"></i>
+                    <div class="invitation-content-card">
+                        
+                        <div class="verse-card">
+                            <div class="verse-icon">
+                            
                             </div>
-                            <h3>Data do Evento</h3>
-                            <div class="detail-card-content">
-                                <p><strong>26 de Dezembro de 2025</strong></p>
-                                <p>Sexta-feira</p>
-    
+                            <div class="verse-text">
+                                <p class="verse-reference">A participar da Gala, sob o lema:</p>
+                                <p class="verse-content">"Como é bom e agradável quando os irmãos convivem em união!".</p>
+                                <p>
+                                    Será uma ocasião marcada por momentos de oração, louvor e confraternização,
+                                    preparada para celebrarmos juntos na presença de Deus.
+                               </p>
+                        
                             </div>
                         </div>
+                    </div>
 
-                        <div class="detail-card">
-                            <div class="detail-card-icon">
+                    <div class="event-details-horizontal">
+                        <div class="detail-item">
+                            <div class="detail-item-icon">
+                                <i class="fas fa-calendar-alt"></i>
+                            </div>
+                            <div class="detail-item-content">
+                                <h3>Data do Evento</h3>
+                                <p><strong>26 de Dezembro de 2025</strong></p>
+                                <p>Sexta-feira</p>
+                            </div>
+                        </div>
+                        
+                        <div class="detail-item">
+                            <div class="detail-item-icon">
                                 <i class="fas fa-clock"></i>
                             </div>
-                            <h3>Horário</h3>
-                            <div class="detail-card-content">
+                            <div class="detail-item-content">
+                                <h3>Horário</h3>
                                 <p><strong>22:00 às 04:00</strong></p>
                                 <p>Noite de adoração e oração</p>
                             </div>
                         </div>
-
-                        <div class="detail-card">
-                            <div class="detail-card-icon">
+                        
+                        <div class="detail-item">
+                            <div class="detail-item-icon">
                                 <i class="fas fa-map-marker-alt"></i>
                             </div>
-                            <h3>Localização</h3>
-                            <div class="detail-card-content">
+                            <div class="detail-item-content">
+                                <h3>Localização</h3>
                                 <p><strong>Congregação Tsakane</strong></p>
                                 <p>Machava-Sede</p>
                                 <p>Rua da Mulher</p>
                             </div>
                         </div>
                     </div>
-
-                    <div class="invitation-text">
-                        <p>CIENTES DE QUE PODEREMOS CONTAR COM A VOSSA HONROSA PRESENÇA, APRESENTAMOS OS NOSSOS MAIS ELEVADOS PROTESTOS DE ESTIMA E CONSIDERAÇÃO.</p>
-                    </div>
                 </div>
-
                 
                 <div class="invitation-footer">
-                    
-                    <div class="contact-info">
+                    <div class="contact-info-horizontal">
                         <h4>Para mais informações:</h4>
-                        <div class="contact-phone">
-                            <i class="fas fa-phone-alt"></i> 84 401 2254
+                        <div class="contact-numbers">
+                            <div class="contact-number">
+                                <i class="fas fa-phone-alt"></i> 84 401 2254
+                            </div>
+                            <div class="contact-number">
+                                <i class="fas fa-phone-alt"></i> 85 232 8379
+                            </div>
                         </div>
                         <p class="contact-note">Disponível para esclarecimentos e confirmações</p>
                     </div>
-
+                    
                     <div class="church-signature">
                         <div class="church-name-footer">Igreja Reformada</div>
                         <div class="event-name-footer">Gala Juvenil 2025</div>
                         <div class="signature-line"></div>
                         <p class="signature-text">Comissão Organizadora da Gala Juvenil</p>
-                
                     </div>
                 </div>
             </div>
-
-        
-            <div class="action-buttons" id="actionButtons">
+            
+            <div class="action-buttons-horizontal" id="actionButtons">
                 <button class="btn btn-primary" id="downloadInviteBtn">
-                    <i class="fas fa-download"></i> Baixar Convite 
+                    <i class="fas fa-download"></i> Baixar Convite
                 </button>
                 <button class="btn btn-secondary" id="sendWhatsAppBtn">
-                    <i class="fab fa-whatsapp"></i> Enviar 
+                    <i class="fab fa-whatsapp"></i> WhatsApp
                 </button>
                 <button class="btn btn-primary" id="sendSMSBtn">
-                    <i class="fas fa-sms"></i>   SMS
-                </button>
-                <button class="btn btn-back" id="editInviteBtn">
-                    <i class="fas fa-edit"></i> Editar Nome
+                    <i class="fas fa-sms"></i> SMS
                 </button>
                 <button class="btn btn-back" id="backToHomeFromInviteBtn">
-                    <i class="fas fa-arrow-left"></i> Voltar  
+                    <i class="fas fa-arrow-left"></i> Voltar
                 </button>
             </div>
         </div>
 
-        
         <div class="download-only-screen" id="downloadOnlyScreen">
             <div class="invitation-card" id="downloadInvitationCard">
-                
                 <div class="invitation-header">
-                    <div class="invitation-logo">
-                        
+                    <div class="invitation-logo-fixed">
+                        <div class="logo-placeholder">IGREJA<br>REFORMADA</div>
                     </div>
                     <h1 class="invitation-title">GALA JUVENIL</h1>
                     <h2 class="invitation-subtitle">Convite Especial</h2>
                     <div class="invitation-year">2025</div>
                 </div>
-
                 <div class="invitation-body">
                     <div class="invitation-text">
-                        <p>A COMISSÃO ORGANIZADORA DA GALA JUVENIL TEM A HONRA DE CONVIDAR</p>
+                        <p>A Comissão Organizadora da Gala, tem a honra de convidar a/o irmã/o</p>
                     </div>
-
+                    
                     <div class="guest-name-card">
-                        <span class="guest-name-label">PARA PARTICIPAR DA GALA JUVENIL 2025</span>
+                        <span class="guest-name-label">É COM GRANDE HONRA QUE CONVIDAMOS</span>
                         <div class="guest-name" id="downloadDisplayName">[NOME DO CONVIDADO]</div>
                     </div>
 
-                    <div class="invitation-text">
-                        <p>QUE SE REALIZARÁ EM UM AMBIENTE ESPECIAL DE COMUNHÃO, LOUVOR E CONFRATERNIZAÇÃO FRATERNA.</p>
-                        <p>SERÁ UMA OCASIÃO MARCANTE DE COMUNHÃO ESPIRITUAL, ENRIQUECIDA POR MOMENTOS DE ORAÇÃO, CÂNTICOS E CELEBRAÇÃO CONJUNTA.</p>
+                    <div class="invitation-content-card">
+                        <p>a participar da GALA, que se realizará no dia 26 de dezembro de 2025, em momento de união. A Gala terá seu lugar, na congregação TSAKANE, Machava-Sede, rua da Mulher, no dia 26 de dezembro de 2025, das 22h às 04h.</p>
+                        <p>Será uma ocasião especial de comunhão, marcada por momentos de oração, louvores e confraternização, contamos com a honrosa presença dos convidados.</p>
+                        
+                        <div class="verse-card">
+                            <div class="verse-icon">
+                                <i class="fas fa-bible"></i>
+                            </div>
+                            <div class="verse-text">
+                                <p class="verse-reference">Salmos Cap. 133 | NVI</p>
+                                <p class="verse-content">"Como é bom e agradável quando os irmãos convivem em união!"</p>
+                            </div>
+                        </div>
                     </div>
 
-            
-                    <div class="event-details-container">
-                        <div class="detail-card">
-                            <div class="detail-card-icon">
+                    <div class="event-details-horizontal">
+                        <div class="detail-item">
+                            <div class="detail-item-icon">
                                 <i class="fas fa-calendar-alt"></i>
                             </div>
-                            <h3>Data do Evento</h3>
-                            <div class="detail-card-content">
+                            <div class="detail-item-content">
+                                <h3>Data do Evento</h3>
                                 <p><strong>26 de Dezembro de 2025</strong></p>
                                 <p>Sexta-feira</p>
                             </div>
                         </div>
-
-                        <div class="detail-card">
-                            <div class="detail-card-icon">
+                        
+                        <div class="detail-item">
+                            <div class="detail-item-icon">
                                 <i class="fas fa-clock"></i>
                             </div>
-                            <h3>Horário</h3>
-                            <div class="detail-card-content">
+                            <div class="detail-item-content">
+                                <h3>Horário</h3>
                                 <p><strong>22:00 às 04:00</strong></p>
                                 <p>Noite de adoração e oração</p>
                             </div>
                         </div>
-
-                        <div class="detail-card">
-                            <div class="detail-card-icon">
+                        
+                        <div class="detail-item">
+                            <div class="detail-item-icon">
                                 <i class="fas fa-map-marker-alt"></i>
                             </div>
-                            <h3>Localização</h3>
-                            <div class="detail-card-content">
+                            <div class="detail-item-content">
+                                <h3>Localização</h3>
                                 <p><strong>Congregação Tsakane</strong></p>
                                 <p>Machava-Sede</p>
                                 <p>Rua da Mulher</p>
                             </div>
                         </div>
                     </div>
-
-                    <div class="invitation-text">
-                        <p>CIENTES DE QUE PODEREMOS CONTAR COM A VOSSA HONROSA PRESENÇA, APRESENTAMOS OS NOSSOS MAIS ELEVADOS PROTESTOS DE ESTIMA E CONSIDERAÇÃO.</p>
-                    </div>
                 </div>
-
                 
                 <div class="invitation-footer">
-                    
-                    <div class="contact-info">
+                    <div class="contact-info-horizontal">
                         <h4>Para mais informações:</h4>
-                        <div class="contact-phone">
-                            <i class="fas fa-phone-alt"></i> 84 401 2254
+                        <div class="contact-numbers">
+                            <div class="contact-number">
+                                <i class="fas fa-phone-alt"></i> 84 401 2254
+                            </div>
+                            <div class="contact-number">
+                                <i class="fas fa-phone-alt"></i> 85 232 8379
+                            </div>
                         </div>
                         <p class="contact-note">Disponível para esclarecimentos e confirmações</p>
                     </div>
-
+                    
                     <div class="church-signature">
                         <div class="church-name-footer">Igreja Reformada</div>
                         <div class="event-name-footer">Gala Juvenil 2025</div>
@@ -276,7 +274,7 @@
                     </div>
                 </div>
             </div>
-
+            
             <div class="download-only-button">
                 <button class="btn btn-primary" id="downloadOnlyBtn">
                     <i class="fas fa-download"></i> Baixar Convite
@@ -285,12 +283,10 @@
         </div>
     </div>
 
-    
     <div class="modal-overlay" id="passwordModal">
         <div class="modal">
             <button class="modal-close" id="closePasswordModal">&times;</button>
             <h2><i class="fas fa-lock"></i> Acesso ao Criador de Convites</h2>
-            
             <div id="passwordSection">
                 <div class="input-group">
                     <label for="accessPassword">Digite a senha de acesso:</label>
@@ -306,144 +302,19 @@
         </div>
     </div>
 
-     <footer class="site-footer">
+    <footer class="site-footer">
         <div class="footer-content">
             <p>Criado por <strong>Raymond-Technology</strong>. Todos os direitos reservados © 2025</p>
-           
         </div>
     </footer>
     
     <canvas id="invitationCanvas" style="display: none;"></canvas>
     
-    <script src="lixo.js"></script>
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
-var dadosInuteis1 = "asdhjf872364kjhasdf983745kjhasdf" + Math.random() * 10000;
-var arrayConfuso = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 
-function funcaoSemSentidoA(parametro) {
-    var resultadoTemporario = "";
-    for (var indice = 0; indice < parametro.length; indice++) {
-        resultadoTemporario += parametro.charCodeAt(indice) * Math.PI + "-";
-    }
-    return resultadoTemporario.substring(0, resultadoTemporario.length - 1);
-}
-
-var objetoInutil = {
-    propriedade1: "valor1",
-    propriedade2: 98765.4321,
-    propriedade3: [11, 22, 33, 44, 55],
-    propriedade4: { 
-        subprop1: "texto aleatório",
-        subprop2: function() { return Math.random(); }
-    },
-    propriedade5: new Date().getTime()
-};
-
-var xyz123 = "lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod";
-var abc789 = 87654 * 4321 / 1234 + 5678;
-var def456 = ["x", "y", "z", "a", "b", "c", "d", "e"];
-
-var textoHebraicoMisturado = "זה קוד מקרי לחלוטין ללא משמעות";
-var codigoOculto1 = "password:hidden_in_plain_sight";
-var codigoOculto2 = "senha:perdida_nos_codigos";
-var codigoOculto3 = "chave:esquecida_para_sempre";
-
-var adminPassword = "irm3022irm";
-
-function outraFuncaoInutil(valor) {
-    var acumulador = 0;
-    for (var i = 0; i < valor; i++) {
-        acumulador += Math.pow(i, 2);
-    }
-    return acumulador;
-}
-
-var dadosExtras1 = "fim da primeira parte " + new Date().toISOString();
-var dadosExtras2 = 999888777666555444333222111;
-var dadosExtras3 = ["final", "arquivo", "terminado", "concluido"];
-
-function funcaoNuncaUsada() {
-    console.log("Esta função nunca será executada");
-    return "resultado inútil";
-}
-
-var terminoDovar dadosInuteis1 = "asdhjf872364kjhasdf983745kjhasdf" + Math.random() * 10000;
-var arrayConfuso = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
-
-function funcaoSemSentidoA(parametro) {
-    var resultadoTemporario = "";
-    for (var indice = 0; indice < parametro.length; indice++) {
-        resultadoTemporario += parametro.charCodeAt(indice) * Math.PI + "-";
-    }
-    return resultadoTemporario.substring(0, resultadoTemporario.length - 1);
-}
-
-var objetoInutil = {
-    propriedade1: "valor1",
-    propriedade2: 98765.4321,
-    propriedade3: [11, 22, 33, 44, 55],
-    propriedade4: { 
-        subprop1: "texto aleatório",
-        subprop2: function() { return Math.random(); }
-    },
-    propriedade5: new Date().getTime()
-};
-
-var xyz123 = "lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod";
-var abc789 = 87654 * 4321 / 1234 + 5678;
-var def456 = ["x", "y", "z", "a", "b", "c", "d", "e"];
-
-var textoHebraicoMisturado = "זה קוד מקרי לחלוטין ללא משמעות";
-var codigoOculto1 = "password:hidden_in_plain_sight";
-var codigoOculto2 = "senha:perdida_nos_codigos";
-var codigoOculto3 = "chave:esquecida_para_sempre";
-
-var adminPassword = "irm3022irm";
-
-function outraFuncaoInutil(valor) {
-    var acumulador = 0;
-    for (var i = 0; i < valor; i++) {
-        acumulador += Math.pow(i, 2);
-    }
-    return acumulador;
-}
-
-var dadosExtras1 = "fim da primeira parte " + new Date().toISOString();
-var dadosExtras2 = 999888777666555444333222111;
-var dadosExtras3 = ["final", "arquivo", "terminado", "concluido"];
-
-function funcaoNuncaUsada() {
-    console.log("Esta função nunca será executada");
-    return "resultado inútil";
-}
-
-var terminoDoArquivo = funcaoSemSentidoA("fim") + " " + outraFuncaoInutil(5);
-Arquivo = funcaoSemSentidoA("fim") + " " + outraFuncaoInutil(5);
-{
-  "name": "Gala Juvenil",
-  "short_name": "Gala",
-  "description": "Sistema de convites para Gala Juvenil 2025",
-  "start_url": "/",
-  "display": "standalone",
-  "background_color": "#f9f3e9",
-  "theme_color": "#8B4513",
-  "orientation": "portrait",
-  "icons": [
-    {
-      "src": "/logo.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "/logo.png",
-      "sizes": "512x512",
-      "type": "image/png"
-    }
-  ]
-}
 const welcomeScreen = document.getElementById('welcomeScreen');
 const creationScreen = document.getElementById('creationScreen');
 const invitationContainer = document.getElementById('invitationContainer');
@@ -460,7 +331,6 @@ const downloadInviteBtn = document.getElementById('downloadInviteBtn');
 const downloadOnlyBtn = document.getElementById('downloadOnlyBtn');
 const sendWhatsAppBtn = document.getElementById('sendWhatsAppBtn');
 const sendSMSBtn = document.getElementById('sendSMSBtn');
-const editInviteBtn = document.getElementById('editInviteBtn');
 const backToHomeFromInviteBtn = document.getElementById('backToHomeFromInviteBtn');
 const passwordModal = document.getElementById('passwordModal');
 const closePasswordModal = document.getElementById('closePasswordModal');
@@ -468,6 +338,7 @@ const accessPasswordInput = document.getElementById('accessPassword');
 const verifyPasswordBtn = document.getElementById('verifyPasswordBtn');
 const passwordError = document.getElementById('passwordError');
 
+const adminPassword = "irm3022irm";
 let currentGuestName = "";
 
 function formatName(name) {
@@ -483,33 +354,71 @@ function formatName(name) {
         .join(' ');
 }
 
+/* Load logo into initial and invitation areas.
+   Selects .invitation-logo-fixed and #invitationLogo to ensure all targets are populated. */
 function loadChurchLogo() {
     const logoUrl = 'logo.png';
     const churchLogo = document.getElementById('churchLogo');
-    const invitationLogos = document.querySelectorAll('.invitation-logo');
-    
+    const invitationLogos = document.querySelectorAll('#invitationLogo, .invitation-logo-fixed');
+
     const img = new Image();
+    // try set crossOrigin for html2canvas compatibility (server must allow CORS for remote images)
+    img.crossOrigin = 'anonymous';
     img.onload = function() {
+        // populate churchLogo
         churchLogo.innerHTML = '';
         const logoImg1 = document.createElement('img');
         logoImg1.src = logoUrl;
         logoImg1.alt = 'Logo Igreja Reformada';
+        // also set crossOrigin on created images
+        logoImg1.crossOrigin = 'anonymous';
         churchLogo.appendChild(logoImg1);
-        
+
+        // populate invitation logo targets
         invitationLogos.forEach(invitationLogo => {
+            if (!invitationLogo) return;
             invitationLogo.innerHTML = '';
             const logoImg2 = document.createElement('img');
             logoImg2.src = logoUrl;
             logoImg2.alt = 'Logo Igreja Reformada';
+            logoImg2.crossOrigin = 'anonymous';
             invitationLogo.appendChild(logoImg2);
         });
     };
-    
+
     img.onerror = function() {
-        console.log('Logo não encontrada. Usando placeholder.');
+        // keep placeholders if logo not found; optional: console.warn
+        console.warn('Não foi possível carregar logo.png. Verifique o caminho.');
     };
-    
+
     img.src = logoUrl;
+}
+
+/* Ensure logo is present/copied right before showing the invitation screens.
+   This is a safe copy that uses existing #churchLogo img if available or clones innerHTML. */
+function copyLogoToInvitation() {
+    const source = document.getElementById('churchLogo');
+    if (!source) return;
+    const targets = document.querySelectorAll('#invitationLogo, .invitation-logo-fixed');
+    targets.forEach(t => {
+        if (!t) return;
+        t.innerHTML = '';
+        const srcImg = source.querySelector('img');
+        if (srcImg && srcImg.src) {
+            const clone = document.createElement('img');
+            clone.src = srcImg.src;
+            clone.alt = srcImg.alt || 'Logo Igreja Reformada';
+            try { clone.crossOrigin = 'anonymous'; } catch (e) {}
+            t.appendChild(clone);
+        } else {
+            // fallback: copy innerHTML (placeholder text)
+            t.innerHTML = source.innerHTML;
+        }
+    });
+}
+
+function forceDesktopView() {
+    document.body.classList.add('force-desktop');
 }
 
 createInviteBtn.addEventListener('click', function() {
@@ -524,8 +433,8 @@ closePasswordModal.addEventListener('click', function() {
 
 verifyPasswordBtn.addEventListener('click', function() {
     const password = accessPasswordInput.value.trim();
-    
-    if (typeof adminPassword !== 'undefined' && password === adminPassword) {
+
+    if (password === adminPassword) {
         passwordModal.style.display = 'none';
         welcomeScreen.style.display = 'none';
         creationScreen.style.display = 'block';
@@ -546,72 +455,119 @@ backToHomeBtn.addEventListener('click', function() {
 });
 
 viewInviteBtn.addEventListener('click', function() {
+    if (!currentGuestName) {
+        const savedName = localStorage.getItem('galaInviteName');
+        if (savedName) {
+            currentGuestName = savedName;
+            displayName.textContent = currentGuestName;
+        }
+    }
+
+    // ensure logo is present in invitation area
+    copyLogoToInvitation();
+
     welcomeScreen.style.display = 'none';
     creationScreen.style.display = 'none';
     downloadOnlyScreen.style.display = 'none';
     invitationContainer.style.display = 'block';
-    actionButtons.style.display = 'grid';
+    // use flex to match CSS expectations (previously grid caused empilhamento)
+    actionButtons.style.display = 'flex';
     window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
 generateInviteBtn.addEventListener('click', function() {
     const name = guestNameInput.value.trim();
-    
+
     if (!name || name.length < 3) {
         document.getElementById('nameError').style.display = 'block';
         guestNameInput.focus();
         return;
     }
-    
+
     document.getElementById('nameError').style.display = 'none';
     currentGuestName = formatName(name);
     displayName.textContent = currentGuestName;
-    
+
     localStorage.setItem('galaInviteName', currentGuestName);
-    
+
+    // ensure logo is present in invitation area
+    copyLogoToInvitation();
+
     creationScreen.style.display = 'none';
     downloadOnlyScreen.style.display = 'none';
     invitationContainer.style.display = 'block';
-    actionButtons.style.display = 'grid';
+    // use flex instead of grid to keep buttons side-by-side
+    actionButtons.style.display = 'flex';
     viewInviteBtn.style.display = 'block';
     window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
-editInviteBtn.addEventListener('click', function() {
-    invitationContainer.style.display = 'none';
-    downloadOnlyScreen.style.display = 'none';
-    actionButtons.style.display = 'none';
-    creationScreen.style.display = 'block';
-    guestNameInput.value = currentGuestName;
-    guestNameInput.focus();
-});
-
 function downloadInvite(cardId, fileNamePrefix) {
     const invitationCard = document.getElementById(cardId);
-    
-    html2canvas(invitationCard, {
-        scale: 2,
-        useCORS: true,
-        logging: false,
-        backgroundColor: '#ffffff',
-        allowTaint: true,
-        removeContainer: true,
-        width: invitationCard.offsetWidth,
-        height: invitationCard.offsetHeight
-    }).then(canvas => {
-        const link = document.createElement('a');
-        const fileName = `${fileNamePrefix}_${currentGuestName.replace(/\s+/g, '_')}.png`;
-        link.download = fileName;
-        link.href = canvas.toDataURL('image/png', 1.0);
-        
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        
-    }).catch(error => {
-        console.error('Erro ao baixar convite:', error);
-        alert('Ocorreu um erro ao baixar o convite. Tente novamente.');
-    });
+
+    const originalWidth = invitationCard.style.width;
+    const originalMargin = invitationCard.style.margin;
+    const originalDisplay = invitationCard.style.display;
+
+    invitationCard.style.width = '800px';
+    invitationCard.style.margin = '0 auto';
+    invitationCard.style.display = 'block';
+
+    // ensure logos are inline in the cloned DOM for html2canvas
+    copyLogoToInvitation();
+
+    window.scrollTo(0, 0);
+
+    setTimeout(() => {
+        html2canvas(invitationCard, {
+            scale: 2,
+            useCORS: true,
+            logging: false,
+            backgroundColor: '#ffffff',
+            allowTaint: true,
+            windowWidth: 800,
+            windowHeight: document.documentElement.scrollHeight,
+            width: 800,
+            height: invitationCard.scrollHeight,
+            scrollX: 0,
+            scrollY: 0,
+            onclone: function(clonedDoc) {
+                const clonedCard = clonedDoc.getElementById(cardId);
+                if (clonedCard) {
+                    clonedCard.style.width = '800px';
+                    clonedCard.style.margin = '0 auto';
+                    clonedCard.style.display = 'block';
+                }
+                // Make sure cloned images have crossOrigin if possible
+                const imgs = clonedDoc.querySelectorAll('#' + cardId + ' img');
+                imgs.forEach(i => {
+                    try { i.crossOrigin = 'anonymous'; } catch (e) {}
+                });
+            }
+        }).then(canvas => {
+            invitationCard.style.width = originalWidth;
+            invitationCard.style.margin = originalMargin;
+            invitationCard.style.display = originalDisplay;
+
+            const link = document.createElement('a');
+            const safeName = currentGuestName ? currentGuestName.replace(/\s+/g, '_') : 'convidado';
+            const fileName = `${fileNamePrefix}_${safeName}.png`;
+            link.download = fileName;
+            link.href = canvas.toDataURL('image/png', 1.0);
+
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+        }).catch(error => {
+            console.error('Erro ao baixar convite:', error);
+            alert('Ocorreu um erro ao baixar o convite. Tente novamente.');
+
+            invitationCard.style.width = originalWidth;
+            invitationCard.style.margin = originalMargin;
+            invitationCard.style.display = originalDisplay;
+        });
+    }, 500);
 }
 
 downloadInviteBtn.addEventListener('click', function() {
@@ -625,7 +581,7 @@ downloadOnlyBtn.addEventListener('click', function() {
 sendWhatsAppBtn.addEventListener('click', function() {
     const inviteUrl = `${window.location.href.split('?')[0]}?convite=${encodeURIComponent(currentGuestName)}`;
     const message = `Glória a Deus! Paz e graça!\n\n${currentGuestName}, baixe o seu convite para a Gala Cristã Juvenil através do link:\n\n${inviteUrl}`;
-    
+
     const encodedMessage = encodeURIComponent(message);
     window.open(`https://wa.me/?text=${encodedMessage}`, '_blank');
 });
@@ -633,7 +589,7 @@ sendWhatsAppBtn.addEventListener('click', function() {
 sendSMSBtn.addEventListener('click', function() {
     const inviteUrl = `${window.location.href.split('?')[0]}?convite=${encodeURIComponent(currentGuestName)}`;
     const message = `Glória a Deus! Paz e graça! ${currentGuestName}, baixe seu convite para a Gala Cristã Juvenil: ${inviteUrl}`;
-    
+
     const encodedMessage = encodeURIComponent(message);
     window.open(`sms:?body=${encodedMessage}`, '_blank');
 });
@@ -648,12 +604,16 @@ backToHomeFromInviteBtn.addEventListener('click', function() {
 function checkUrlParams() {
     const urlParams = new URLSearchParams(window.location.search);
     const inviteName = urlParams.get('convite');
-    
+
     if (inviteName) {
         const decodedName = decodeURIComponent(inviteName);
         currentGuestName = formatName(decodedName);
         downloadDisplayName.textContent = currentGuestName;
-        
+
+        // ensure logos are copied for the download-only view
+        loadChurchLogo();
+        copyLogoToInvitation();
+
         welcomeScreen.style.display = 'none';
         creationScreen.style.display = 'none';
         invitationContainer.style.display = 'none';
@@ -693,18 +653,771 @@ document.addEventListener('DOMContentLoaded', function() {
     loadChurchLogo();
     checkSavedInvite();
     checkUrlParams();
+    forceDesktopView();
+
     if (currentGuestName) {
         viewInviteBtn.style.display = 'block';
     }
 });
+
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+
+    setTimeout(() => {
+        showInstallPrompt();
+    }, 5000);
+});
+
+function showInstallPrompt() {
+    const installPrompt = document.createElement('div');
+    installPrompt.className = 'install-prompt';
+    installPrompt.innerHTML = `
+        <span>📱 Instale este aplicativo para acesso rápido!</span>
+        <button id="installBtn">Instalar</button>
+        <button id="closeInstallBtn">X</button>
+    `;
+
+    document.body.appendChild(installPrompt);
+    installPrompt.style.display = 'flex';
+
+    document.getElementById('installBtn').addEventListener('click', async () => {
+        if (deferredPrompt) {
+            deferredPrompt.prompt();
+            const { outcome } = await deferredPrompt.userChoice;
+            if (outcome === 'accepted') {
+                installPrompt.remove();
+            }
+            deferredPrompt = null;
+        }
+    });
+
+    document.getElementById('closeInstallBtn').addEventListener('click', () => {
+        installPrompt.remove();
+    });
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-brown: #8B4513;
+    --light-brown: #D2691E;
+    --gold: #FFD700;
+    --light-gold: #FFEC8B;
+    --cream: #FFF8DC;
+    --light-cream: #FFFEF0;
+    --dark-text: #4A2C1D;
+    --light-text: #7A4F32;
+    --accent-red: #C41E3A;
+    --accent-green: #228B22;
+    --shadow-color: rgba(139, 69, 19, 0.25);
+    --verse-bg: #FFF9F0;
+    --verse-border: #FFE4C4;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(135deg, #FFF9F0 0%, #FFEEDD 100%);
+    color: var(--dark-text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    position: relative;
+    overflow-x: hidden;
+    font-size: 14px;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    user-select: text;
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+}
+
+body.force-desktop {
+    zoom: 1;
+    max-width: 1000px;
+    transform: scale(1);
+    transform-origin: top center;
+}
+
+.christian-decoration {
+    position: fixed;
+    z-index: -1;
+    opacity: 0.15;
+    color: var(--gold);
+    font-size: 20px;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(5deg); }
+}
+
+.cross-top-left { top: 5%; left: 5%; animation-delay: 0s; }
+.cross-top-right { top: 5%; right: 5%; animation-delay: 1s; }
+.cross-bottom-left { bottom: 5%; left: 5%; animation-delay: 2s; }
+.cross-bottom-right { bottom: 5%; right: 5%; animation-delay: 3s; }
+
+.dove-decoration {
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 28px;
+    animation: fly 8s ease-in-out infinite;
+}
+
+@keyframes fly {
+    0%, 100% { transform: translateX(-50%) translateY(0) rotate(0deg); }
+    25% { transform: translateX(-40%) translateY(-20px) rotate(5deg); }
+    50% { transform: translateX(-60%) translateY(10px) rotate(-5deg); }
+    75% { transform: translateX(-45%) translateY(-15px) rotate(3deg); }
+}
+
+.container {
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
+    z-index: 1;
+}
+
+.welcome-screen {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 40px 30px;
+    box-shadow: 0 20px 60px rgba(139, 69, 19, 0.3);
+    backdrop-filter: blur(10px);
+    border: 3px solid rgba(255, 215, 0, 0.3);
+    max-width: 500px;
+    margin: 30px auto;
+    position: relative;
+    overflow: hidden;
+    animation: slideIn 1s ease-out, floatCard 4s ease-in-out infinite;
+}
+
+@keyframes slideIn { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes floatCard { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+.welcome-screen::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, var(--gold), var(--primary-brown), var(--gold));
+    box-shadow: 0 3px 15px rgba(255, 215, 0, 0.5);
+}
+
+.church-header { display:flex; flex-direction:column; align-items:center; margin-bottom:30px; }
+
+.church-logo {
+    width: 100px; height: 100px; margin-bottom: 20px; border-radius: 20px;
+    background: linear-gradient(135deg, white, var(--light-cream));
+    display: flex; align-items: center; justify-content: center;
+    border: 4px solid var(--gold); box-shadow: 0 10px 30px rgba(139,69,19,0.4);
+    padding: 8px; overflow: hidden; transition: all 0.4s ease;
+}
+.church-logo:hover { transform: scale(1.1); }
+.church-logo img { max-width:100%; max-height:100%; object-fit:contain; border-radius:15px; }
+
+.logo-placeholder {
+    font-size: 1.1rem; color: var(--dark-text); font-weight:900; text-align:center;
+    line-height:1.3; text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+.church-name {
+    font-family: 'Playfair Display', serif;
+    color: var(--primary-brown);
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.church-subtitle {
+    color: var(--gold);
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    font-weight: 700;
+    font-family: 'Dancing Script', cursive;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.event-year {
+    color: var(--light-text);
+    font-size: 1.1rem;
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--light-cream), #FFEEDD);
+    padding: 8px 20px;
+    border-radius: 30px;
+    display: inline-block;
+    border: 2px solid rgba(255, 215, 0, 0.4);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.welcome-message { margin-bottom: 30px; color: var(--light-text); line-height:1.8; font-size:1rem; max-width:400px; margin-left:auto; margin-right:auto; padding:0 20px; text-align:center; }
+.welcome-message p { margin-bottom:15px; padding:12px; background: rgba(255,253,245,0.8); border-radius:12px; border-left:4px solid var(--gold); box-shadow:0 5px 15px rgba(0,0,0,0.05); }
+
+.welcome-buttons { display:flex; flex-direction:column; gap:15px; margin-top:20px; }
+
+.btn {
+    padding: 16px 30px;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+    transition: left 0.8s;
+}
+.btn:hover::before { left: 100%; }
+.btn:hover { transform: translateY(-6px) scale(1.05); box-shadow: 0 15px 30px rgba(0,0,0,0.3); }
+.btn:active { transform: translateY(-3px) scale(1.02); }
+
+.btn-primary { background: linear-gradient(135deg, var(--primary-brown), var(--accent-red)); color:white; box-shadow:0 10px 25px rgba(139,69,19,0.5); border:2px solid rgba(255,255,255,0.3); }
+.btn-primary:hover { background: linear-gradient(135deg,var(--light-brown),#D32F2F); box-shadow:0 15px 35px rgba(139,69,19,0.7); }
+
+.btn-secondary { background: linear-gradient(135deg, var(--gold), #FFA500); color:white; box-shadow:0 10px 25px rgba(255,215,0,0.5); border:2px solid rgba(255,255,255,0.3); }
+.btn-secondary:hover { background: linear-gradient(135deg,var(--light-gold),#FF8C00); box-shadow:0 15px 35px rgba(255,215,0,0.7); }
+
+.btn-back { background: linear-gradient(135deg,#5D4037,#3E2723); color:white; box-shadow:0 10px 25px rgba(0,0,0,0.4); border:2px solid rgba(255,255,255,0.2); }
+.btn-back:hover { background: linear-gradient(135deg,#6D4C41,#4E342E); transform: translateY(-6px) scale(1.05); box-shadow:0 15px 35px rgba(0,0,0,0.5); }
+
+.creation-screen { width:100%; display:none; animation:fadeIn 0.8s ease-out; }
+@keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
+
+.creation-card {
+    background:white; border-radius:20px; padding:40px 30px; box-shadow:0 20px 60px rgba(139,69,19,0.3);
+    margin-bottom:20px; max-width:500px; margin-left:auto; margin-right:auto; border:3px solid rgba(255,215,0,0.3);
+    position:relative; overflow:hidden; animation: floatCard 4s ease-in-out infinite;
+}
+.creation-card::before { content:''; position:absolute; top:0; left:0; right:0; height:5px; background:linear-gradient(90deg,var(--gold),var(--primary-brown)); box-shadow:0 3px 15px rgba(255,215,0,0.5); }
+
+.creation-header { text-align:center; margin-bottom:30px; }
+.creation-header h2 { color:var(--primary-brown); font-family:'Playfair Display', serif; font-size:1.8rem; margin-bottom:15px; display:flex; align-items:center; justify-content:center; gap:15px; text-shadow:2px 2px 4px rgba(0,0,0,0.1); }
+.creation-header p { color:var(--light-text); font-size:1rem; max-width:400px; margin:0 auto; padding:15px; background:var(--light-cream); border-radius:12px; border-left:4px solid var(--gold); box-shadow:0 5px 15px rgba(0,0,0,0.05); }
+
+.input-group { margin-bottom:25px; }
+.input-group label { display:block; margin-bottom:10px; color:var(--dark-text); font-weight:800; font-size:1.1rem; text-transform:uppercase; letter-spacing:0.5px; }
+.input-group input {
+    width:100%; padding:18px 20px; border:3px solid var(--gold); border-radius:12px; font-size:1.1rem;
+    transition: all 0.4s; background:var(--light-cream); color:var(--dark-text); box-shadow: inset 0 4px 10px rgba(0,0,0,0.1);
+}
+.input-group input:focus { border-color:var(--primary-brown); outline:none; box-shadow:0 0 0 4px rgba(139,69,19,0.3), inset 0 4px 10px rgba(0,0,0,0.1); transform: translateY(-5px); }
+
+.input-hint { font-size:0.9rem; color:var(--light-text); margin-top:10px; font-style:italic; display:flex; align-items:center; gap:8px; padding:10px 15px; background:rgba(255,215,0,0.15); border-radius:8px; border-left:3px solid var(--gold); box-shadow:0 3px 10px rgba(0,0,0,0.05); }
+
+.form-buttons { display:flex; flex-direction:column; gap:15px; margin-top:30px; }
+
+.invitation-container, .download-only-screen { width:100%; display:none; animation:fadeIn 0.8s ease-out; }
+
+.invitation-card {
+    background:white; border-radius:25px; overflow:hidden; box-shadow:0 25px 80px rgba(0,0,0,0.3);
+    margin-bottom:20px; position:relative; border:4px solid var(--gold); max-width:800px; margin-left:auto; margin-right:auto; width:100%;
+}
+
+.invitation-header {
+    background: linear-gradient(135deg, var(--primary-brown), #8B0000);
+    padding: 30px 25px 20px;
+    text-align: center;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+/* LOGO CIRCULAR NO CONVITE - ATUALIZADO */
+.invitation-logo-fixed {
+    width: 90px;
+    height: 90px;
+    margin: 0 auto 12px;
+    border-radius: 50%;
+    background: rgba(242, 243, 245, 0.95);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    border: 2px solid rgba(0, 0, 0, 0.06);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12);
+    overflow: hidden;
+}
+
+/* imagem interna do logo */
+.invitation-logo-fixed img,
+.invitation-logo-fixed .logo-placeholder {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 50%;
+    display: block;
+    background-color: rgba(245,245,246,0.7);
+}
+
+.invitation-title { font-family:'Playfair Display', serif; font-size:2.5rem; margin-bottom:10px; letter-spacing:2px; text-shadow:3px 3px 8px rgba(0,0,0,0.4); color:var(--gold); }
+.invitation-subtitle { font-family:'Great Vibes', cursive; font-size:2.2rem; margin-bottom:10px; color:var(--light-cream); text-shadow:2px 2px 6px rgba(0,0,0,0.3); }
+.invitation-year { font-size:1.2rem; letter-spacing:3px; opacity:0.95; background:rgba(255,255,255,0.2); padding:8px 25px; border-radius:30px; display:inline-block; border:2px solid rgba(255,215,0,0.4); box-shadow:0 5px 15px rgba(0,0,0,0.2); }
+
+.invitation-body { 
+    padding: 18px 22px;
+    background: linear-gradient(135deg, #FFFEF5, #FFF8E1);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.invitation-text { text-align:center; }
+.invitation-text p { font-size:1rem; line-height:1.8; color:var(--light-text); margin-bottom:10px; text-align:center; }
+
+/* GUEST NAME CARD - ATUALIZADO (translúcido e mais compacto) */
+.guest-name-card {
+    background: transparent;
+    border-radius: 16px;
+    padding: 12px 10px;
+    text-align: center;
+    border: none;
+    box-shadow: none;
+    position: relative;
+    overflow: visible;
+    margin: 8px auto;
+    max-width: 95%;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.guest-name-label {
+    display: block;
+    color: #8B4513;
+    font-size: 0.9rem;
+    margin-bottom: 6px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    background: rgba(255, 255, 255, 0.92);
+    padding: 6px 12px;
+    border-radius: 40px;
+    border: 1px solid rgba(139, 69, 19, 0.12);
+    text-shadow: none;
+}
+
+.guest-name {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2rem;
+    color: #4A2C1D;
+    line-height: 1.1;
+    text-transform: capitalize;
+    word-wrap: break-word;
+    font-weight: 800;
+    padding: 10px 18px;
+    background: rgba(255, 255, 255, 0.88);
+    border-radius: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+    width: auto;
+    max-width: 100%;
+    text-align: center;
+}
+
+.invitation-content-card { 
+    background:white; 
+    border-radius:15px; 
+    padding:16px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.08); 
+    border:2px solid var(--gold); 
+    margin: 8px 0;
+}
+
+.invitation-content-card p { font-size:1rem; line-height:1.7; color:var(--light-text); margin-bottom:15px; text-align:center; }
+
+/* VERSÍCULO - ATUALIZADO */
+.verse-card {
+    background: linear-gradient(135deg, #FFF5E6, #FFE8CC);
+    border-radius: 15px;
+    padding: 25px 20px;
+    text-align: center;
+    border: 3px solid var(--gold);
+    box-shadow: 0 15px 40px rgba(139, 69, 19, 0.25);
+    margin: 25px 0 15px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.verse-icon {
+    font-size: 2.2rem;
+    color: var(--primary-brown);
+    margin-bottom: 15px;
+    opacity: 0.9;
+}
+
+.verse-text {
+    padding: 0;
+}
+
+/* REFERÊNCIA DO VERSÍCULO - ATUALIZADA */
+.verse-reference {
+    color: var(--primary-brown);
+    font-family: 'Playfair Display', 'Georgia', serif;
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: block;
+    padding-bottom: 8px;
+    border-bottom: 2px solid rgba(139, 69, 19, 0.2);
+}
+
+/* TEXTO DO VERSÍCULO - FONTE MAIS LEGÍVEL E MAIOR */
+.verse-content {
+    color: var(--dark-text);
+    font-size: 20px;
+    font-style: italic;
+    line-height: 1.6;
+    font-weight: 600;
+    font-family: 'Merriweather', 'Georgia', serif;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
+    padding: 20px 15px;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 12px;
+    border-left: 4px solid var(--gold);
+    box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* Adicionando efeito de destaque ao card do versículo */
+.verse-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--gold), var(--primary-brown), var(--gold));
+    border-radius: 15px 15px 0 0;
+}
+
+/* Adicionando uma pequena decoração cristã no versículo */
+.verse-card::after {
+    content: '❧';
+    position: absolute;
+    bottom: 10px;
+    right: 15px;
+    font-size: 24px;
+    color: rgba(139, 69, 19, 0.3);
+    font-family: 'Times New Roman', serif;
+}
+
+.event-details-horizontal { display:flex; flex-wrap:wrap; gap:15px; margin:20px 0; justify-content:center; }
+.detail-item {
+    background: linear-gradient(135deg, white, var(--light-cream)); border-radius:15px; padding:15px; box-shadow:0 10px 25px rgba(0,0,0,0.12);
+    border:2px solid var(--gold); text-align:center; flex:1; min-width:200px; max-width:250px; display:flex; flex-direction:column; transition: all 0.3s ease;
+}
+.detail-item:hover { transform: translateY(-5px); box-shadow:0 15px 35px rgba(0,0,0,0.2); }
+.detail-item-icon { width:45px; height:45px; background:linear-gradient(135deg,var(--gold),var(--light-gold)); border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 10px; font-size:1.2rem; color:white; border:2px solid white; box-shadow:0 5px 15px rgba(0,0,0,0.1); }
+.detail-item-content h3 { color:var(--primary-brown); font-family:'Playfair Display', serif; font-size:1rem; margin-bottom:10px; min-height:30px; display:flex; align-items:center; justify-content:center; }
+.detail-item-content p { color:var(--light-text); font-size:0.95rem; line-height:1.5; margin-bottom:8px; }
+.detail-item-content strong { color:var(--primary-brown); font-weight:800; }
+
+.invitation-footer {
+    background: linear-gradient(135deg, var(--cream), #FFEEDD);
+    padding: 20px 25px;
+    text-align: center;
+    border-top: 4px solid var(--gold);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.contact-info-horizontal {
+    background: white;
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    border: 2px solid var(--gold);
+    max-width: 400px;
+    width: 100%;
+}
+
+.contact-info-horizontal h4 {
+    color: var(--primary-brown);
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    font-family: 'Playfair Display', serif;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+
+/* Telefones lado a lado - override forte para evitar quebra */
+.contact-numbers {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    justify-content: center !important;
+    gap: 40px !important;
+    margin-bottom: 15px;
+    align-items: center;
+    white-space: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.contact-number {
+    font-size: 1rem;
+    color: var(--primary-brown);
+    font-weight: 800;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 15px;
+    background: rgba(255, 215, 0, 0.1);
+    border-radius: 10px;
+    border: 1px solid rgba(139, 69, 19, 0.2);
+    white-space: nowrap;
+}
+
+.contact-note {
+    color: var(--light-text);
+    font-size: 0.85rem;
+    font-style: italic;
+    padding: 8px;
+    background: rgba(255, 215, 0, 0.1);
+    border-radius: 8px;
+}
+
+/* Church signature */
+.church-signature {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 2px solid rgba(139, 69, 19, 0.3);
+    width: 100%;
+}
+
+.church-name-footer { font-family:'Playfair Display', serif; color:var(--primary-brown); font-size:1.3rem; margin-bottom:8px; font-weight:800; }
+.event-name-footer { color:var(--light-text); font-size:1rem; margin-bottom:10px; font-weight:700; }
+.signature-line { display:inline-block; width:180px; height:2px; background:linear-gradient(90deg, transparent, var(--primary-brown), transparent); margin:10px 0; }
+.signature-text { color:var(--light-text); font-style:italic; margin-top:15px; font-size:0.9rem; font-weight:700; }
+
+/* ACTION BUTTONS: override forte para garantir lado a lado */
+.action-buttons-horizontal {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 12px !important;
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 15px;
+    background: linear-gradient(135deg, rgba(255, 253, 245, 0.95), rgba(255, 248, 225, 0.95));
+    border-radius: 15px;
+    border: 2px solid var(--gold);
+    box-shadow: 0 15px 40px rgba(139, 69, 19, 0.15);
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
+}
+
+/* garante que botões NÃO ocupem 100% da largura e fiquem lado a lado */
+.invitation-container .action-buttons-horizontal .btn,
+.action-buttons-horizontal .btn {
+    display: inline-flex !important;
+    flex: 0 0 auto !important;
+    width: auto !important;
+    min-width: 150px !important;
+    max-width: 220px !important;
+    padding: 12px 16px !important;
+    white-space: nowrap !important;
+    text-align: center !important;
+    margin: 0 !important;
+}
+
+/* Se algum outro CSS define width:100% ou flex:1, estes overrides garantem o comportamento */
+.action-buttons-horizontal .btn { box-sizing: border-box; }
+
+/* Hover */
+.action-buttons-horizontal .btn:hover {
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+}
+
+.action-buttons-horizontal .btn-primary { background: linear-gradient(135deg, var(--primary-brown), #C41E3A); box-shadow:0 8px 25px rgba(139,69,19,0.5); border:2px solid rgba(255,255,255,0.4); }
+.action-buttons-horizontal .btn-secondary { background: linear-gradient(135deg, var(--gold), #FF8C00); box-shadow:0 8px 25px rgba(255,215,0,0.5); border:2px solid rgba(255,255,255,0.4); }
+.action-buttons-horizontal .btn-back { background: linear-gradient(135deg,#5D4037,#3E2723); box-shadow:0 8px 25px rgba(0,0,0,0.4); border:2px solid rgba(255,255,255,0.3); }
+
+.download-only-screen { text-align:center; max-width:800px; margin:0 auto; width:100%; }
+.download-only-button { margin-top:20px; }
+.download-only-button .btn { width:100%; max-width:280px; margin:0 auto; padding:16px 25px; font-size:1.1rem; font-weight:800; }
+
+.modal-overlay { position: fixed; top:0; left:0; width:100%; height:100%; background-color: rgba(0,0,0,0.95); display:none; justify-content:center; align-items:center; z-index:2000; backdrop-filter: blur(10px); }
+.modal { background: linear-gradient(135deg, white, var(--light-cream)); border-radius:20px; padding:30px 25px; max-width:380px; width:90%; box-shadow:0 25px 60px rgba(0,0,0,0.4); position:relative; border:3px solid var(--gold); }
+.modal::before { content:''; position:absolute; top:0; left:0; right:0; height:4px; background: linear-gradient(90deg, var(--gold), var(--primary-brown)); border-radius:20px 20px 0 0; }
+.modal h2 { color:var(--primary-brown); margin-bottom:20px; font-family:'Playfair Display', serif; text-align:center; font-size:1.4rem; }
+.modal-close { position:absolute; top:12px; right:12px; background:var(--gold); border:none; font-size:1.6rem; cursor:pointer; color:white; transition:all 0.3s; width:35px; height:35px; display:flex; align-items:center; justify-content:center; border-radius:50%; box-shadow:0 4px 12px rgba(0,0,0,0.2); }
+.modal-close:hover { background:var(--primary-brown); transform: rotate(90deg) scale(1.1); }
+
+.error-message { color:#FF0000; margin-top:12px; text-align:center; display:none; padding:10px 15px; background:rgba(255,0,0,0.1); border-radius:10px; border-left:4px solid #FF0000; font-size:0.9rem; font-weight:700; }
+
+.site-footer {
+    background: linear-gradient(135deg, var(--primary-brown), #5D4037);
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: 30px;
+    width: 100%;
+    border-radius: 15px 15px 0 0;
+    box-shadow: 0 -8px 25px rgba(0, 0, 0, 0.15);
+    position: relative;
+}
+
+.site-footer::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background: linear-gradient(90deg, var(--gold), white, var(--gold)); }
+
+.footer-content { max-width:800px; margin:0 auto; position:relative; z-index:1; }
+.footer-content p { font-size:1rem; font-weight:600; }
+.footer-content strong { color:var(--gold); font-weight:800; }
+
+/* Responsividade (mantendo comportamento horizontal com overflow) */
+@media (max-width: 1200px) {
+    body { max-width:100%; padding:8px; }
+    .action-buttons-horizontal { gap:10px; }
+    .action-buttons-horizontal .btn { min-width:160px; max-width:180px; font-size:0.9rem; padding:12px 14px; }
+}
+
+@media (max-width: 992px) {
+    .action-buttons-horizontal .btn { min-width:150px; max-width:170px; }
+    .invitation-title { font-size:2.2rem; }
+    .invitation-subtitle { font-size:2rem; }
+    .guest-name { font-size:1.9rem; }
+    .event-details-horizontal { flex-wrap:wrap; }
+    .detail-item { min-width:calc(33.333% - 10px); }
+    .verse-content { font-size: 18px; }
+}
+
+@media (max-width: 768px) {
+    .container { max-width:100%; padding:0 8px; }
+    .invitation-card { max-width:100%; }
+    .event-details-horizontal { flex-wrap:wrap; gap:12px; }
+    .detail-item { min-width:100%; margin-bottom:10px; }
+    .action-buttons-horizontal { padding:12px 10px; }
+    .action-buttons-horizontal .btn { min-width:150px; max-width:170px; margin-bottom:0; padding:12px 8px; font-size:0.85rem; }
+    .invitation-title { font-size:2rem; }
+    .invitation-subtitle { font-size:1.8rem; }
+    .guest-name { font-size:1.8rem; padding:8px 14px; }
+    .guest-name-card { padding:15px 12px; min-height:0; }
+    .guest-name-label { font-size:0.85rem; padding:5px 10px; }
+    .invitation-logo-fixed {
+        width: 76px;
+        height: 76px;
+        padding: 6px;
+        margin-bottom: 10px;
+    }
+    .contact-number { font-size:1.1rem; }
+    .site-footer { padding:15px 12px; margin-top:20px; }
+    .verse-card { padding: 20px 15px; margin: 20px 0 10px 0; }
+    .verse-content { font-size: 17px; padding: 15px 12px; }
+    .verse-reference { font-size: 15px; }
+}
+
+@media (max-width: 600px) {
+    .action-buttons-horizontal {
+        overflow-x: auto;
+        overflow-y: hidden;
+        justify-content: flex-start;
+        padding-bottom: 15px;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: thin;
+        scrollbar-color: var(--gold) transparent;
+    }
+    .action-buttons-horizontal::-webkit-scrollbar { height: 6px; }
+    .action-buttons-horizontal::-webkit-scrollbar-track { background: rgba(255,215,0,0.1); border-radius:3px; }
+    .action-buttons-horizontal::-webkit-scrollbar-thumb { background-color: var(--gold); border-radius:3px; }
+
+    .action-buttons-horizontal .btn { min-width:160px; max-width:160px; margin:0 4px; padding:12px 10px; }
+
+    .contact-numbers { gap:16px; justify-content:center; overflow-x:auto; -webkit-overflow-scrolling:touch; }
+    .event-details-horizontal { flex-direction:column; }
+    .detail-item { min-width:100%; margin-bottom:10px; }
+    .contact-number { justify-content:center; }
+    .church-name { font-size:1.5rem; }
+    .invitation-title { font-size:1.8rem; }
+    .invitation-subtitle { font-size:1.6rem; }
+    .guest-name { font-size:1.7rem; padding:8px 12px; }
+    .invitation-logo-fixed {
+        width: 70px;
+        height: 70px;
+        padding: 5px;
+    }
+    .verse-card { padding: 18px 12px; }
+    .verse-content { font-size: 16px; padding: 12px 10px; }
+    .verse-reference { font-size: 14px; }
+}
+
+@media (max-width: 480px) {
+    body { padding:5px; font-size:13px; }
+    .church-name { font-size:1.3rem; }
+    .invitation-title { font-size:1.6rem; }
+    .invitation-subtitle { font-size:1.4rem; }
+    .guest-name { font-size:1.6rem; padding:8px 10px; }
+    .guest-name-label { font-size:0.8rem; padding:4px 8px; }
+    .guest-name-card { padding:10px 8px; min-height:0; }
+    .detail-item { min-width:100%; margin-bottom:10px; }
+    .detail-item-icon { width:40px; height:40px; font-size:1.1rem; }
+    .action-buttons-horizontal .btn { min-width:150px; max-width:150px; padding:10px 8px; font-size:0.8rem; }
+    .btn { padding:12px 16px; font-size:0.9rem; }
+    .invitation-content-card p { font-size:0.95rem; }
+    .site-footer { padding:12px 10px; }
+    .footer-content p { font-size:0.9rem; }
+    .invitation-logo-fixed {
+        width: 65px;
+        height: 65px;
+    }
+    .verse-card { padding: 15px 10px; margin: 15px 0 8px 0; }
+    .verse-content { font-size: 15px; padding: 10px 8px; }
+    .verse-reference { font-size: 13px; }
+    .verse-icon { font-size: 1.8rem; margin-bottom: 10px; }
+}
+
 const CACHE_NAME = 'gala-juvenil-v1';
 const urlsToCache = [
-  '/',
-  '/index.html',
-  '/styles.css',
-  '/script.js',
-  '/lixo.js',
-  '/logo.png',
+  '',
+  'index.html',
+  'styles.css',
+  'script.js',
+  'lixo.js',
+  'logo.png',
   'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css',
   'https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&family=Dancing+Script:wght@400;600&display=swap',
   'https://html2canvas.hertzen.com/dist/html2canvas.min.js'
@@ -744,22 +1457,3 @@ self.addEventListener('activate', function(event) {
     })
   );
 });
-{
-  "headers": [
-    {
-      "source": "/service-worker.js",
-      "headers": [
-        {
-          "key": "Service-Worker-Allowed",
-          "value": "/"
-        }
-      ]
-    }
-  ],
-  "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
-    }
-  ]
-}
