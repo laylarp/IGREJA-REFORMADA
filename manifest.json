@@ -1,20 +1,20 @@
 {
-  "name": "Gala Juvenil",
-  "short_name": "Gala",
-  "description": "Sistema de convites para Gala Juvenil 2025",
+  "name": "Gala Juvenil 2025",
+  "short_name": "Gala Juvenil",
+  "description": "Sistema de convites eletrônicos para a Gala Juvenil 2025",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#f9f3e9",
+  "background_color": "#FFF9F0",
   "theme_color": "#8B4513",
   "orientation": "portrait",
   "icons": [
     {
-      "src": "/logo.png",
+      "src": "logo.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "/logo.png",
+      "src": "logo.png",
       "sizes": "512x512",
       "type": "image/png"
     }

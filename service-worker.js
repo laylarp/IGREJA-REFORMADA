@@ -1,10 +1,9 @@
-const CACHE_NAME = 'gala-juvenil-v1';
+const CACHE_NAME = 'gala-juvenil-v2';
 const urlsToCache = [
   '',
   'index.html',
   'styles.css',
   'script.js',
-  'lixo.js',
   'logo.png',
   'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css',
   'https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&family=Dancing+Script:wght@400;600&display=swap',

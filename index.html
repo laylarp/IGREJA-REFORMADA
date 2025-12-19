@@ -2,14 +2,14 @@
 <html lang="pt">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>Gala Juvenil - Convite Eletrônico</title>
+    <link rel="manifest" href="/manifest.json">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&family=Dancing+Script:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    
     <div class="christian-decoration cross-top-left">✝</div>
     <div class="christian-decoration cross-top-right">✝</div>
     <div class="christian-decoration cross-bottom-left">✝</div>
@@ -17,257 +17,258 @@
     <div class="christian-decoration dove-decoration">🕊</div>
 
     <div class="container">
-        
         <div class="welcome-screen" id="welcomeScreen">
             <div class="church-header">
                 <div class="church-logo" id="churchLogo">
                     <div class="logo-placeholder">IGREJA<br>REFORMADA</div>
                 </div>
-                
                 <h1 class="church-name">Igreja Reformada de Moçambique</h1>
                 <p class="church-subtitle">Gala Juvenil 2025</p>
                 <p class="event-year">26 DE DEZEMBRO</p>
             </div>
-            
             <div class="welcome-message">
-                <p>Seja bem-vindo(a) ao sistema de convites eletrônicos para a <strong>Gala Juvenil 2025</strong>.</p>
-                <p>Crie seu convite personalizado e faça parte deste momento especial de comunhão, louvor e confraternização.</p>
+                <h>Seja bem-vindo(a) ao sistema de convites eletrônicos para a <strong>Gala Juvenil 2025</strong>.</h>
+                <p>Crie seu convite personalizado e compartilhe com seus amigos.</p>
             </div>
-            
             <div class="welcome-buttons">
                 <button class="btn btn-primary" id="createInviteBtn">
-                    <i class="fas fa-ticket-alt"></i> Criar  Convite
+                    <i class="fas fa-ticket-alt"></i> Criar Convite
                 </button>
                 <button class="btn btn-secondary" id="viewInviteBtn" style="display: none;">
-                    <i class="fas fa-eye"></i> Ver  Convite
+                    <i class="fas fa-eye"></i> Ver Meu Convite
                 </button>
             </div>
         </div>
 
-        
         <div class="creation-screen" id="creationScreen">
             <div class="creation-card">
                 <div class="creation-header">
                     <h2><i class="fas fa-gift"></i> Personalize Seu Convite</h2>
-                    <p>Insira seu nome completo para gerar um convite personalizado para a Gala Juvenil 2025</p>
+                    <p>Insira seu nome  para gerar um convite personalizado para a Gala Juvenil 2025</p>
                 </div>
-                
                 <div class="input-group">
-                    <label for="guestName">Nome Completo do Convidado:</label>
-                    <input type="text" id="guestName" placeholder="Ex: João Carlos da Silva" maxlength="60">
+                    <label for="guestName">Nome do Convidado:</label>
+                    <input type="text" id="guestName" placeholder="Ex: João Carlos " maxlength="60">
                     <div class="input-hint">
                         <i class="fas fa-info-circle"></i> O nome será formatado automaticamente (primeira letra maiúscula)
                     </div>
                 </div>
-                
                 <div class="form-buttons">
                     <button class="btn btn-primary" id="generateInviteBtn">
                         <i class="fas fa-check-circle"></i> Gerar Convite Personalizado
                     </button>
                     <button class="btn btn-back" id="backToHomeBtn">
-                        <i class="fas fa-arrow-left"></i> Voltar para o Início
+                        <i class="fas fa-arrow-left"></i> Voltar 
                     </button>
                 </div>
-                
                 <div class="error-message" id="nameError">
                     <i class="fas fa-exclamation-circle"></i> Por favor, insira um nome válido.
                 </div>
             </div>
         </div>
 
-        
         <div class="invitation-container" id="invitationContainer">
             <div class="invitation-card" id="invitationCard">
-                
                 <div class="invitation-header">
-                    <div class="invitation-logo" id="invitationLogo">
-                        
+                    <div class="invitation-logo-fixed" id="invitationLogo">
+                        <div class="logo-placeholder">IGREJA<br>REFORMADA</div>
                     </div>
                     <h1 class="invitation-title">GALA JUVENIL</h1>
                     <h2 class="invitation-subtitle">Convite Especial</h2>
                     <div class="invitation-year">2025</div>
                 </div>
-
                 <div class="invitation-body">
                     <div class="invitation-text">
-                        <p>A COMISSÃO ORGANIZADORA DA GALA JUVENIL TEM A HONRA DE CONVIDAR</p>
+                      <p>A Comissão Organizadora da Gala Juvenil 2025 tem a honra de convidar a(o) irmã(o)</p>
                     </div>
-
+                    
                     <div class="guest-name-card">
-                        <span class="guest-name-label">PARA PARTICIPAR DA GALA JUVENIL 2025</span>
                         <div class="guest-name" id="displayName">[NOME DO CONVIDADO]</div>
                     </div>
 
-                    <div class="invitation-text">
-                        <p>QUE SE REALIZARÁ EM UM AMBIENTE ESPECIAL DE COMUNHÃO, LOUVOR E CONFRATERNIZAÇÃO FRATERNA.</p>
-                        <p>SERÁ UMA OCASIÃO MARCANTE DE COMUNHÃO ESPIRITUAL, ENRIQUECIDA POR MOMENTOS DE ORAÇÃO, CÂNTICOS E CELEBRAÇÃO CONJUNTA.</p>
-                    </div>
-
-            
-                    <div class="event-details-container">
-                        <div class="detail-card">
-                            <div class="detail-card-icon">
-                                <i class="fas fa-calendar-alt"></i>
+                    <div class="invitation-content-card">
+                        <p>
+                            A participar da <strong>Gala</strong>, sob o lema:<i>
+“Como é bom e agradável quando os irmãos convivem em união.”</i>
+                        </p>
+                        <p>
+                           Será uma ocasião marcada por momentos de oração, louvor e confraternização,
+                           preparada para celebrarmos juntos na presença de Deus.
+                        </p>
+                        
+                        <div class="verse-card">
+                            <div class="verse-icon">
+                                <i class="fas fa-bible"></i>
                             </div>
-                            <h3>Data do Evento</h3>
-                            <div class="detail-card-content">
-                                <p><strong>26 de Dezembro de 2025</strong></p>
-                                <p>Sexta-feira</p>
-    
+                            <div class="verse-text">
+                                <p class="verse-reference">Salmos Cap. 133 | NVI</p>
+                                <p class="verse-content">"Como é bom e agradável quando os irmãos convivem em união!"</p>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="detail-card">
-                            <div class="detail-card-icon">
+                    <div class="event-details-horizontal">
+                        <div class="detail-item">
+                            <div class="detail-item-icon">
+                                <i class="fas fa-calendar-alt"></i>
+                            </div>
+                            <div class="detail-item-content">
+                                <h3>Data do Evento</h3>
+                                <p><strong>26 de Dezembro de 2025</strong></p>
+                                <p>Sexta-feira</p>
+                            </div>
+                        </div>
+                        
+                        <div class="detail-item">
+                            <div class="detail-item-icon">
                                 <i class="fas fa-clock"></i>
                             </div>
-                            <h3>Horário</h3>
-                            <div class="detail-card-content">
+                            <div class="detail-item-content">
+                                <h3>Horário</h3>
                                 <p><strong>22:00 às 04:00</strong></p>
                                 <p>Noite de adoração e oração</p>
                             </div>
                         </div>
-
-                        <div class="detail-card">
-                            <div class="detail-card-icon">
+                        
+                        <div class="detail-item">
+                            <div class="detail-item-icon">
                                 <i class="fas fa-map-marker-alt"></i>
                             </div>
-                            <h3>Localização</h3>
-                            <div class="detail-card-content">
+                            <div class="detail-item-content">
+                                <h3>Localização</h3>
                                 <p><strong>Congregação Tsakane</strong></p>
                                 <p>Machava-Sede</p>
                                 <p>Rua da Mulher</p>
                             </div>
                         </div>
                     </div>
-
-                    <div class="invitation-text">
-                        <p>CIENTES DE QUE PODEREMOS CONTAR COM A VOSSA HONROSA PRESENÇA, APRESENTAMOS OS NOSSOS MAIS ELEVADOS PROTESTOS DE ESTIMA E CONSIDERAÇÃO.</p>
-                    </div>
                 </div>
-
                 
                 <div class="invitation-footer">
-                    
-                    <div class="contact-info">
+                    <div class="contact-info-horizontal">
                         <h4>Para mais informações:</h4>
-                        <div class="contact-phone">
-                            <i class="fas fa-phone-alt"></i> 84 401 2254
+                        <div class="contact-numbers">
+                            <div class="contact-number">
+                                <i class="fas fa-phone-alt"></i> 84 401 2254
+                            </div>
+                            <div class="contact-number">
+                                <i class="fas fa-phone-alt"></i> 85 232 8379
+                            </div>
                         </div>
                         <p class="contact-note">Disponível para esclarecimentos e confirmações</p>
                     </div>
-
+                    
                     <div class="church-signature">
                         <div class="church-name-footer">Igreja Reformada</div>
                         <div class="event-name-footer">Gala Juvenil 2025</div>
                         <div class="signature-line"></div>
                         <p class="signature-text">Comissão Organizadora da Gala Juvenil</p>
-                
                     </div>
                 </div>
             </div>
-
-        
-            <div class="action-buttons" id="actionButtons">
+            
+            <div class="action-buttons-horizontal" id="actionButtons">
                 <button class="btn btn-primary" id="downloadInviteBtn">
-                    <i class="fas fa-download"></i> Baixar Convite 
+                    <i class="fas fa-download"></i> Baixar Convite
                 </button>
                 <button class="btn btn-secondary" id="sendWhatsAppBtn">
-                    <i class="fab fa-whatsapp"></i> Enviar 
+                    <i class="fab fa-whatsapp"></i> WhatsApp
                 </button>
                 <button class="btn btn-primary" id="sendSMSBtn">
-                    <i class="fas fa-sms"></i>   SMS
-                </button>
-                <button class="btn btn-back" id="editInviteBtn">
-                    <i class="fas fa-edit"></i> Editar Nome
+                    <i class="fas fa-sms"></i> SMS
                 </button>
                 <button class="btn btn-back" id="backToHomeFromInviteBtn">
-                    <i class="fas fa-arrow-left"></i> Voltar  
+                    <i class="fas fa-arrow-left"></i> Voltar
                 </button>
             </div>
         </div>
 
-        
         <div class="download-only-screen" id="downloadOnlyScreen">
             <div class="invitation-card" id="downloadInvitationCard">
-                
                 <div class="invitation-header">
-                    <div class="invitation-logo">
-                        
+                    <div class="invitation-logo-fixed">
+                        <div class="logo-placeholder">IGREJA<br>REFORMADA</div>
                     </div>
                     <h1 class="invitation-title">GALA JUVENIL</h1>
                     <h2 class="invitation-subtitle">Convite Especial</h2>
                     <div class="invitation-year">2025</div>
                 </div>
-
                 <div class="invitation-body">
                     <div class="invitation-text">
-                        <p>A COMISSÃO ORGANIZADORA DA GALA JUVENIL TEM A HONRA DE CONVIDAR</p>
+                        <p>A Comissão Organizadora da Gala, tem a honra de convidar a/o irmã/o</p>
                     </div>
-
+                    
                     <div class="guest-name-card">
-                        <span class="guest-name-label">PARA PARTICIPAR DA GALA JUVENIL 2025</span>
+                        <span class="guest-name-label">É COM GRANDE HONRA QUE CONVIDAMOS</span>
                         <div class="guest-name" id="downloadDisplayName">[NOME DO CONVIDADO]</div>
                     </div>
 
-                    <div class="invitation-text">
-                        <p>QUE SE REALIZARÁ EM UM AMBIENTE ESPECIAL DE COMUNHÃO, LOUVOR E CONFRATERNIZAÇÃO FRATERNA.</p>
-                        <p>SERÁ UMA OCASIÃO MARCANTE DE COMUNHÃO ESPIRITUAL, ENRIQUECIDA POR MOMENTOS DE ORAÇÃO, CÂNTICOS E CELEBRAÇÃO CONJUNTA.</p>
+                    <div class="invitation-content-card">
+                        <p>a participar da GALA, que se realizará no dia 26 de dezembro de 2025, em momento de união. A Gala terá seu lugar, na congregação TSAKANE, Machava-Sede, rua da Mulher, no dia 26 de dezembro de 2025, das 22h às 04h.</p>
+                        <p>Será uma ocasião especial de comunhão, marcada por momentos de oração, louvores e confraternização, contamos com a honrosa presença dos convidados.</p>
+                        
+                        <div class="verse-card">
+                            <div class="verse-icon">
+                                <i class="fas fa-bible"></i>
+                            </div>
+                            <div class="verse-text">
+                                <p class="verse-reference">Salmos Cap. 133 | NVI</p>
+                                <p class="verse-content">"Como é bom e agradável quando os irmãos convivem em união!"</p>
+                            </div>
+                        </div>
                     </div>
 
-            
-                    <div class="event-details-container">
-                        <div class="detail-card">
-                            <div class="detail-card-icon">
+                    <div class="event-details-horizontal">
+                        <div class="detail-item">
+                            <div class="detail-item-icon">
                                 <i class="fas fa-calendar-alt"></i>
                             </div>
-                            <h3>Data do Evento</h3>
-                            <div class="detail-card-content">
+                            <div class="detail-item-content">
+                                <h3>Data do Evento</h3>
                                 <p><strong>26 de Dezembro de 2025</strong></p>
                                 <p>Sexta-feira</p>
                             </div>
                         </div>
-
-                        <div class="detail-card">
-                            <div class="detail-card-icon">
+                        
+                        <div class="detail-item">
+                            <div class="detail-item-icon">
                                 <i class="fas fa-clock"></i>
                             </div>
-                            <h3>Horário</h3>
-                            <div class="detail-card-content">
+                            <div class="detail-item-content">
+                                <h3>Horário</h3>
                                 <p><strong>22:00 às 04:00</strong></p>
                                 <p>Noite de adoração e oração</p>
                             </div>
                         </div>
-
-                        <div class="detail-card">
-                            <div class="detail-card-icon">
+                        
+                        <div class="detail-item">
+                            <div class="detail-item-icon">
                                 <i class="fas fa-map-marker-alt"></i>
                             </div>
-                            <h3>Localização</h3>
-                            <div class="detail-card-content">
+                            <div class="detail-item-content">
+                                <h3>Localização</h3>
                                 <p><strong>Congregação Tsakane</strong></p>
                                 <p>Machava-Sede</p>
                                 <p>Rua da Mulher</p>
                             </div>
                         </div>
                     </div>
-
-                    <div class="invitation-text">
-                        <p>CIENTES DE QUE PODEREMOS CONTAR COM A VOSSA HONROSA PRESENÇA, APRESENTAMOS OS NOSSOS MAIS ELEVADOS PROTESTOS DE ESTIMA E CONSIDERAÇÃO.</p>
-                    </div>
                 </div>
-
                 
                 <div class="invitation-footer">
-                    
-                    <div class="contact-info">
+                    <div class="contact-info-horizontal">
                         <h4>Para mais informações:</h4>
-                        <div class="contact-phone">
-                            <i class="fas fa-phone-alt"></i> 84 401 2254
+                        <div class="contact-numbers">
+                            <div class="contact-number">
+                                <i class="fas fa-phone-alt"></i> 84 401 2254
+                            </div>
+                            <div class="contact-number">
+                                <i class="fas fa-phone-alt"></i> 85 232 8379
+                            </div>
                         </div>
                         <p class="contact-note">Disponível para esclarecimentos e confirmações</p>
                     </div>
-
+                    
                     <div class="church-signature">
                         <div class="church-name-footer">Igreja Reformada</div>
                         <div class="event-name-footer">Gala Juvenil 2025</div>
@@ -276,7 +277,7 @@
                     </div>
                 </div>
             </div>
-
+            
             <div class="download-only-button">
                 <button class="btn btn-primary" id="downloadOnlyBtn">
                     <i class="fas fa-download"></i> Baixar Convite
@@ -285,12 +286,10 @@
         </div>
     </div>
 
-    
     <div class="modal-overlay" id="passwordModal">
         <div class="modal">
             <button class="modal-close" id="closePasswordModal">&times;</button>
             <h2><i class="fas fa-lock"></i> Acesso ao Criador de Convites</h2>
-            
             <div id="passwordSection">
                 <div class="input-group">
                     <label for="accessPassword">Digite a senha de acesso:</label>
@@ -306,16 +305,14 @@
         </div>
     </div>
 
-     <footer class="site-footer">
+    <footer class="site-footer">
         <div class="footer-content">
             <p>Criado por <strong>Raymond-Technology</strong>. Todos os direitos reservados © 2025</p>
-           
         </div>
     </footer>
     
     <canvas id="invitationCanvas" style="display: none;"></canvas>
     
-    <script src="lixo.js"></script>
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <script src="script.js"></script>
 </body>
