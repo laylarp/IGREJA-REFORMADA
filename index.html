@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Convite Gala Juvenil</title>
   
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Georgia:wght@400;700&family=Segoe+UI:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -97,6 +97,91 @@
     </div>
   </section>
 
-  <script src="convite.js"></script>
+  <section id="inviteScreen" class="screen">
+    <div class="card invite-card">
+      <div class="back-btn" id="backFromInvite">
+        <i class="fas fa-arrow-left"></i>
+      </div>
+      
+      <div id="invitePreview" class="invite-preview">
+        <div class="invite-content">
+          <div class="header">
+            <div class="logo-placeholder">
+              <img src="logo.png" alt="Logo" class="invite-logo">
+            </div>
+            <h1>GALA JUVENIL</h1>
+            <div class="subtitle">Convite Especial</div>
+            <div class="year">2025</div>
+          </div>
+
+          <div class="content">
+            <p class="intro-text">A Comissão Organizadora da Gala Juvenil tem a honra de convidar</p>
+
+            <div class="name-box">
+              <div class="invite-label">Para participar da Gala Juvenil 2025</div>
+              <div id="inviteName" class="guest-name">Alberto Watche</div>
+            </div>
+
+            <p class="description">
+              Que se realizará em um ambiente especial de comunhão, louvor e confraternização fraterna. 
+              Será uma ocasião marcante de comunhão espiritual, enriquecida por momentos de oração, cânticos e celebração conjunta.
+            </p>
+
+            <div class="info-grid">
+              <div class="info-box">
+                <h3><i class="fas fa-calendar-alt"></i> Data do Evento</h3>
+                <p>26 de Dezembro de 2025</p>
+                <p>Sexta-feira</p>
+                <p>Ano Novo Litúrgico</p>
+              </div>
+              <div class="info-box">
+                <h3><i class="fas fa-clock"></i> Horário</h3>
+                <p>22:00 às 04:00</p>
+                <p>Noite de adoração e oração</p>
+              </div>
+              <div class="info-box">
+                <h3><i class="fas fa-map-marker-alt"></i> Localização</h3>
+                <p>Congregação Tsakane</p>
+                <p>Machava-Sede</p>
+                <p>Rua da Mulher</p>
+              </div>
+            </div>
+
+            <p class="footer-note">
+              Cientes de que poderemos contar com a vossa honrosa presença, apresentamos os nossos mais elevados protestos de estima e consideração.
+            </p>
+
+            <div class="contact-box">
+              <div class="contact-title">Para mais informações:</div>
+              <div class="contact-phone"><i class="fas fa-phone"></i> 84 401 2254</div>
+              <div class="contact-note">Disponível para esclarecimentos e confirmações</div>
+            </div>
+
+            <div class="footer-brand">
+              Igreja Reformada<br>
+              <span class="event-year">Gala Juvenil 2025</span>
+            </div>
+
+            <div class="organizer">Comissão Organizadora da Gala Juvenil</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="action-buttons">
+        <button id="btnDownload" class="action-btn download-btn">
+          <i class="fas fa-download"></i> BAIXAR
+        </button>
+        <button id="btnWhats" class="action-btn whatsapp-btn">
+          <i class="fab fa-whatsapp"></i> WHATSAPP
+        </button>
+        <button id="btnEditName" class="action-btn edit-btn">
+          <i class="fas fa-edit"></i> EDITAR
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>

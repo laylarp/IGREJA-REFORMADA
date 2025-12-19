@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Convite Gala Juvenil</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="convite.css">
 </head>
 <body>
@@ -20,7 +21,10 @@
         <!-- TOPO / LOGO -->
         <div class="top-row">
           <div class="logo-circle" aria-hidden="true">
-            <span>LOGO</span>
+            <img src="logo.png" alt="Logo Gala Juvenil" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+            <div class="logo-fallback">
+              <i class="fas fa-crown"></i>
+            </div>
           </div>
         </div>
 
@@ -53,22 +57,25 @@
         <div class="details-section">
           <div class="detail-grid">
             <div class="detail-item">
-              <div class="date-badge">
-                <div class="badge-top">26</div>
-                <div class="badge-bottom">Dez</div>
+              <div class="icon-circle">
+                <i class="fas fa-calendar-day"></i>
               </div>
               <h3>Data</h3>
-              <p>26 de Dezembro de 2025</p>
+              <p>26 de Dezembro<br>de 2025</p>
             </div>
             
             <div class="detail-item">
-              <div class="icon-box">⏰</div>
+              <div class="icon-circle">
+                <i class="fas fa-clock"></i>
+              </div>
               <h3>Horário</h3>
               <p>22:00 às 04:00</p>
             </div>
             
             <div class="detail-item">
-              <div class="icon-box">📍</div>
+              <div class="icon-circle">
+                <i class="fas fa-map-marker-alt"></i>
+              </div>
               <h3>Localização</h3>
               <p>Congregação Tsakane<br>Machava-Sede</p>
             </div>
@@ -80,12 +87,22 @@
           <h3>Mais informações</h3>
           <div class="contact-numbers">
             <div class="number-group">
-              <div class="number-large">85</div>
-              <div class="number-small">232 8379</div>
+              <div class="number-icon">
+                <i class="fas fa-phone"></i>
+              </div>
+              <div class="number-content">
+                <div class="number-large">85</div>
+                <div class="number-small">232 8379</div>
+              </div>
             </div>
             <div class="number-group">
-              <div class="number-large">84</div>
-              <div class="number-small">401 2254</div>
+              <div class="number-icon">
+                <i class="fas fa-phone"></i>
+              </div>
+              <div class="number-content">
+                <div class="number-large">84</div>
+                <div class="number-small">401 2254</div>
+              </div>
             </div>
           </div>
           <p class="info-note">Disponível para esclarecimentos</p>

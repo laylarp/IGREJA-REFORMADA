@@ -1,8 +1,10 @@
+// convite.js - Atualizado com melhorias
 const ConviteApp = {
   init() {
     this.cacheElements();
     this.bindEvents();
     this.loadName();
+    this.checkLogo();
   },
   
   cacheElements() {
@@ -12,7 +14,9 @@ const ConviteApp = {
       downloadBtn: document.getElementById('btnDownload'),
       whatsappBtn: document.getElementById('btnWhats'),
       editBtn: document.getElementById('btnEdit'),
-      invitePreview: document.getElementById('invitePreview')
+      invitePreview: document.getElementById('invitePreview'),
+      logoImg: document.querySelector('.logo-img'),
+      logoFallback: document.querySelector('.logo-fallback')
     };
   },
   
@@ -24,9 +28,17 @@ const ConviteApp = {
   },
   
   loadName() {
-    const savedName = localStorage.getItem('gala_nome_salvo');
-    if (savedName) {
-      this.elements.inviteName.textContent = savedName;
+    const savedName = localStorage.getItem('gala_nome_salvo') || 'Convidado Especial';
+    this.elements.inviteName.textContent = savedName;
+  },
+  
+  checkLogo() {
+    // Verifica se a logo.png existe, caso contrário mostra o fallback
+    if (this.elements.logoImg && this.elements.logoImg.naturalWidth === 0) {
+      this.elements.logoImg.style.display = 'none';
+      if (this.elements.logoFallback) {
+        this.elements.logoFallback.style.display = 'flex';
+      }
     }
   },
   
@@ -35,7 +47,6 @@ const ConviteApp = {
   },
   
   editName() {
-    // Mantive o comportamento original de redirecionar para index.html
     window.location.href = 'index.html';
   },
   
@@ -44,44 +55,79 @@ const ConviteApp = {
       const inviteElement = this.elements.invitePreview;
       if (!inviteElement) return reject(new Error('Elemento do convite não encontrado'));
 
-      // escala adaptativa para melhor qualidade em dispositivos HiDPI
-      const scale = Math.min(2, window.devicePixelRatio || 1);
+      // Temporariamente aumenta a qualidade visual para captura
+      inviteElement.style.transform = 'scale(1.02)';
+      inviteElement.style.transition = 'none';
+
+      const scale = Math.min(3, window.devicePixelRatio || 1.5);
       const rect = inviteElement.getBoundingClientRect();
+      
       const options = {
         scale,
         useCORS: true,
         backgroundColor: '#ffffff',
         logging: false,
-        width: Math.round(rect.width * scale),
-        height: Math.round(rect.height * scale)
+        width: Math.round(rect.width),
+        height: Math.round(rect.height),
+        windowWidth: document.documentElement.clientWidth,
+        windowHeight: document.documentElement.clientHeight,
+        onclone: (clonedDoc) => {
+          // Garante que todos os elementos visuais estejam otimizados para captura
+          const clonedCard = clonedDoc.getElementById('invitePreview');
+          if (clonedCard) {
+            clonedCard.style.boxShadow = '0 20px 60px rgba(154, 78, 46, 0.25)';
+            clonedCard.style.border = '3px solid rgba(154, 78, 46, 0.15)';
+          }
+        }
       };
       
       html2canvas(inviteElement, options)
         .then(canvas => {
-          // Garantir fundo branco e exportar PNG
+          // Restaura transformação original
+          inviteElement.style.transform = '';
+          inviteElement.style.transition = '';
+          
+          // Melhora a qualidade da imagem final
           const finalCanvas = document.createElement('canvas');
-          finalCanvas.width = canvas.width;
-          finalCanvas.height = canvas.height;
           const ctx = finalCanvas.getContext('2d');
+          
+          // Aumenta um pouco a resolução para melhor qualidade
+          finalCanvas.width = canvas.width * 1.2;
+          finalCanvas.height = canvas.height * 1.2;
+          
+          // Fundo branco
           ctx.fillStyle = '#ffffff';
           ctx.fillRect(0, 0, finalCanvas.width, finalCanvas.height);
-          ctx.drawImage(canvas, 0, 0);
+          
+          // Centraliza a imagem no canvas maior
+          const xOffset = (finalCanvas.width - canvas.width) / 2;
+          const yOffset = (finalCanvas.height - canvas.height) / 2;
+          ctx.drawImage(canvas, xOffset, yOffset);
+          
           const dataUrl = finalCanvas.toDataURL('image/png', 1.0);
           try {
             localStorage.setItem('gala_imagem_salva', dataUrl);
           } catch (e) {
-            // storage pode falhar em modo privado; mas ainda resolvemos com dataUrl
-            console.warn('Não foi possível salvar imagem em localStorage:', e);
+            console.warn('Storage limitado, continuando sem salvar:', e);
           }
           resolve(dataUrl);
         })
         .catch(err => {
-          console.warn('html2canvas falhou com opções avançadas, tentando fallback', err);
-          // fallback com scale 1
-          html2canvas(inviteElement, { scale: 1, useCORS: true })
+          inviteElement.style.transform = '';
+          inviteElement.style.transition = '';
+          console.error('Erro html2canvas:', err);
+          
+          // Fallback simplificado
+          html2canvas(inviteElement, { 
+            scale: 1,
+            useCORS: true,
+            backgroundColor: '#ffffff'
+          })
             .then(canvas => {
               const dataUrl = canvas.toDataURL('image/png');
-              try { localStorage.setItem('gala_imagem_salva', dataUrl); } catch(e){}
+              try { 
+                localStorage.setItem('gala_imagem_salva', dataUrl); 
+              } catch(e) {}
               resolve(dataUrl);
             })
             .catch(finalErr => reject(finalErr));
@@ -90,76 +136,138 @@ const ConviteApp = {
   },
   
   async downloadInvite() {
-    let imageUrl = localStorage.getItem('gala_imagem_salva');
-    
-    if (!imageUrl) {
-      this.elements.downloadBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> GERANDO...';
-      this.elements.downloadBtn.disabled = true;
-      
-      try {
-        imageUrl = await this.generateImage();
-      } catch (error) {
-        console.error('Erro ao gerar imagem:', error);
-        alert('Erro ao gerar convite. Tente novamente.');
-        this.elements.downloadBtn.innerHTML = '<i class="fas fa-download"></i> BAIXAR';
-        this.elements.downloadBtn.disabled = false;
-        return;
-      }
-      
-      this.elements.downloadBtn.innerHTML = '<i class="fas fa-download"></i> BAIXAR';
-      this.elements.downloadBtn.disabled = false;
-    }
-    
-    // Criar link e forçar download
-    const link = document.createElement('a');
-    link.href = imageUrl;
-    const name = (localStorage.getItem('gala_nome_salvo') || 'Convidado').replace(/\s+/g, '-');
-    const fileName = `Gala-Juvenil-${name}.png`;
-    link.download = fileName;
-    
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    
-    // Feedback visual
     const originalHTML = this.elements.downloadBtn.innerHTML;
-    this.elements.downloadBtn.innerHTML = '<i class="fas fa-check"></i> BAIXADO!';
+    this.elements.downloadBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> GERANDO...';
     this.elements.downloadBtn.disabled = true;
     
-    setTimeout(() => {
+    try {
+      const imageUrl = await this.generateImage();
+      
+      // Criar link e forçar download
+      const link = document.createElement('a');
+      link.href = imageUrl;
+      const name = (localStorage.getItem('gala_nome_salvo') || 'Convidado').replace(/\s+/g, '_');
+      const fileName = `Gala_Juvenil_2025_${name}.png`;
+      link.download = fileName;
+      
+      // Adiciona efeito visual antes do download
+      this.elements.invitePreview.style.animation = 'pulse 0.5s';
+      setTimeout(() => {
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        this.elements.invitePreview.style.animation = '';
+      }, 500);
+      
+      // Feedback visual
+      this.elements.downloadBtn.innerHTML = '<i class="fas fa-check"></i> BAIXADO!';
+      this.elements.downloadBtn.style.background = 'linear-gradient(135deg, #4CAF50, #2E7D32)';
+      this.elements.downloadBtn.style.borderColor = '#2E7D32';
+      
+      setTimeout(() => {
+        this.elements.downloadBtn.innerHTML = originalHTML;
+        this.elements.downloadBtn.disabled = false;
+        this.elements.downloadBtn.style.background = '';
+        this.elements.downloadBtn.style.borderColor = '';
+      }, 3000);
+      
+    } catch (error) {
+      console.error('Erro ao gerar imagem:', error);
+      alert('Erro ao gerar convite. Por favor, tente novamente.');
       this.elements.downloadBtn.innerHTML = originalHTML;
       this.elements.downloadBtn.disabled = false;
-    }, 2000);
+    }
   },
   
   async shareWhatsApp() {
-    // Gera a imagem se necessário para o utilizador poder partilhar a imagem manualmente
+    const originalHTML = this.elements.whatsappBtn.innerHTML;
+    this.elements.whatsappBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> PREPARANDO...';
+    this.elements.whatsappBtn.disabled = true;
+    
     try {
-      this.elements.whatsappBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> PREPARANDO...';
-      this.elements.whatsappBtn.disabled = true;
+      // Gera a imagem primeiro
+      const imageUrl = await this.generateImage();
       
-      let imageUrl = localStorage.getItem('gala_imagem_salva');
-      if (!imageUrl) {
-        imageUrl = await this.generateImage();
+      // Converte dataURL para blob para compartilhamento
+      const response = await fetch(imageUrl);
+      const blob = await response.blob();
+      const file = new File([blob], 'Convite_Gala_Juvenil.png', { type: 'image/png' });
+      
+      // Tenta usar a Web Share API primeiro (se disponível)
+      if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+        await navigator.share({
+          files: [file],
+          title: 'Convite Gala Juvenil 2025',
+          text: `Glória a Deus! Recebeste um convite para a Gala Juvenil 2025.`
+        });
+      } else {
+        // Fallback para WhatsApp Web
+        const name = localStorage.getItem('gala_nome_salvo') || 'Convidado Especial';
+        const message = `🎉 *CONVITE GALA JUVENIL 2025* 🎉\n\n` +
+                       `Glória a Deus! Recebeste um convite especial para a Gala Juvenil 2025.\n` +
+                       `👤 *Convidado:* ${name}\n` +
+                       `📅 *Data:* 26 de Dezembro de 2025\n` +
+                       `⏰ *Horário:* 22:00 às 04:00\n` +
+                       `📍 *Local:* Congregação Tsakane, Machava-Sede\n` +
+                       `\n"Como é bom e agradável quando os irmãos convivem em união." (Salmos 133:1)\n` +
+                       `\nPara mais informações, abre a imagem do convite.`;
+        
+        const encodedMessage = encodeURIComponent(message);
+        window.open(`https://wa.me/?text=${encodedMessage}`, '_blank');
+        
+        // Mostra a imagem em nova aba para o usuário salvar
+        setTimeout(() => {
+          const win = window.open();
+          if (win) {
+            win.document.write(`
+              <!DOCTYPE html>
+              <html>
+              <head>
+                <title>Convite Gala Juvenil</title>
+                <style>
+                  body { 
+                    margin: 0; 
+                    padding: 20px; 
+                    background: #f9f1e3;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    min-height: 100vh;
+                  }
+                  img { 
+                    max-width: 100%; 
+                    height: auto; 
+                    border-radius: 20px;
+                    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+                  }
+                </style>
+              </head>
+              <body>
+                <img src="${imageUrl}" alt="Convite Gala Juvenil">
+                <script>
+                  setTimeout(() => alert('Podes salvar esta imagem para partilhar!'), 500);
+                </script>
+              </body>
+              </html>
+            `);
+          }
+        }, 1000);
       }
       
-      // Abre a imagem em nova aba (usuário pode salvar/encaminhar a partir daí)
-      const win = window.open();
-      if (win) {
-        win.document.write(`<title>Convite - Gala Juvenil</title><img src="${imageUrl}" style="max-width:100%;height:auto;display:block;margin:0 auto;">`);
-      }
+      // Feedback visual
+      this.elements.whatsappBtn.innerHTML = '<i class="fas fa-check"></i> PARTILHADO!';
+      this.elements.whatsappBtn.style.background = 'linear-gradient(135deg, #4CAF50, #2E7D32)';
       
-      // Prepara mensagem para WhatsApp (link para a página atual; não é possível anexar imagens via URL)
-      const shareUrl = window.location.href.split('?')[0];
-      const name = localStorage.getItem('gala_nome_salvo') || 'Convidado';
-      const message = `Glória a Deus! Recebeste um convite para a Gala Juvenil 2025 — ${name}. Descarrega o convite a partir da imagem aberta ou visita: ${shareUrl}`;
-      const encodedMessage = encodeURIComponent(message);
-      window.open(`https://wa.me/?text=${encodedMessage}`, '_blank');
+      setTimeout(() => {
+        this.elements.whatsappBtn.innerHTML = originalHTML;
+        this.elements.whatsappBtn.disabled = false;
+        this.elements.whatsappBtn.style.background = '';
+      }, 3000);
+      
     } catch (e) {
-      console.error('Erro ao preparar partilha WhatsApp:', e);
-      alert('Não foi possível preparar a partilha. Tenta novamente.');
-    } finally {
-      this.elements.whatsappBtn.innerHTML = '<i class="fab fa-whatsapp"></i> COMPARTILHAR';
+      console.error('Erro ao partilhar:', e);
+      alert('Não foi possível partilhar. Podes tentar descarregar o convite e partilhar manualmente.');
+      this.elements.whatsappBtn.innerHTML = originalHTML;
       this.elements.whatsappBtn.disabled = false;
     }
   }
@@ -171,3 +279,26 @@ if (document.readyState === 'loading') {
 } else {
   ConviteApp.init();
 }
+
+// Adicionar animação CSS
+const style = document.createElement('style');
+style.textContent = `
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+    100% { transform: scale(1); }
+  }
+  
+  .logo-circle img {
+    transition: transform 0.5s ease;
+  }
+  
+  .logo-circle:hover img {
+    transform: rotate(10deg) scale(1.1);
+  }
+  
+  .logo-circle:hover .logo-fallback i {
+    transform: rotate(-10deg) scale(1.1);
+  }
+`;
+document.head.appendChild(style);
