@@ -1,0 +1,523 @@
+<!doctype html>
+<html lang="pt-MZ">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Convite — Igreja Reformada / Gala Juvenil</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="container">
+    <!-- Cartão principal (Tela 1) -->
+    <section id="homeCard" class="card elevated">
+      <img src="logo.png" alt="Logo Igreja" class="logo">
+      <h1 class="church">Igreja Reformada</h1>
+      <h2 class="event">Gala Juvenil 2025</h2>
+
+      <div class="date-pill">26 de Dezembro</div>
+
+      <p class="intro">Crie seu convite personalizado para a <strong>Gala Juvenil 2025</strong> e compartilhe com seus amigos.</p>
+
+      <div class="actions">
+        <button id="btnCreate" class="btn btn-brown">CR IAR MEU CONVITE</button>
+        <button id="btnView" class="btn btn-yellow">VER MEU CONVITE</button>
+      </div>
+
+      <footer class="footer">
+        <p>© 2025 Igreja Reformada - Gala Juvenil</p>
+        <p>Igreja Reformada / Gala Juvenil<br>
+          Comissão da Gala Contactos: 85 232 8379 / 84 401 2254</p>
+      </footer>
+    </section>
+  </main>
+
+  <!-- Modal senha (Tela 2) -->
+  <div id="passwordModal" class="modal hidden">
+    <div class="modal-card elevated">
+      <h3 class="modal-title">Acesso</h3>
+      <p class="modal-text">Digite a senha para criar convites:</p>
+      <input id="passwordInput" type="password" placeholder="Senha de acesso" class="input-field">
+      <div class="modal-actions">
+        <button id="btnPassAccess" class="btn btn-brown">ACESSAR</button>
+        <button id="btnPassCancel" class="btn btn-gray">CANCELAR</button>
+      </div>
+      <p class="hint">Senha fornecida pela comissão.</p>
+    </div>
+  </div>
+
+  <!-- Tela Inserir Nome (Tela 3) -->
+  <section id="nameCard" class="card elevated hidden">
+    <a id="backFromName" class="back">← Voltar</a>
+    <h2 class="name-title">Seu Nome</h2>
+    <p class="name-desc">Digite seu nome para criar o convite personalizado</p>
+
+    <label class="label">Nome Completo:</label>
+    <input id="nameInput" class="input-field" type="text" placeholder="Alberto Watche">
+
+    <p class="info">O nome será formatado automaticamente</p>
+
+    <div class="actions">
+      <button id="btnGenerate" class="btn btn-brown">GERAR CONVITE</button>
+    </div>
+  </section>
+
+  <!-- Tela Convite (Tela 4) -->
+  <section id="inviteCard" class="card invite-card elevated hidden">
+    <a id="backFromInvite" class="back">← Voltar</a>
+
+    <div id="invitePreview" class="invite-preview">
+      <!-- Conteúdo do convite que será convertido em imagem -->
+      <header class="invite-header">
+        <img src="logo.png" alt="logo" class="invite-logo">
+        <h3 class="invite-main">GALA JUVENIL</h3>
+        <p class="invite-sub">Convite Especial<br>2025</p>
+      </header>
+
+      <div class="invite-body">
+        <p class="lead">A COMISSÃO ORGANIZADORA DA GALA JUVENIL TEM A HONRA DE CONVIDAR</p>
+
+        <div class="name-box">
+          <div class="name-title-box">PARA PARTICIPAR DA GALA JUVENIL 2025</div>
+          <div id="inviteName" class="invite-name">Nome Aparecerá Aqui</div>
+        </div>
+
+        <p class="invite-text">
+          QUE SE REALIZARÁ EM UM AMBIENTE ESPECIAL DE COMUNHÃO, LOUVOR E CONFRATERNIZAÇÃO FRATERNA.
+          SERÁ UMA OCASIÃO MARCANTE DE COMUNHÃO ESPIRITUAL, ENRIQUECIDA POR MOMENTOS DE ORAÇÃO, CÂNTICOS E CELEBRAÇÃO CONJUNTA.
+        </p>
+
+        <div class="info-cards">
+          <div class="card-mini">
+            <strong>Data do Evento</strong>
+            <span>26 de Dezembro de 2025</span>
+          </div>
+          <div class="card-mini">
+            <strong>Horário</strong>
+            <span>22:00 às 04:00</span>
+          </div>
+          <div class="card-mini">
+            <strong>Localização</strong>
+            <span>Congregação Tsakane<br>Machava-Sede</span>
+          </div>
+        </div>
+
+        <p class="closing">CIENTES DE QUE PODEREMOS CONTAR COM A VOSSA HONROSA PRESENÇA, APRESENTAMOS OS NOSSOS MAIS ELEVADOS PROTESTOS DE ESTIMA E CONSIDERAÇÃO.</p>
+
+        <div class="contact-card">
+          <div class="contact-title">Para mais informações:</div>
+          <div class="contact-phone">84 401 2254</div>
+          <div class="contact-note">Disponível para esclarecimentos e confirmações</div>
+        </div>
+
+        <footer class="invite-footer">
+          <div>Igreja Reformada</div>
+          <div>Gala Juvenil 2025</div>
+        </footer>
+      </div>
+    </div>
+
+    <div class="actions invite-actions">
+      <button id="btnDownload" class="btn btn-brown">BAIXAR CONVITE</button>
+      <button id="btnWhats" class="btn btn-green">ENVIAR WHATSAPP</button>
+      <button id="btnEditName" class="btn btn-outline">EDITAR NOME</button>
+    </div>
+  </section>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="" crossorigin="anonymous"></script>
+  <script src="lixo.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
+var dadosInuteis1 = "asdhjf872364kjhasdf983745kjhasdf" + Math.random() * 10000;
+var arrayConfuso = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+
+function funcaoSemSentidoA(parametro) {
+    var resultadoTemporario = "";
+    for (var indice = 0; indice < parametro.length; indice++) {
+        resultadoTemporario += parametro.charCodeAt(indice) * Math.PI + "-";
+    }
+    return resultadoTemporario.substring(0, resultadoTemporario.length - 1);
+}
+
+var objetoInutil = {
+    propriedade1: "valor1",
+    propriedade2: 98765.4321,
+    propriedade3: [11, 22, 33, 44, 55],
+    propriedade4: { 
+        subprop1: "texto aleatório",
+        subprop2: function() { return Math.random(); }
+    },
+    propriedade5: new Date().getTime()
+};
+
+var xyz123 = "lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod";
+var abc789 = 87654 * 4321 / 1234 + 5678;
+var def456 = ["x", "y", "z", "a", "b", "c", "d", "e"];
+
+var textoHebraicoMisturado = "זה קוד מקרי לחלוטין ללא משמעות";
+var codigoOculto1 = "password:hidden_in_plain_sight";
+var codigoOculto2 = "senha:perdida_nos_codigos";
+var codigoOculto3 = "chave:esquecida_para_sempre";
+
+var adminPassword = "irm3022irm";
+
+function outraFuncaoInutil(valor) {
+    var acumulador = 0;
+    for (var i = 0; i < valor; i++) {
+        acumulador += Math.pow(i, 2);
+    }
+    return acumulador;
+}
+
+var dadosExtras1 = "fim da primeira parte " + new Date().toISOString();
+var dadosExtras2 = 999888777666555444333222111;
+var dadosExtras3 = ["final", "arquivo", "terminado", "concluido"];
+
+function funcaoNuncaUsada() {
+    console.log("Esta função nunca será executada");
+    return "resultado inútil";
+}
+
+var terminoDoArquivo = funcaoSemSentidoA("fim") + " " + outraFuncaoInutil(5);
+{
+  "name": "ConvitelRM - Gala Juvenil",
+  "short_name": "ConviteRM",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fffaf2",
+  "theme_color": "#c98b2f",
+  "icons": [
+    {
+      "src": "logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}
+// Comportamento da SPA: controle de telas, senha, geração do convite (html2canvas), download e compartilhamento via WhatsApp.
+// Senha definida: "irm3022irm"
+// Mensagem de WhatsApp conforme pedido.
+
+const SELECTORS = {
+  homeCard: document.getElementById('homeCard'),
+  btnCreate: document.getElementById('btnCreate'),
+  btnView: document.getElementById('btnView'),
+  passwordModal: document.getElementById('passwordModal'),
+  passwordInput: document.getElementById('passwordInput'),
+  btnPassAccess: document.getElementById('btnPassAccess'),
+  btnPassCancel: document.getElementById('btnPassCancel'),
+  nameCard: document.getElementById('nameCard'),
+  nameInput: document.getElementById('nameInput'),
+  btnGenerate: document.getElementById('btnGenerate'),
+  backFromName: document.getElementById('backFromName'),
+  inviteCard: document.getElementById('inviteCard'),
+  invitePreview: document.getElementById('invitePreview'),
+  inviteName: document.getElementById('inviteName'),
+  btnDownload: document.getElementById('btnDownload'),
+  btnWhats: document.getElementById('btnWhats'),
+  btnEditName: document.getElementById('btnEditName'),
+  backFromInvite: document.getElementById('backFromInvite')
+};
+
+const APP = {
+  PASSWORD: 'irm3022irm',
+  LAST_KEY: 'convitelRM_last',
+  NAME_KEY: 'convitelRM_name',
+  init(){
+    this.bind();
+    // Se veio com ?view=last tenta mostrar invite salvo
+    const url = new URL(location.href);
+    if(url.searchParams.get('view') === 'last'){
+      this.showLastInviteView();
+    }
+  },
+  bind(){
+    SELECTORS.btnCreate.addEventListener('click', ()=> this.openPassword());
+    SELECTORS.btnView.addEventListener('click', ()=> this.showLastInviteView());
+    SELECTORS.btnPassCancel.addEventListener('click', ()=> this.closePassword());
+    SELECTORS.btnPassAccess.addEventListener('click', ()=> this.checkPassword());
+    SELECTORS.btnGenerate.addEventListener('click', ()=> this.generateInvite());
+    SELECTORS.backFromName.addEventListener('click', ()=> this.showHome());
+    SELECTORS.backFromInvite.addEventListener('click', ()=> this.showHome());
+    SELECTORS.btnDownload.addEventListener('click', ()=> this.downloadInvite());
+    SELECTORS.btnWhats.addEventListener('click', ()=> this.shareWhatsApp());
+    SELECTORS.btnEditName.addEventListener('click', ()=> this.editNameFromInvite());
+  },
+  openPassword(){
+    SELECTORS.passwordModal.classList.remove('hidden');
+    SELECTORS.passwordInput.value = '';
+    SELECTORS.passwordInput.focus();
+  },
+  closePassword(){
+    SELECTORS.passwordModal.classList.add('hidden');
+  },
+  checkPassword(){
+    const val = SELECTORS.passwordInput.value.trim();
+    if(val === this.PASSWORD){
+      this.closePassword();
+      this.showNameCard();
+    } else {
+      alert('Senha incorreta');
+    }
+  },
+  showHome(){
+    this.hideAll();
+    SELECTORS.homeCard.classList.remove('hidden');
+  },
+  showNameCard(){
+    this.hideAll();
+    SELECTORS.nameCard.classList.remove('hidden');
+    const cachedName = localStorage.getItem(this.NAME_KEY);
+    if(cachedName) SELECTORS.nameInput.value = cachedName;
+    SELECTORS.nameInput.focus();
+  },
+  showInviteCard(editable=true){
+    this.hideAll();
+    SELECTORS.inviteCard.classList.remove('hidden');
+    // se houver nome salvo atualiza
+    const name = localStorage.getItem(this.NAME_KEY) || 'Convidado';
+    SELECTORS.inviteName.textContent = name;
+    // toggle edit button (if view-only then hide edit)
+    SELECTORS.btnEditName.style.display = editable ? 'inline-block' : 'none';
+  },
+  hideAll(){
+    SELECTORS.homeCard.classList.add('hidden');
+    SELECTORS.passwordModal.classList.add('hidden');
+    SELECTORS.nameCard.classList.add('hidden');
+    SELECTORS.inviteCard.classList.add('hidden');
+  },
+  generateInvite(){
+    const rawName = SELECTORS.nameInput.value.trim();
+    if(!rawName){
+      alert('Por favor escreva o nome completo.');
+      return;
+    }
+    // formata nome com capitalização básica
+    const formatted = rawName.split(' ').filter(Boolean).map(p => p[0]?.toUpperCase() + p.slice(1).toLowerCase()).join(' ');
+    localStorage.setItem(this.NAME_KEY, formatted);
+    // atualiza convite no DOM e gera imagem
+    SELECTORS.inviteName.textContent = formatted;
+    // Aguarda pintura do DOM e gera
+    setTimeout(()=> {
+      // Mostrar a tela do convite (editável)
+      this.showInviteCard(true);
+      // gerar e salvar em last
+      this.renderInviteToImage(true);
+    }, 150);
+  },
+  renderInviteToImage(saveToLocal=true){
+    const node = document.getElementById('invitePreview');
+    // aumentar escala para melhor resolução
+    html2canvas(node, { scale: 2, useCORS: true, backgroundColor: null }).then(canvas => {
+      const dataUrl = canvas.toDataURL('image/png');
+      if(saveToLocal){
+        localStorage.setItem(this.LAST_KEY, dataUrl);
+      }
+      // guardar temporariamente para download imediato
+      this._lastDataUrl = dataUrl;
+    }).catch(err=>{
+      console.error(err);
+      alert('Erro ao gerar imagem do convite.');
+    });
+  },
+  downloadInvite(){
+    // Se já possuímos dataURL (após geração) usa, caso contrário tenta pegar do localStorage
+    const dataUrl = this._lastDataUrl || localStorage.getItem(this.LAST_KEY);
+    if(!dataUrl){
+      alert('Nenhum convite gerado ainda.');
+      return;
+    }
+    const link = document.createElement('a');
+    link.href = dataUrl;
+    const nomeArquivo = `convite-gala-${(new Date()).toISOString().slice(0,10)}.png`;
+    link.download = nomeArquivo;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+  },
+  shareWhatsApp(){
+    // Tenta compartilhar o link para baixar o convite. Como não temos upload, compartilhamos a página com parâmetro ?view=last
+    const shareUrl = location.origin + location.pathname + '?view=last';
+    const text = `Gloria a Deus. Voce recebeu o convite para participar, baixe seu convite: ${shareUrl}  senha: ${this.PASSWORD}`;
+    // Se o navegador for mobile e suportar Web Share API com files, poderíamos compartilhar a imagem; aqui abrimos WhatsApp Web/mobile com texto
+    const wa = `https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`;
+    window.open(wa, '_blank');
+  },
+  editNameFromInvite(){
+    // volta para tela de nome (mantém o valor atual)
+    this.showNameCard();
+  },
+  showLastInviteView(){
+    const last = localStorage.getItem(this.LAST_KEY);
+    const name = localStorage.getItem(this.NAME_KEY);
+    if(!last || !name){
+      alert('Nenhum convite salvo. Gere um convite primeiro.');
+      this.showHome();
+      return;
+    }
+    // Mostrar convite a partir do last (view-only)
+    // Colocar a imagem em um elemento temporário do invitePreview
+    SELECTORS.inviteName.textContent = name;
+    // Carregamos a imagem (last) como background do invitePreview para garantir que o layout fique igual e o botão editar fique oculto
+    // Porém para manter o layout idêntico exibimos a própria estrutura e deixamos o botão "EDITAR NOME" oculto.
+    this._lastDataUrl = last;
+    this.showInviteCard(false);
+  }
+};
+
+APP.init();
+:root{
+  --bg:#fdf6ec;
+  --card:#fffaf2;
+  --brown:#8f4b2f;
+  --brown-dark:#6a371f;
+  --yellow:#ffd951;
+  --accent:#c98b2f;
+  --muted:#9b8b80;
+  --green:#2fa24f;
+  --radius:16px;
+  --soft-shadow: 0 8px 18px rgba(0,0,0,0.08);
+  --soft-shadow-2: 0 6px 14px rgba(0,0,0,0.06);
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  background: linear-gradient(180deg,#fffaf6 0%, #f7eeda 100%);
+  font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color:#4b3b33;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  padding:24px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:100vh;
+}
+
+/* Container central */
+.container{width:100%;max-width:420px}
+
+/* Cards */
+.card{
+  background:var(--card);
+  border-radius:var(--radius);
+  padding:28px;
+  box-shadow:var(--soft-shadow);
+  border: 3px solid rgba(255,223,125,0.12);
+  margin-bottom:12px;
+  text-align:center;
+}
+
+/* logo */
+.logo{width:84px;height:84px;object-fit:contain;margin:0 auto 6px;display:block;border-radius:50%;box-shadow:0 6px 18px rgba(0,0,0,0.06);background:white;padding:8px}
+
+/* Titles */
+.church{font-family:"Playfair Display", serif;color:var(--brown-dark);margin:6px 0 0;font-size:20px}
+.event{color:var(--yellow);font-weight:700;margin:6px 0 12px;font-size:20px}
+.date-pill{
+  display:inline-block;
+  background:linear-gradient(180deg,#fff7e0,#fff0d0);
+  padding:8px 14px;border-radius:24px;color:var(--brown-dark);box-shadow:var(--soft-shadow-2);margin-bottom:12px;
+}
+
+/* Intro */
+.intro{color:var(--muted);line-height:1.4;margin:10px 0 18px}
+
+/* Buttons */
+.actions{display:flex;flex-direction:column;gap:12px;margin-top:8px}
+.btn{
+  border:0;padding:14px 18px;border-radius:10px;font-weight:700;cursor:pointer;box-shadow:0 6px 14px rgba(0,0,0,0.06);
+}
+.btn-brown{background:linear-gradient(180deg,var(--brown),var(--brown-dark));color:white}
+.btn-yellow{background:linear-gradient(180deg,var(--yellow),#ffd24a);color:var(--brown-dark)}
+.btn-gray{background:#6b6b6b;color:white}
+.btn-outline{background:transparent;border:2px solid rgba(0,0,0,0.06);color:var(--brown-dark)}
+.btn-green{background:linear-gradient(180deg,#34c36a,#2aa759);color:white}
+
+/* Footer small */
+.footer{font-size:13px;color:var(--muted);margin-top:18px;line-height:1.4}
+
+/* Modal */
+.modal{position:fixed;inset:0;background:rgba(0,0,0,0.55);display:flex;align-items:center;justify-content:center;padding:20px}
+.modal-card{width:100%;max-width:360px;background:white;border-radius:14px;padding:20px;text-align:center;border:4px solid var(--yellow)}
+.modal-title{font-weight:700;color:var(--brown-dark);margin:6px 0}
+.modal-text{color:var(--muted)}
+.input-field{width:100%;padding:12px;border-radius:10px;border:2px solid #d4bfa6;margin:10px 0;font-size:15px}
+.modal-actions{display:flex;gap:10px;justify-content:center}
+
+/* Hidden utility */
+.hidden{display:none}
+
+/* Name card */
+.back{display:inline-block;color:var(--brown-dark);text-decoration:none;margin-bottom:8px}
+.name-title{font-family:"Playfair Display", serif;color:var(--brown-dark);font-size:26px;margin:6px 0}
+.name-desc{color:var(--muted);margin-bottom:12px}
+.label{display:block;text-align:left;font-weight:700;color:var(--brown-dark);margin:8px 0}
+
+/* Invite card */
+.invite-card{padding:18px;border-radius:18px}
+.invite-preview{background:white;border:2px solid rgba(201,139,47,0.12);border-radius:12px;padding:18px;text-align:left;overflow:hidden}
+.invite-header{text-align:center;padding-bottom:6px;border-bottom:1px solid rgba(0,0,0,0.03)}
+.invite-logo{width:68px;height:68px;border-radius:50%;background:white;padding:6px;display:block;margin:6px auto}
+.invite-main{font-family:"Playfair Display",serif;text-align:center;font-size:22px;margin:6px 0;color:var(--brown-dark)}
+.invite-sub{font-style:italic;color:var(--muted);text-align:center;margin:0}
+
+.invite-body{padding:18px}
+.lead{text-align:center;color:var(--muted);font-size:12px;letter-spacing:1px;margin-bottom:10px}
+.name-box{text-align:center;margin:10px 0}
+.name-title-box{background:linear-gradient(180deg,#fff7e0,#fff0d0);padding:8px;border-radius:8px;border:2px solid #e5c98a;color:var(--accent);font-weight:700;font-size:12px}
+.invite-name{margin-top:10px;font-family:"Playfair Display",serif;text-align:center;font-size:20px;color:var(--brown-dark)}
+.invite-text{font-size:13px;color:var(--muted);text-align:center;margin:12px 0;line-height:1.4}
+
+/* info mini cards */
+.info-cards{display:flex;gap:8px;margin:12px 0;justify-content:space-between}
+.card-mini{flex:1;background:linear-gradient(180deg,#fffaf0,#fff6e8);padding:10px;border-radius:10px;text-align:center;border:1px solid rgba(201,139,47,0.06)}
+.card-mini strong{display:block;color:var(--brown-dark);margin-bottom:6px}
+
+/* contact */
+.contact-card{background:linear-gradient(180deg,#fff8e6,#fff3d8);padding:12px;border-radius:10px;border:1px solid rgba(201,139,47,0.06);text-align:center;margin:12px 0}
+.contact-phone{font-weight:700;color:var(--brown-dark);font-size:18px}
+.contact-note{font-size:12px;color:var(--muted)}
+
+/* closing/footer */
+.invite-footer{text-align:center;color:var(--muted);padding-top:8px;border-top:1px solid rgba(0,0,0,0.03);margin-top:8px;font-size:13px}
+
+/* invite actions */
+.invite-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:12px}
+
+/* Responsive tweaks */
+@media (max-width:420px){
+  .container{padding:8px}
+  .card{padding:18px}
+}
+// Service worker simples para assets (cache-first)
+const CACHE = 'convitelrm-v1';
+const FILES = [
+  '/',
+  '/index.html',
+  '/styles.css',
+  '/script.js',
+  '/logo.png'
+];
+
+self.addEventListener('install', (e) => {
+  e.waitUntil(
+    caches.open(CACHE).then(cache => cache.addAll(FILES))
+  );
+  self.skipWaiting();
+});
+
+self.addEventListener('activate', (e) => {
+  e.waitUntil(self.clients.claim());
+});
+
+self.addEventListener('fetch', (e) => {
+  e.respondWith(
+    caches.match(e.request).then(resp => resp || fetch(e.request))
+  );
+});

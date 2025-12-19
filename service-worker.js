@@ -1,11 +1,12 @@
-// Service worker simples para assets (cache-first)
 const CACHE = 'convitelrm-v1';
 const FILES = [
   '/',
   '/index.html',
   '/styles.css',
   '/script.js',
-  '/logo.png'
+  '/logo.png',
+  'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js',
+  'https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600;700&display=swap'
 ];
 
 self.addEventListener('install', (e) => {

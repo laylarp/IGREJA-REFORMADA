@@ -1,6 +1,5 @@
 // Comportamento da SPA: controle de telas, senha, geração do convite (html2canvas), download e compartilhamento via WhatsApp.
 // Senha definida: "irm3022irm"
-// Mensagem de WhatsApp conforme pedido.
 
 const SELECTORS = {
   homeCard: document.getElementById('homeCard'),
@@ -29,7 +28,6 @@ const APP = {
   NAME_KEY: 'convitelRM_name',
   init(){
     this.bind();
-    // Se veio com ?view=last tenta mostrar invite salvo
     const url = new URL(location.href);
     if(url.searchParams.get('view') === 'last'){
       this.showLastInviteView();
@@ -78,10 +76,8 @@ const APP = {
   showInviteCard(editable=true){
     this.hideAll();
     SELECTORS.inviteCard.classList.remove('hidden');
-    // se houver nome salvo atualiza
     const name = localStorage.getItem(this.NAME_KEY) || 'Convidado';
     SELECTORS.inviteName.textContent = name;
-    // toggle edit button (if view-only then hide edit)
     SELECTORS.btnEditName.style.display = editable ? 'inline-block' : 'none';
   },
   hideAll(){
@@ -96,28 +92,21 @@ const APP = {
       alert('Por favor escreva o nome completo.');
       return;
     }
-    // formata nome com capitalização básica
     const formatted = rawName.split(' ').filter(Boolean).map(p => p[0]?.toUpperCase() + p.slice(1).toLowerCase()).join(' ');
     localStorage.setItem(this.NAME_KEY, formatted);
-    // atualiza convite no DOM e gera imagem
     SELECTORS.inviteName.textContent = formatted;
-    // Aguarda pintura do DOM e gera
     setTimeout(()=> {
-      // Mostrar a tela do convite (editável)
       this.showInviteCard(true);
-      // gerar e salvar em last
       this.renderInviteToImage(true);
     }, 150);
   },
   renderInviteToImage(saveToLocal=true){
     const node = document.getElementById('invitePreview');
-    // aumentar escala para melhor resolução
     html2canvas(node, { scale: 2, useCORS: true, backgroundColor: null }).then(canvas => {
       const dataUrl = canvas.toDataURL('image/png');
       if(saveToLocal){
         localStorage.setItem(this.LAST_KEY, dataUrl);
       }
-      // guardar temporariamente para download imediato
       this._lastDataUrl = dataUrl;
     }).catch(err=>{
       console.error(err);
@@ -125,7 +114,6 @@ const APP = {
     });
   },
   downloadInvite(){
-    // Se já possuímos dataURL (após geração) usa, caso contrário tenta pegar do localStorage
     const dataUrl = this._lastDataUrl || localStorage.getItem(this.LAST_KEY);
     if(!dataUrl){
       alert('Nenhum convite gerado ainda.');
@@ -140,15 +128,12 @@ const APP = {
     link.remove();
   },
   shareWhatsApp(){
-    // Tenta compartilhar o link para baixar o convite. Como não temos upload, compartilhamos a página com parâmetro ?view=last
     const shareUrl = location.origin + location.pathname + '?view=last';
     const text = `Gloria a Deus. Voce recebeu o convite para participar, baixe seu convite: ${shareUrl}  senha: ${this.PASSWORD}`;
-    // Se o navegador for mobile e suportar Web Share API com files, poderíamos compartilhar a imagem; aqui abrimos WhatsApp Web/mobile com texto
     const wa = `https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`;
     window.open(wa, '_blank');
   },
   editNameFromInvite(){
-    // volta para tela de nome (mantém o valor atual)
     this.showNameCard();
   },
   showLastInviteView(){
@@ -159,11 +144,7 @@ const APP = {
       this.showHome();
       return;
     }
-    // Mostrar convite a partir do last (view-only)
-    // Colocar a imagem em um elemento temporário do invitePreview
     SELECTORS.inviteName.textContent = name;
-    // Carregamos a imagem (last) como background do invitePreview para garantir que o layout fique igual e o botão editar fique oculto
-    // Porém para manter o layout idêntico exibimos a própria estrutura e deixamos o botão "EDITAR NOME" oculto.
     this._lastDataUrl = last;
     this.showInviteCard(false);
   }

@@ -2,7 +2,7 @@
 <html lang="pt-MZ">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
   <title>Convite — Igreja Reformada / Gala Juvenil</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -22,7 +22,7 @@
       <p class="intro">Crie seu convite personalizado para a <strong>Gala Juvenil 2025</strong> e compartilhe com seus amigos.</p>
 
       <div class="actions">
-        <button id="btnCreate" class="btn btn-brown">CR IAR MEU CONVITE</button>
+        <button id="btnCreate" class="btn btn-brown">CRIAR MEU CONVITE</button>
         <button id="btnView" class="btn btn-yellow">VER MEU CONVITE</button>
       </div>
 
@@ -69,7 +69,6 @@
     <a id="backFromInvite" class="back">← Voltar</a>
 
     <div id="invitePreview" class="invite-preview">
-      <!-- Conteúdo do convite que será convertido em imagem -->
       <header class="invite-header">
         <img src="logo.png" alt="logo" class="invite-logo">
         <h3 class="invite-main">GALA JUVENIL</h3>
@@ -126,8 +125,12 @@
     </div>
   </section>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="" crossorigin="anonymous"></script>
-  <script src="lixo.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script src="script.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js');
+    }
+  </script>
 </body>
 </html>
