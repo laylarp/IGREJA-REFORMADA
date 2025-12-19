@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="pt-MZ">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Convite Gala Juvenil</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="invite_card_styles.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- BOTÃO VOLTAR -->
+    <div class="back-btn" id="backBtn" title="Voltar">
+      <i class="fas fa-arrow-left"></i>
+    </div>
+
+    <!-- CONVITE -->
+    <div class="invite-card" id="invitePreview" role="img" aria-label="Convite Gala Juvenil">
+      <div class="invite-content">
+        <!-- TOPO / LOGO -->
+        <div class="top-row">
+          <div class="logo-circle" aria-hidden="true">
+            <span>LOGO</span>
+          </div>
+        </div>
+
+        <!-- TÍTULO PRINCIPAL -->
+        <div class="title-section">
+          <h1>GALA JUVENIL</h1>
+          <div class="year">2025</div>
+        </div>
+
+        <!-- ORGANIZAÇÃO -->
+        <div class="organizer-section">
+          <p class="organizer-label">A comissão organizadora da gala</p>
+          <div class="invited-person" id="inviteName" aria-live="polite">Alberto Vaiche</div>
+          <p class="organizer-sub">Para participar da</p>
+        </div>
+
+        <!-- LEMA -->
+        <div class="motto-section">
+          <p class="motto-label">Sob lema</p>
+          <div class="motto-text">
+            <p class="quote">"Como é bom e agradável quando os irmãos convivem em união."</p>
+            <p class="bible-ref">(Salmos 133:1)</p>
+          </div>
+        </div>
+
+        <!-- LINHA DIVISÓRIA -->
+        <div class="divider"></div>
+
+        <!-- DETALHES -->
+        <div class="details-section">
+          <div class="detail-grid">
+            <div class="detail-item">
+              <div class="date-badge">
+                <div class="badge-top">26</div>
+                <div class="badge-bottom">Dez</div>
+              </div>
+              <h3>Data</h3>
+              <p>26 de Dezembro de 2025</p>
+            </div>
+            
+            <div class="detail-item">
+              <div class="icon-box">⏰</div>
+              <h3>Horário</h3>
+              <p>22:00 às 04:00</p>
+            </div>
+            
+            <div class="detail-item">
+              <div class="icon-box">📍</div>
+              <h3>Localização</h3>
+              <p>Congregação Tsakane<br>Machava-Sede</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- INFORMAÇÕES -->
+        <div class="info-section">
+          <h3>Mais informações</h3>
+          <div class="contact-numbers">
+            <div class="number-group">
+              <div class="number-large">85</div>
+              <div class="number-small">232 8379</div>
+            </div>
+            <div class="number-group">
+              <div class="number-large">84</div>
+              <div class="number-small">401 2254</div>
+            </div>
+          </div>
+          <p class="info-note">Disponível para esclarecimentos</p>
+        </div>
+
+        <!-- RODAPÉ -->
+        <div class="footer">
+          <div class="logo-text">GALA JUVENIL</div>
+          <div class="signature">Comissão Organizadora</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BOTÕES -->
+    <div class="action-buttons">
+      <button id="btnDownload" class="action-btn download-btn" title="Baixar convite">
+        <i class="fas fa-download"></i> BAIXAR
+      </button>
+      <button id="btnWhats" class="action-btn whatsapp-btn" title="Compartilhar no WhatsApp">
+        <i class="fab fa-whatsapp"></i> COMPARTILHAR
+      </button>
+      <button id="btnEdit" class="action-btn edit-btn" title="Editar">
+        <i class="fas fa-edit"></i> EDITAR
+      </button>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="convite_app.js"></script>
+</body>
+</html>

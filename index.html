@@ -10,17 +10,18 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- TELA 1: INÍCIO -->
   <section id="homeCard" class="screen active">
-    <div class="card">
+    <div class="card main-card">
       <div class="logo-container">
-        <img src="logo.png" alt="Logo" class="logo">
+        <img src="logo.png" alt="Logo Igreja Reformada" class="logo">
       </div>
       
       <h1 class="title-main">Igreja Reformada</h1>
       <h2 class="title-sub">Gala Juvenil 2025</h2>
       
-      <div class="date-badge">26 de Dezembro</div>
+      <div class="date-badge">
+        <i class="fas fa-calendar-star"></i> 26 de Dezembro
+      </div>
       
       <p class="description">Crie seu convite personalizado para a <strong>Gala Juvenil 2025</strong> e compartilhe com seus amigos.</p>
       
@@ -34,14 +35,13 @@
       </div>
       
       <div class="footer-info">
-        <p>Comissão da Gala</p>
-        <p>Contactos: 85 232 8379 / 84 401 2254</p>
+        <p><i class="fas fa-users"></i> Comissão da Gala</p>
+        <p><i class="fas fa-phone"></i> 85 232 8379 / 84 401 2254</p>
         <p class="copyright">© 2025 Igreja Reformada</p>
       </div>
     </div>
   </section>
 
-  <!-- TELA 2: SENHA -->
   <section id="passwordScreen" class="screen">
     <div class="card password-card">
       <div class="back-btn" id="backFromPassword">
@@ -49,26 +49,28 @@
       </div>
       
       <h2 class="screen-title"><i class="fas fa-lock"></i> Acesso</h2>
-      <p class="screen-subtitle">Digite a senha para criar convites:</p>
+      <p class="screen-subtitle">Digite a senha para criar convites</p>
       
       <div class="input-container">
-        <input type="password" id="passwordInput" placeholder="Senha de acesso" class="input-field">
+        <div class="input-with-icon">
+          <i class="fas fa-key"></i>
+          <input type="password" id="passwordInput" placeholder="Digite a senha" class="input-field">
+        </div>
       </div>
       
       <div class="button-group">
         <button id="btnAccess" class="btn primary-btn">
-          <i class="fas fa-key"></i> ACESSAR
+          <i class="fas fa-sign-in-alt"></i> ACESSAR
         </button>
         <button id="btnCancel" class="btn cancel-btn">
           <i class="fas fa-times"></i> CANCELAR
         </button>
       </div>
       
-      <p class="hint-text">Senha fornecida pela comissão</p>
+      <p class="hint-text"><i class="fas fa-info-circle"></i> Senha fornecida pela comissão</p>
     </div>
   </section>
 
-  <!-- TELA 3: INSERIR NOME -->
   <section id="nameScreen" class="screen">
     <div class="card name-card">
       <div class="back-btn" id="backFromName">
@@ -76,14 +78,16 @@
       </div>
       
       <h2 class="screen-title"><i class="fas fa-user-edit"></i> Seu Nome</h2>
-      <p class="screen-subtitle">Digite seu nome completo</p>
+      <p class="screen-subtitle">Digite seu nome completo para o convite</p>
       
       <div class="input-container">
-        <label class="input-label">Nome Completo:</label>
-        <input type="text" id="nameInput" placeholder="Ex: Alberto Watche" class="input-field">
+        <div class="input-with-icon">
+          <i class="fas fa-signature"></i>
+          <input type="text" id="nameInput" placeholder="Ex: Alberto Watche" class="input-field">
+        </div>
       </div>
       
-      <p class="info-text"><i class="fas fa-info-circle"></i> O nome será formatado automaticamente</p>
+      <p class="info-text"><i class="fas fa-lightbulb"></i> O nome será formatado automaticamente</p>
       
       <div class="button-group">
         <button id="btnGenerate" class="btn primary-btn">
@@ -93,118 +97,6 @@
     </div>
   </section>
 
-  <!-- TELA 4: CONVITE GERADO -->
-  <section id="inviteScreen" class="screen">
-    <div class="card invite-card">
-      <div class="back-btn" id="backFromInvite">
-        <i class="fas fa-arrow-left"></i>
-      </div>
-      
-      <!-- CONVITE VISUAL -->
-      <div id="invitePreview" class="invite-preview">
-        <!-- TOPO DECORADO -->
-        <div class="invite-top">
-          <div class="decoration-line"></div>
-          <div class="invite-logo-container">
-            <img src="logo.png" alt="Logo" class="invite-logo">
-          </div>
-          <div class="invite-main-title">GALA JUVENIL</div>
-          <div class="invite-subtitle">Convite Especial • 2025</div>
-          <div class="decoration-line"></div>
-        </div>
-        
-        <!-- CONTEÚDO -->
-        <div class="invite-content">
-          <p class="invite-text">
-            A Comissão Organizadora da Gala Juvenil tem a honra de convidar a/o irmã/o
-          </p>
-          
-          <div class="name-container">
-            <div class="name-label">PARA PARTICIPAR DA GALA JUVENIL 2025</div>
-            <div id="inviteName" class="guest-name">Nome Aqui</div>
-            <div class="name-line"></div>
-          </div>
-          
-          <div class="motto-container">
-            <div class="motto-label">sob o lema:</div>
-            <div class="motto-text">"Como é bom e agradável quando os irmãos convivem em união."</div>
-            <div class="bible-verse">(Salmos 133:1)</div>
-          </div>
-          
-          <div class="description-text">
-            Será uma ocasião especial de comunhão, marcada por momentos de louvores, orações e confraternização. Contamos com a vossa honrosa presença.
-          </div>
-        </div>
-        
-        <!-- INFORMAÇÕES -->
-        <div class="info-container">
-          <div class="info-item">
-            <div class="info-icon"><i class="fas fa-calendar-alt"></i></div>
-            <div class="info-details">
-              <div class="info-title">Data</div>
-              <div class="info-value">26 de Dezembro 2025</div>
-            </div>
-          </div>
-          
-          <div class="info-item">
-            <div class="info-icon"><i class="fas fa-clock"></i></div>
-            <div class="info-details">
-              <div class="info-title">Horário</div>
-              <div class="info-value">22:00 às 04:00</div>
-            </div>
-          </div>
-          
-          <div class="info-item">
-            <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
-            <div class="info-details">
-              <div class="info-title">Local</div>
-              <div class="info-value">Congregação Tsakane<br>Machava-Sede</div>
-            </div>
-          </div>
-        </div>
-        
-        <!-- CONTACTOS -->
-        <div class="contacts-container">
-          <div class="contacts-title">
-            <i class="fas fa-phone"></i> Para mais informações:
-          </div>
-          <div class="phones">
-            <div class="phone-number">
-              <i class="fas fa-mobile-alt"></i> 85 232 8379
-            </div>
-            <div class="phone-number">
-              <i class="fas fa-mobile-alt"></i> 84 401 2254
-            </div>
-          </div>
-          <div class="contacts-note">Disponível para esclarecimentos</div>
-        </div>
-        
-        <!-- RODAPÉ -->
-        <div class="invite-footer">
-          <div class="footer-line"></div>
-          <div class="footer-text">
-            <div class="footer-church">Igreja Reformada</div>
-            <div class="footer-event">Gala Juvenil 2025</div>
-          </div>
-        </div>
-      </div>
-      
-      <!-- BOTÕES DE AÇÃO -->
-      <div class="action-buttons">
-        <button id="btnDownload" class="action-btn download-btn">
-          <i class="fas fa-download"></i> BAIXAR
-        </button>
-        <button id="btnWhats" class="action-btn whatsapp-btn">
-          <i class="fab fa-whatsapp"></i> WHATSAPP
-        </button>
-        <button id="btnEditName" class="action-btn edit-btn">
-          <i class="fas fa-edit"></i> EDITAR
-        </button>
-      </div>
-    </div>
-  </section>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-  <script src="script.js"></script>
+  <script src="script-main.js"></script>
 </body>
 </html>
