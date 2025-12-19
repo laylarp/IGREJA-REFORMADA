@@ -1,10 +1,10 @@
-const CACHE_NAME = 'gala-juvenil-mobile-v1';
+const CACHE_NAME = 'gala-juvenil-mobile-v2';
 const urlsToCache = [
-  './',
-  './index.html',
-  './styles.css',
-  './script.js',
-  './logo.png',
+  '',
+  '.index.html',
+  'styles.css',
+  'script.js',
+  'logo.png',
   'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css',
   'https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600&family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@400;700&display=swap',
   'https://html2canvas.hertzen.com/dist/html2canvas.min.js'
