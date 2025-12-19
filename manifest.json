@@ -1,22 +1,108 @@
 {
-  "name": "Gala Juvenil - Convites",
+  "name": "Gala Juvenil 2025",
   "short_name": "Gala Juvenil",
-  "description": "Sistema de convites eletrônicos para a Gala Juvenil",
+  "description": "Sistema de convites digitais para a Gala Juvenil da Igreja Reformada de Moçambique",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#FFF9F0",
+  "background_color": "#0D1B2A",
   "theme_color": "#8B4513",
-  "orientation": "portrait",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "pt-PT",
+  "dir": "ltr",
   "icons": [
+    {
+      "src": "icon-72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
     {
       "src": "icon-192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
       "src": "icon-512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
-  ]
+  ],
+  "screenshots": [
+    {
+      "src": "screenshot-mobile.png",
+      "sizes": "540x720",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Tela de boas-vindas do convite digital"
+    },
+    {
+      "src": "screenshot-desktop.png",
+      "sizes": "1024x768",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Cartão do convite em alta resolução"
+    }
+  ],
+  "categories": ["lifestyle", "productivity", "social"],
+  "shortcuts": [
+    {
+      "name": "Criar Novo Convite",
+      "short_name": "Novo Convite",
+      "description": "Crie um convite personalizado",
+      "url": "/?action=new",
+      "icons": [
+        {
+          "src": "icon-96.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Ver Meu Convite",
+      "short_name": "Meu Convite",
+      "description": "Acesse seu último convite gerado",
+      "url": "/?action=view",
+      "icons": [
+        {
+          "src": "icon-96.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ],
+  "prefer_related_applications": false,
+  "related_applications": []
 }
