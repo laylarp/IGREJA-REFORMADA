@@ -19,7 +19,6 @@ const ConviteApp = {
     
     setTimeout(() => {
       document.body.style.opacity = '1';
-      document.body.style.transition = 'opacity 0.5s ease';
     }, 100);
   },
   
@@ -119,10 +118,6 @@ const ConviteApp = {
                            localStorage.getItem(this.STORAGE_KEYS.NAME) || 
                            'Convidado';
         this.elements.inviteName.textContent = this.formatName(currentName);
-        
-        if (!this.lastImageUrl) {
-          setTimeout(() => this.generateImage(), 500);
-        }
         break;
     }
   },
@@ -181,20 +176,6 @@ const ConviteApp = {
   
   generateImage() {
     const inviteElement = document.getElementById('invitePreview');
-    const originalStyles = {
-      width: inviteElement.style.width,
-      height: inviteElement.style.height,
-      position: inviteElement.style.position,
-      overflow: inviteElement.style.overflow
-    };
-    
-    inviteElement.style.width = '600px';
-    inviteElement.style.height = 'auto';
-    inviteElement.style.position = 'absolute';
-    inviteElement.style.left = '-9999px';
-    inviteElement.style.overflow = 'visible';
-    
-    document.body.appendChild(inviteElement);
     
     const options = {
       scale: 2,
@@ -203,17 +184,15 @@ const ConviteApp = {
       logging: false,
       allowTaint: true,
       foreignObjectRendering: true,
-      imageTimeout: 20000,
-      width: 600,
+      imageTimeout: 30000,
+      width: 450,
       height: inviteElement.scrollHeight,
-      windowWidth: 600,
+      windowWidth: 450,
       windowHeight: inviteElement.scrollHeight,
-      removeContainer: true,
       onclone: function(clonedDoc) {
         const clonedPreview = clonedDoc.getElementById('invitePreview');
         if (clonedPreview) {
-          clonedPreview.style.width = '600px';
-          clonedPreview.style.height = 'auto';
+          clonedPreview.style.width = '450px';
           clonedPreview.style.position = 'relative';
           clonedPreview.style.left = '0';
           clonedPreview.style.overflow = 'visible';
@@ -223,10 +202,7 @@ const ConviteApp = {
     
     html2canvas(inviteElement, options)
       .then(canvas => {
-        Object.assign(inviteElement.style, originalStyles);
-        document.body.appendChild(inviteElement);
-        
-        const margin = 50;
+        const margin = 40;
         const finalCanvas = document.createElement('canvas');
         finalCanvas.width = canvas.width + (margin * 2);
         finalCanvas.height = canvas.height + (margin * 2);
@@ -240,10 +216,11 @@ const ConviteApp = {
         
         this.lastImageUrl = finalCanvas.toDataURL('image/png', 1.0);
         localStorage.setItem(this.STORAGE_KEYS.IMAGE, this.lastImageUrl);
+        
+        console.log('Imagem gerada com sucesso!');
       })
       .catch(error => {
-        Object.assign(inviteElement.style, originalStyles);
-        document.body.appendChild(inviteElement);
+        console.error('Erro ao gerar imagem:', error);
         
         const simpleOptions = {
           scale: 2,
@@ -256,6 +233,10 @@ const ConviteApp = {
           .then(canvas => {
             this.lastImageUrl = canvas.toDataURL('image/png');
             localStorage.setItem(this.STORAGE_KEYS.IMAGE, this.lastImageUrl);
+          })
+          .catch(simpleError => {
+            console.error('Erro no método simples:', simpleError);
+            alert('Não foi possível gerar a imagem. Tente novamente.');
           });
       });
   },
@@ -270,30 +251,35 @@ const ConviteApp = {
       return;
     }
     
-    const link = document.createElement('a');
-    link.href = this.lastImageUrl;
-    const fileName = `Convite-Gala-Juvenil-${this.formatName(localStorage.getItem(this.STORAGE_KEYS.NAME) || 'Convidado').replace(/\s+/g, '-')}.png`;
-    link.download = fileName;
-    
-    document.body.appendChild(link);
-    link.click();
-    
-    setTimeout(() => {
-      document.body.removeChild(link);
-    }, 1000);
-    
-    const originalText = this.elements.buttons.download.innerHTML;
-    const originalBg = this.elements.buttons.download.style.background;
-    
-    this.elements.buttons.download.innerHTML = '<i class="fas fa-check"></i> BAIXADO!';
-    this.elements.buttons.download.style.background = '#2e7d32';
-    this.elements.buttons.download.disabled = true;
-    
-    setTimeout(() => {
-      this.elements.buttons.download.innerHTML = originalText;
-      this.elements.buttons.download.style.background = originalBg;
-      this.elements.buttons.download.disabled = false;
-    }, 2000);
+    try {
+      const link = document.createElement('a');
+      link.href = this.lastImageUrl;
+      
+      const name = localStorage.getItem(this.STORAGE_KEYS.NAME) || 'Convidado';
+      const formattedName = this.formatName(name);
+      const fileName = `Convite-Gala-Juvenil-${formattedName.replace(/\s+/g, '-')}.png`;
+      
+      link.download = fileName;
+      
+      document.body.appendChild(link);
+      link.click();
+      
+      setTimeout(() => {
+        document.body.removeChild(link);
+      }, 1000);
+      
+      this.elements.buttons.download.innerHTML = '<i class="fas fa-check"></i> BAIXADO!';
+      this.elements.buttons.download.disabled = true;
+      
+      setTimeout(() => {
+        this.elements.buttons.download.innerHTML = '<i class="fas fa-download"></i> BAIXAR';
+        this.elements.buttons.download.disabled = false;
+      }, 2000);
+      
+    } catch (error) {
+      console.error('Erro no download:', error);
+      alert('Erro ao baixar o convite. Tente novamente.');
+    }
   },
   
   shareWhatsApp() {
@@ -332,6 +318,7 @@ const ConviteApp = {
 
 document.addEventListener('DOMContentLoaded', () => {
   document.body.style.opacity = '0';
+  document.body.style.transition = 'opacity 0.5s ease';
   
   setTimeout(() => {
     ConviteApp.init();
