@@ -13,9 +13,92 @@
 </head>
 <body>
 
+    <!-- TELA 0 - DETECÇÃO DE CELULAR / MODO DESENVOLVEDOR -->
+    <div id="telaMobile" class="mobile-overlay">
+        <div class="mobile-modal">
+            <div class="mobile-header">
+                <i class="fas fa-mobile-alt"></i>
+                <h2>Configuração para Celular</h2>
+            </div>
+            
+            <div class="mobile-content">
+                <p><strong>Importante:</strong> Para o correto funcionamento desta aplicação no seu celular, é necessário ativar o <strong>Modo Desenvolvedor</strong> no navegador.</p>
+                
+                <div class="steps-container">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Abra o Menu do Navegador</h4>
+                            <p>Toque nos três pontos (⋮) no canto superior direito</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>Vá em Configurações</h4>
+                            <p>Role para baixo e encontre "Configurações do site"</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>Ative o Modo Desenvolvedor</h4>
+                            <p>Procure por "Modo Desktop" ou "Site para computador"</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h4>Recarregue a Página</h4>
+                            <p>Toque no ícone de atualizar e confirme</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="browser-tips">
+                    <h4><i class="fas fa-info-circle"></i> Dicas por Navegador:</h4>
+                    <div class="browser-grid">
+                        <div class="browser-item">
+                            <i class="fab fa-chrome"></i>
+                            <span>Chrome: Menu → "Site para computador"</span>
+                        </div>
+                        <div class="browser-item">
+                            <i class="fab fa-safari"></i>
+                            <span>Safari: Compartilhar → "Pedir site para computador"</span>
+                        </div>
+                        <div class="browser-item">
+                            <i class="fab fa-firefox"></i>
+                            <span>Firefox: Menu → "Site para computador"</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mobile-actions">
+                <button id="btnIgnorarMobile" class="btn-mobile btn-ignore">
+                    <i class="fas fa-times"></i> Ignorar (Não Recomendado)
+                </button>
+                <button id="btnAtivarDesktop" class="btn-mobile btn-activate">
+                    <i class="fas fa-desktop"></i> Entendi, Vou Ativar
+                </button>
+                <button id="btnTestarNovamente" class="btn-mobile btn-test">
+                    <i class="fas fa-sync-alt"></i> Já Ativei, Testar Novamente
+                </button>
+            </div>
+            
+            <div class="mobile-footer">
+                <p><i class="fas fa-exclamation-triangle"></i> Sem esta configuração, algumas funções podem não funcionar corretamente.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- APLICAÇÃO PRINCIPAL -->
     <div id="app">
         <!-- TELA 1 - INÍCIO -->
-        <section id="tela1" class="screen active">
+        <section id="tela1" class="screen">
             <div class="card main-card">
                 <div class="logo-container">
                     <img src="logo.png" alt="Logo Igreja" class="circular-logo">
@@ -33,6 +116,11 @@
                     <p><i class="fas fa-phone"></i> 85 232 8379 / 84 401 2254</p>
                     <p>© 2025 Igreja Reformada</p>
                 </div>
+                
+                <!-- Botão para reabrir verificação mobile -->
+                <button onclick="verificarMobileNovamente()" class="btn-mobile-check">
+                    <i class="fas fa-mobile-alt"></i> Verificar Configuração do Celular
+                </button>
             </div>
         </section>
 
