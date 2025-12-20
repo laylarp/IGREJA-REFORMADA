@@ -620,3 +620,380 @@ h3 {
     }
 
 }
+/* === NOVOS EFEITOS ADICIONADOS === */
+
+/* Efeito de brilho suave para logos */
+.logo-glow {
+    position: relative;
+    display: inline-block;
+}
+
+.logo-glow::after {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.3) 0%, transparent 70%);
+    border-radius: 50%;
+    z-index: 0;
+    animation: gentleGlow 3s ease-in-out infinite alternate;
+}
+
+.logo-glow-small {
+    position: relative;
+    display: inline-block;
+}
+
+.logo-glow-small::after {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: -8px;
+    right: -8px;
+    bottom: -8px;
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.3) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: gentleGlow 4s ease-in-out infinite;
+}
+
+/* Efeito de shimmer na borda superior dos cards */
+.card::before {
+    background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 50%, var(--primary) 100%);
+    background-size: 200% 100%;
+    animation: shimmer 3s infinite linear;
+}
+
+/* Efeito de onda ao clicar nos botões */
+.btn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    border-radius: 100%;
+    transform: scale(1, 1) translate(-50%);
+    transform-origin: 50% 50%;
+}
+
+.btn:active::after {
+    animation: ripple 0.6s ease-out;
+}
+
+/* Efeito de brilho no badge de data */
+.date-badge::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+    transform: rotate(45deg);
+    animation: shine 4s infinite linear;
+}
+
+/* Efeito de animação no nome destacado */
+.nome-destaque {
+    animation: highlightName 2s ease-in-out infinite alternate;
+}
+
+/* Efeito nos ícones de informação */
+.info-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--accent) 0%, #ffd95a 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.8rem;
+    box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.info-card:hover .info-icon {
+    transform: scale(1.1) rotate(10deg);
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+}
+
+/* Efeito de brilho nos botões de ação */
+.btn-action::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    background: linear-gradient(135deg, transparent 0%, rgba(255,255,255,0.2) 50%, transparent 100%);
+    transform: translateX(-100%);
+    animation: shineBtn 3s infinite;
+}
+
+/* Tooltip para botões de ação */
+.btn-tooltip {
+    font-size: 0.8rem;
+    font-weight: 600;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    white-space: nowrap;
+}
+
+.btn-action:hover .btn-tooltip {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Efeito de oração no ícone de prece */
+.prayer-icon {
+    color: var(--accent);
+    animation: pray 2s ease-in-out infinite;
+}
+
+/* Efeito de glow para ícones de acesso */
+.icon-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.3) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: gentleGlow 3s ease-in-out infinite;
+}
+
+/* Linha decorativa abaixo do nome da igreja */
+.church-name::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 25%;
+    width: 50%;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    border-radius: 2px;
+}
+
+/* Efeito de borda tracejada no convite */
+.convite-border::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+    border: 2px dashed rgba(212, 175, 55, 0.3);
+    border-radius: 15px;
+    pointer-events: none;
+}
+
+/* Gradiente de texto para título gala */
+.gala-title {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Linha decorativa no subtítulo */
+.gala-subtitle::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 25%;
+    width: 50%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+}
+
+/* Linha decorativa no rodapé */
+.convite-footer-branding::before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: 25%;
+    width: 50%;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+}
+
+/* Container de versículo com estilo especial */
+.verse-container {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 25px;
+    border-radius: 15px;
+    margin: 25px 0;
+    border-left: 5px solid var(--accent);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+}
+
+/* Barra superior na descrição do evento */
+.descricao-evento::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary), var(--accent), var(--primary));
+}
+
+/* Ícone flutuante para evento */
+.event-icon {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--accent);
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 10px rgba(212, 175, 55, 0.4);
+}
+
+/* Barra superior nos cards de informação */
+.info-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    border-radius: 20px 20px 0 0;
+}
+
+/* === NOVAS ANIMAÇÕES === */
+@keyframes gentleGlow {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 0.8; }
+}
+
+@keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+@keyframes ripple {
+    0% {
+        transform: scale(0, 0);
+        opacity: 0.5;
+    }
+    100% {
+        transform: scale(50, 50);
+        opacity: 0;
+    }
+}
+
+@keyframes shine {
+    0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+    100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+}
+
+@keyframes highlightName {
+    0% { 
+        box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+        border-color: var(--accent);
+    }
+    100% { 
+        box-shadow: 0 15px 40px rgba(212, 175, 55, 0.5);
+        border-color: #ffd95a;
+    }
+}
+
+@keyframes pray {
+    0%, 100% { transform: rotate(0deg) scale(1); }
+    25% { transform: rotate(-10deg) scale(1.1); }
+    75% { transform: rotate(10deg) scale(1.1); }
+}
+
+@keyframes shineBtn {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+/* Efeito de pulso para ícones de instalação */
+.install-icon {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+/* Efeito de slide para notificações */
+.notification {
+    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* Transições suaves */
+.card, .btn, .input-group, .info-card, .btn-action {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Gradientes de fundo melhorados */
+html, body {
+    background: linear-gradient(135deg, #f1f3f4 0%, var(--bg) 100%);
+}
+
+.card {
+    background: var(--white);
+    border: 2px solid rgba(212, 175, 55, 0.2);
+}
+
+.info-card {
+    background: linear-gradient(135deg, var(--white) 0%, #fafafa 100%);
+}
+
+.btn-primary { 
+    background: linear-gradient(135deg, var(--primary) 0%, #3e2723 100%);
+}
+
+.btn-secondary { 
+    background: linear-gradient(135deg, var(--accent) 0%, #b3892a 100%);
+}
+
+.btn-download { 
+    background: linear-gradient(135deg, #2980b9 0%, #3498db 100%); 
+}
+
+.btn-whatsapp { 
+    background: linear-gradient(135deg, #25d366 0%, #128C7E 100%); 
+}
+
+.btn-edit { 
+    background: linear-gradient(135deg, var(--accent) 0%, #b3892a 100%); 
+}
+
+.btn-share { 
+    background: linear-gradient(135deg, #9c27b0 0%, #7b1fa2 100%); 
+}
+
+/* Sombras mais pronunciadas */
+.card {
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+}
+
+.card:hover {
+    box-shadow: 0 30px 60px rgba(78, 52, 46, 0.2);
+}
+
+.info-card {
+    box-shadow: 0 12px 30px rgba(78, 52, 46, 0.15);
+}
+
+.info-card:hover {
+    box-shadow: 0 20px 40px rgba(78, 52, 46, 0.25);
+}
