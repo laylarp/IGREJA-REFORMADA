@@ -2,31 +2,19 @@
 const SENHA_VALIDA = "gala2025";
 let nomeConvidado = "";
 let isFromLink = false;
-let isFromView = false;
 let deferredPrompt;
 let isInstalled = false;
-let conviteGerado = false;
 
 // Inicialização
-document.addEventListener('DOMContentLoaded', function() {
-    // Verificar se veio de um link compartilhado
-    checkUrlParameters();
+(function() {
+    // Verificar parâmetros da URL ANTES de qualquer coisa
+    processUrlParametersImmediately();
     
-    // Configurações da aplicação
+    // Configurar app
     setupApp();
     
     // Configurar partículas
     setupParticles();
-    
-    // Verificar se já está instalado
-    checkIfInstalled();
-    
-    // Mostrar prompt de instalação em mobile
-    if (isMobile() && !isInstalled) {
-        setTimeout(() => {
-            showInstallPrompt();
-        }, 2000);
-    }
     
     // Evento para instalação PWA
     window.addEventListener('beforeinstallprompt', (e) => {
@@ -41,10 +29,10 @@ document.addEventListener('DOMContentLoaded', function() {
         showNotification('Aplicativo instalado com sucesso!');
         localStorage.setItem('appInstalled', 'true');
     });
-});
+})();
 
-// Verificar parâmetros da URL
-function checkUrlParameters() {
+// Processar parâmetros da URL IMEDIATAMENTE
+function processUrlParametersImmediately() {
     const urlParams = new URLSearchParams(window.location.search);
     const nomeParam = urlParams.get('nome');
     const shareParam = urlParams.get('share');
@@ -55,21 +43,59 @@ function checkUrlParameters() {
         if (nomeParam) {
             try {
                 nomeConvidado = decodeURIComponent(nomeParam);
-                document.getElementById('displayNome').textContent = nomeConvidado;
-                conviteGerado = true;
+                console.log('Nome do convite via URL:', nomeConvidado);
                 
-                // Ir direto para tela do convite
-                setTimeout(() => {
-                    navegar('tela4');
-                    ocultarBotaoEditar();
-                    showNotification('Convite carregado!');
-                }, 300);
+                // Salvar no localStorage para persistência
+                localStorage.setItem('conviteGalaNome', nomeConvidado);
+                localStorage.setItem('conviteGerado', 'true');
+                localStorage.setItem('isFromLink', 'true');
             } catch (e) {
                 console.error('Erro ao decodificar nome:', e);
-                showNotification('Erro ao carregar convite.', 'error');
             }
         }
     }
+}
+
+// Quando o DOM estiver pronto
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM carregado, processando convite...');
+    
+    // Verificar se tem convite para carregar
+    const isFromLinkStorage = localStorage.getItem('isFromLink');
+    const nomeSalvo = localStorage.getItem('conviteGalaNome');
+    const conviteCriado = localStorage.getItem('conviteGerado');
+    
+    if ((isFromLink || isFromLinkStorage === 'true') && nomeSalvo && conviteCriado === 'true') {
+        console.log('Carregando convite do localStorage...');
+        nomeConvidado = nomeSalvo;
+        document.getElementById('displayNome').textContent = nomeConvidado;
+        
+        // Navegar DIRETO para tela do convite
+        setTimeout(() => {
+            navegarParaConvite();
+            ocultarBotaoEditar();
+            showNotification('Convite carregado!');
+        }, 300);
+    } else {
+        // Mostrar tela inicial normalmente
+        document.getElementById('tela1').classList.add('active');
+    }
+    
+    // Mostrar prompt de instalação se for mobile
+    if (isMobile() && !isInstalled) {
+        setTimeout(() => {
+            showInstallPrompt();
+        }, 3000);
+    }
+});
+
+// Navegar direto para convite
+function navegarParaConvite() {
+    document.querySelectorAll('.screen').forEach(tela => {
+        tela.classList.remove('active');
+    });
+    document.getElementById('tela4').classList.add('active');
+    window.scrollTo(0, 0);
 }
 
 // Configuração da aplicação
@@ -88,10 +114,12 @@ function setupApp() {
         }
     });
     
-    // Carrega nome salvo se existir
-    const nomeSalvo = localStorage.getItem('conviteGalaNome');
-    if (nomeSalvo && !isFromLink) {
-        document.getElementById('nomeConvidado').value = nomeSalvo;
+    // Carrega nome salvo se existir (apenas se não veio de link)
+    if (!isFromLink) {
+        const nomeSalvo = localStorage.getItem('conviteGalaNome');
+        if (nomeSalvo) {
+            document.getElementById('nomeConvidado').value = nomeSalvo;
+        }
     }
 }
 
@@ -132,16 +160,22 @@ function isMobile() {
 // Mostrar prompt de instalação
 function showInstallPrompt() {
     const dismissed = localStorage.getItem('installPromptDismissed');
-    if (!dismissed && !isInstalled) {
+    const appInstalled = localStorage.getItem('appInstalled');
+    
+    if (!dismissed && (!isInstalled && appInstalled !== 'true')) {
         const prompt = document.getElementById('installPrompt');
-        prompt.style.display = 'flex';
+        if (prompt) {
+            prompt.style.display = 'flex';
+        }
     }
 }
 
 // Esconder prompt de instalação
 function hideInstallPrompt() {
     const prompt = document.getElementById('installPrompt');
-    prompt.style.display = 'none';
+    if (prompt) {
+        prompt.style.display = 'none';
+    }
 }
 
 // Instalar aplicativo
@@ -163,22 +197,6 @@ function installApp() {
 function dismissPrompt() {
     hideInstallPrompt();
     localStorage.setItem('installPromptDismissed', 'true');
-}
-
-function checkIfInstalled() {
-    // Verificar se já foi instalado como PWA
-    if (window.matchMedia('(display-mode: standalone)').matches || 
-        window.navigator.standalone ||
-        document.referrer.includes('android-app://')) {
-        isInstalled = true;
-        localStorage.setItem('appInstalled', 'true');
-    }
-    
-    // Verificar se já foi instalado anteriormente
-    const appInstalled = localStorage.getItem('appInstalled');
-    if (appInstalled === 'true') {
-        isInstalled = true;
-    }
 }
 
 // Navegação entre telas
@@ -232,7 +250,6 @@ function gerarConvite() {
     
     document.getElementById('displayNome').textContent = nomeConvidado;
     navegar('tela4');
-    conviteGerado = true;
     
     // Mostrar botão editar se não for de link
     if (!isFromLink) {
@@ -242,8 +259,11 @@ function gerarConvite() {
         }
     }
     
+    // Salvar dados
     localStorage.setItem('conviteGalaNome', nomeConvidado);
     localStorage.setItem('conviteGerado', 'true');
+    localStorage.removeItem('isFromLink'); // Remover marcação de link
+    
     showNotification('Convite gerado com sucesso!');
     
     // Efeito visual no nome
@@ -260,10 +280,8 @@ function verConviteExistente() {
     const conviteCriado = localStorage.getItem('conviteGerado');
     
     if (nomeSalvo && conviteCriado === 'true') {
-        isFromView = true;
         nomeConvidado = nomeSalvo;
         document.getElementById('displayNome').textContent = nomeSalvo;
-        conviteGerado = true;
         navegar('tela4');
         
         // Ocultar botão editar quando vem do "Ver Convite"
@@ -282,102 +300,203 @@ function editarNome() {
     document.getElementById('nomeConvidado').focus();
 }
 
-// Download da imagem do convite - CORRIGIDO
+// FUNÇÃO PRINCIPAL DE DOWNLOAD - VERSÃO OTIMIZADA
 function baixarImagem() {
-    if (!conviteGerado) {
+    if (!nomeConvidado) {
         showNotification('Primeiro gere um convite!', 'error');
         return;
     }
     
-    const elemento = document.getElementById('areaConvite');
-    
-    if (!elemento) {
-        showNotification('Erro: Elemento do convite não encontrado.', 'error');
-        return;
-    }
-    
     const btnDownload = document.querySelector('.btn-download');
-    if (!btnDownload) return;
-    
     const originalHTML = btnDownload.innerHTML;
     btnDownload.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
     btnDownload.disabled = true;
     
-    showNotification('Gerando imagem...');
+    showNotification('🖼️ Gerando imagem em alta qualidade...');
     
-    // Forçar reflow para garantir que tudo está renderizado
-    elemento.style.display = 'block';
-    elemento.offsetHeight;
-    
-    const options = {
-        scale: 3, // Aumentado para melhor qualidade
-        useCORS: true,
-        backgroundColor: '#f5f1e9', // Cor de fundo do convite
-        logging: false,
-        width: elemento.offsetWidth,
-        height: elemento.offsetHeight,
-        onclone: function(clonedDoc) {
-            const clonedElement = clonedDoc.getElementById('areaConvite');
-            // Garantir que o elemento clone tenha estilos corretos
-            clonedElement.style.width = elemento.offsetWidth + 'px';
-            clonedElement.style.height = elemento.offsetHeight + 'px';
-            clonedElement.style.transform = 'none';
-            clonedElement.style.position = 'relative';
-        }
+    // Salvar estilos originais
+    const elemento = document.getElementById('areaConvite');
+    const estilosOriginais = {
+        width: elemento.style.width,
+        height: elemento.style.height,
+        position: elemento.style.position,
+        left: elemento.style.left,
+        top: elemento.style.top,
+        transform: elemento.style.transform,
+        margin: elemento.style.margin,
+        padding: elemento.style.padding,
+        backgroundColor: elemento.style.backgroundColor
     };
     
-    html2canvas(elemento, options)
-        .then(canvas => {
-            try {
+    // Criar um container de captura
+    const captureContainer = document.createElement('div');
+    captureContainer.className = 'capture-container';
+    captureContainer.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: #f5f1e9;
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        box-sizing: border-box;
+        overflow: hidden;
+    `;
+    
+    // Clonar o convite
+    const conviteClone = elemento.cloneNode(true);
+    conviteClone.id = 'convite-capture';
+    
+    // Aplicar estilos otimizados para captura
+    conviteClone.style.cssText = `
+        width: 900px !important;
+        max-width: 90vw !important;
+        height: 1600px !important;
+        max-height: 90vh !important;
+        margin: 0 !important;
+        padding: 40px !important;
+        background: #f5f1e9 !important;
+        border-radius: 20px !important;
+        transform: none !important;
+        position: relative !important;
+        overflow: visible !important;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.15) !important;
+    `;
+    
+    // Ajustar elementos internos
+    setTimeout(() => {
+        // Ajustar borda do convite
+        const border = conviteClone.querySelector('.convite-border');
+        if (border) {
+            border.style.cssText = `
+                width: 100% !important;
+                height: 100% !important;
+                margin: 0 !important;
+                padding: 50px !important;
+                border: 4px solid #d4af37 !important;
+                border-radius: 15px !important;
+                background: white !important;
+                box-sizing: border-box !important;
+            `;
+        }
+        
+        // Aumentar tamanho do texto
+        const aumentarTexto = (elemento, multiplicador) => {
+            const estilo = window.getComputedStyle(elemento);
+            if (estilo.fontSize) {
+                const tamanho = parseFloat(estilo.fontSize);
+                if (!isNaN(tamanho)) {
+                    elemento.style.fontSize = (tamanho * multiplicador) + 'px';
+                }
+            }
+        };
+        
+        // Aplicar a todos os textos importantes
+        const titulos = conviteClone.querySelectorAll('h1, h2, h3');
+        titulos.forEach(titulo => aumentarTexto(titulo, 1.8));
+        
+        const paragrafos = conviteClone.querySelectorAll('p');
+        paragrafos.forEach(p => aumentarTexto(p, 1.5));
+        
+        const spans = conviteClone.querySelectorAll('span');
+        spans.forEach(span => aumentarTexto(span, 1.3));
+        
+        // Ajustar ícones
+        const icones = conviteClone.querySelectorAll('i');
+        icones.forEach(icone => {
+            const estilo = window.getComputedStyle(icone);
+            if (estilo.fontSize) {
+                const tamanho = parseFloat(estilo.fontSize);
+                if (!isNaN(tamanho)) {
+                    icone.style.fontSize = (tamanho * 1.8) + 'px';
+                }
+            }
+        });
+        
+        // Adicionar ao container
+        captureContainer.appendChild(conviteClone);
+        document.body.appendChild(captureContainer);
+        
+        // Capturar após um breve delay para renderização
+        setTimeout(() => {
+            html2canvas(conviteClone, {
+                scale: 3, // Alta qualidade
+                useCORS: true,
+                backgroundColor: '#f5f1e9',
+                width: conviteClone.offsetWidth,
+                height: conviteClone.offsetHeight,
+                logging: false,
+                allowTaint: true,
+                useCORS: true,
+                onclone: function(clonedDoc, element) {
+                    // Garantir que todos os estilos sejam aplicados
+                    element.style.width = conviteClone.offsetWidth + 'px';
+                    element.style.height = conviteClone.offsetHeight + 'px';
+                    element.style.overflow = 'visible';
+                }
+            }).then(canvas => {
+                // Remover container de captura
+                document.body.removeChild(captureContainer);
+                
                 // Criar link para download
                 const link = document.createElement('a');
-                const nomeArquivo = `Convite-Gala-Juvenil-${nomeConvidado.replace(/\s+/g, '-')}.png`;
+                const nomeArquivo = `Convite_Gala_Juvenil_${nomeConvidado.replace(/[^a-zA-Z0-9]/g, '_')}.png`;
                 
-                // Configurar link
+                // Otimizar canvas final
+                const canvasFinal = document.createElement('canvas');
+                canvasFinal.width = canvas.width;
+                canvasFinal.height = canvas.height;
+                const ctx = canvasFinal.getContext('2d');
+                
+                // Adicionar fundo branco
+                ctx.fillStyle = '#f5f1e9';
+                ctx.fillRect(0, 0, canvasFinal.width, canvasFinal.height);
+                
+                // Desenhar o convite
+                ctx.drawImage(canvas, 0, 0);
+                
                 link.download = nomeArquivo;
-                link.href = canvas.toDataURL('image/png');
+                link.href = canvasFinal.toDataURL('image/png', 1.0);
                 link.style.display = 'none';
                 
-                // Adicionar ao documento e clicar
                 document.body.appendChild(link);
                 link.click();
                 
-                // Limpar
                 setTimeout(() => {
                     document.body.removeChild(link);
                     URL.revokeObjectURL(link.href);
                 }, 100);
                 
-                showNotification('Convite baixado com sucesso!');
-                
-            } catch (error) {
-                console.error("Erro ao criar download:", error);
-                showNotification('Erro ao criar arquivo de download.', 'error');
-            }
-        })
-        .catch(error => {
-            console.error("Erro no html2canvas:", error);
-            showNotification('Erro ao gerar imagem. Tente novamente.', 'error');
-        })
-        .finally(() => {
-            // Restaurar botão
-            btnDownload.innerHTML = originalHTML;
-            btnDownload.disabled = false;
-        });
+                showNotification('✅ Convite baixado com sucesso!');
+            }).catch(error => {
+                console.error('Erro no html2canvas:', error);
+                document.body.removeChild(captureContainer);
+                showNotification('❌ Erro ao gerar imagem. Tente novamente.', 'error');
+            }).finally(() => {
+                btnDownload.innerHTML = originalHTML;
+                btnDownload.disabled = false;
+            });
+        }, 800);
+        
+    }, 100);
 }
 
-// Gerar link compartilhável - CORRIGIDO
+// Gerar link compartilhável
 function gerarLinkCompartilhavel() {
-    if (!conviteGerado || !nomeConvidado) {
+    if (!nomeConvidado) {
         showNotification('Primeiro gere um convite com seu nome!', 'error');
         return;
     }
     
     const nomeCodificado = encodeURIComponent(nomeConvidado);
-    // Criar URL completa com protocolo, domínio e parâmetros
-    const linkCompleto = `${window.location.origin}${window.location.pathname}?nome=${nomeCodificado}&share=true`;
+    const baseUrl = window.location.origin + window.location.pathname;
+    const linkCompleto = `${baseUrl}?nome=${nomeCodificado}&share=true`;
     
-    // Usar a API moderna de clipboard
+    // Usar API moderna de clipboard
     if (navigator.clipboard && window.isSecureContext) {
         navigator.clipboard.writeText(linkCompleto)
             .then(() => {
@@ -388,7 +507,6 @@ function gerarLinkCompartilhavel() {
                 fallbackCopy(linkCompleto);
             });
     } else {
-        // Fallback para navegadores mais antigos
         fallbackCopy(linkCompleto);
     }
 }
@@ -406,42 +524,31 @@ function fallbackCopy(text) {
     
     try {
         const successful = document.execCommand('copy');
+        document.body.removeChild(textArea);
+        
         if (successful) {
             showNotification('✅ Link copiado! Cole no WhatsApp.');
         } else {
-            showNotification('❌ Não foi possível copiar o link.', 'error');
+            showNotification('❌ Não foi possível copiar.', 'error');
         }
     } catch (err) {
-        console.error('Erro fallback copy:', err);
-        showNotification('❌ Erro ao copiar o link.', 'error');
+        document.body.removeChild(textArea);
+        showNotification('❌ Erro ao copiar.', 'error');
     }
-    
-    document.body.removeChild(textArea);
 }
 
-// Compartilhar no WhatsApp - CORRIGIDO
+// Compartilhar no WhatsApp
 function compartilharWhatsApp() {
-    if (!conviteGerado || !nomeConvidado) {
-        showNotification('Primeiro gere um convite com seu nome!', 'error');
+    if (!nomeConvidado) {
+        showNotification('Primeiro gere um convite!', 'error');
         return;
     }
     
     const nomeCodificado = encodeURIComponent(nomeConvidado);
-    const linkConvite = `${window.location.origin}${window.location.pathname}?nome=${nomeCodificado}&share=true`;
+    const baseUrl = window.location.origin + window.location.pathname;
+    const linkConvite = `${baseUrl}?nome=${nomeCodificado}&share=true`;
     
-       const textoConvite = `🎉✨ *Convite Especial – Gala Juvenil 2025* ✨🎉
-
-      🙌 *Glória a Deus!*  
-       É com grande alegria que te convido para participares da  
-       *Gala Juvenil da Igreja Reformada*.
-
-       Um momento especial de comunhão, louvor, alegria e edificação espiritual, preparado com muito carinho para ti.
-
-     👉 *Clique no link abaixo para ver o convite personalizado:*  
-     🔗 ${window.location.origin}${window.location.pathname}?nome=${encodeURIComponent(nomeConvidado)}&share=true
-
-      ⬇️ *Baixe o convite e junte-se a nós nesse grande encontro para a glória do Senhor!*  🙏✨`;
-
+    const textoConvite = `*🎉 Convite para a Gala Juvenil 2025 🎉*\n\nOlá! Recebi um convite especial para a *Gala Juvenil da Igreja Reformada*.\n\nClique no link abaixo para ver o convite personalizado:\n\n🔗 ${linkConvite}\n\n*Baixe o convite e participe desta celebração especial!*`;
     
     const textoCodificado = encodeURIComponent(textoConvite);
     const urlWhatsApp = `https://wa.me/?text=${textoCodificado}`;
@@ -453,14 +560,15 @@ function compartilharWhatsApp() {
 
 // Compartilhar convite
 function compartilharConvite() {
-    if (!conviteGerado || !nomeConvidado) {
-        showNotification('Primeiro gere um convite com seu nome!', 'error');
+    if (!nomeConvidado) {
+        showNotification('Primeiro gere um convite!', 'error');
         return;
     }
     
     if (navigator.share) {
         const nomeCodificado = encodeURIComponent(nomeConvidado);
-        const linkConvite = `${window.location.origin}${window.location.pathname}?nome=${nomeCodificado}&share=true`;
+        const baseUrl = window.location.origin + window.location.pathname;
+        const linkConvite = `${baseUrl}?nome=${nomeCodificado}&share=true`;
         
         navigator.share({
             title: 'Convite Gala Juvenil 2025',
@@ -500,7 +608,7 @@ function showNotification(message, type = 'success') {
     }, 3000);
 }
 
-// Instalação PWA
+// Service Worker
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
         navigator.serviceWorker.register('service-worker.js')
@@ -513,13 +621,11 @@ if ('serviceWorker' in navigator) {
     });
 }
 
-// Verificar se tem convite gerado ao carregar a página
-window.addEventListener('pageshow', function() {
-    const conviteCriado = localStorage.getItem('conviteGerado');
-    const nomeSalvo = localStorage.getItem('conviteGalaNome');
-    
-    if (conviteCriado === 'true' && nomeSalvo && !isFromLink) {
-        conviteGerado = true;
-        nomeConvidado = nomeSalvo;
+// Limpar estado quando sair do modo link
+window.addEventListener('pageshow', function(event) {
+    // Se não tem parâmetros na URL, limpar marcação de link
+    const urlParams = new URLSearchParams(window.location.search);
+    if (!urlParams.has('nome') && !urlParams.has('share')) {
+        localStorage.removeItem('isFromLink');
     }
 });

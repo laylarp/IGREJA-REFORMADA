@@ -4,14 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Gala Juvenil 2025 - Convites</title>
+    
+    <!-- FONTES -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <!-- ANIMATE.CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    
+    <!-- ESTILOS LOCAIS -->
     <link rel="stylesheet" href="style.css">
+    
+    <!-- PWA -->
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#4e342e">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <!-- HTML2CANVAS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body>
@@ -19,7 +31,7 @@
     <!-- APLICAÇÃO PRINCIPAL -->
     <div id="app">
         <!-- TELA 1 - INÍCIO -->
-        <section id="tela1" class="screen active">
+        <section id="tela1" class="screen">
             <div class="card main-card animate__animated animate__fadeIn">
                 <div class="logo-container">
                     <div class="logo-glow">
@@ -42,6 +54,7 @@
                 <button onclick="verConviteExistente()" class="btn btn-secondary animate__animated animate__bounceIn animate__delay-1s">
                     <i class="fas fa-eye"></i> VER CONVITE
                 </button>
+
                 <div class="footer-info">
                     <p><i class="fas fa-users"></i> Comissão da Gala</p>
                     <p><i class="fas fa-phone"></i> 85 232 8379 | 84 401 2254</p>
@@ -49,6 +62,7 @@
                 </div>
             </div>
             
+
         </section>
 
         <!-- TELA 2 - SENHA -->
@@ -119,14 +133,14 @@
                                 </div>
                                 
                                 <h1 class="gala-title">GALA JUVENIL</h1>
-                                <p class="gala-subtitle">CONVITE ESPECIAL 2025</p>
+                                <p class="gala-subtitle">CONVITE ESPECIAL</p>
 
                                 <div class="main-text">
                                     <p class="invitation-text">
-                                        A Comissão Organizadora da Gala Juvenil tem a honra de convidar a(o) irmã(o)
+                                        A Comissão Organizadora da Gala 2025 tem a honra de convidar a(o) irmã(o)
                                     </p>
                                     <h2 id="displayNome" class="nome-destaque">NOME DO CONVIDADO</h2>
-                                    <p class="lema-label">Para participar da GALA, sob o lema:</p>
+                                    <p class="lema-label">Para participar da GALA JUVENIL, sob o lema:</p>
                                     <div class="verse-container">
                                         <p class="versiculo">"Como é bom e agradável quando os irmãos convivem em união."</p>
                                         <p class="referencia">(Salmos 133:1)</p>
@@ -179,7 +193,6 @@
                                 <div class="convite-footer-branding">
                                     <p class="church-name-footer">Igreja Reformada</p>
                                     <div class="contatos">
-            
                                         <i class="fas fa-phone"></i>
                                         <span>85 232 8379 | 84 401 2254</span>
                                         <i class="fas fa-hands-praying prayer-icon"></i>
@@ -223,7 +236,9 @@
 
     <!-- EFEITOS DE PARTÍCULAS -->
     <div id="particles-js"></div>
-
+    
+    
+    <!-- SCRIPTS -->
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="script.js"></script>
 </body>
