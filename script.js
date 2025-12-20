@@ -2,6 +2,7 @@
 const SENHA_VALIDA = "gala2025";
 let nomeConvidado = "";
 let isFromLink = false;
+let screenshotShown = false;
 
 // Inicialização
 (function() {
@@ -82,6 +83,11 @@ document.addEventListener('DOMContentLoaded', function() {
             navegarParaConvite();
             ocultarBotaoEditar();
             showNotification('Convite carregado!');
+            
+            // Mostrar notificação de screenshot após 2 segundos
+            setTimeout(() => {
+                showScreenshotNotification();
+            }, 2000);
         }, 300);
     } else {
         // Mostrar tela inicial normalmente
@@ -152,6 +158,26 @@ function ocultarBotaoEditar() {
     }
 }
 
+// Mostrar notificação de screenshot
+function showScreenshotNotification() {
+    if (!screenshotShown) {
+        const notification = document.getElementById('screenshotNotification');
+        notification.style.display = 'block';
+        screenshotShown = true;
+        
+        // Fechar automaticamente após 10 segundos
+        setTimeout(() => {
+            closeScreenshotNotification();
+        }, 10000);
+    }
+}
+
+// Fechar notificação de screenshot
+function closeScreenshotNotification() {
+    const notification = document.getElementById('screenshotNotification');
+    notification.style.display = 'none';
+}
+
 // Navegação entre telas
 function navegar(telaDestino) {
     document.querySelectorAll('.screen').forEach(tela => {
@@ -217,7 +243,13 @@ function gerarConvite() {
     localStorage.setItem('conviteGerado', 'true');
     localStorage.removeItem('isFromLink'); // Remover marcação de link
     
-    showNotification('Convite gerado com sucesso! Para salvar, use o método comum do seu celular para tirar screenshot.');
+    // Resetar flag de screenshot
+    screenshotShown = false;
+    
+    // Mostrar notificação de screenshot após 1 segundo
+    setTimeout(() => {
+        showScreenshotNotification();
+    }, 1000);
     
     // Efeito visual no nome
     const nomeElement = document.getElementById('displayNome');
@@ -240,7 +272,13 @@ function verConviteExistente() {
         // Ocultar botão editar quando vem do "Ver Convite"
         ocultarBotaoEditar();
         
-        showNotification('Convite carregado! Para salvar, use o método comum do seu celular para tirar screenshot.');
+        // Resetar flag de screenshot
+        screenshotShown = false;
+        
+        // Mostrar notificação de screenshot após 1 segundo
+        setTimeout(() => {
+            showScreenshotNotification();
+        }, 1000);
     } else {
         showNotification('Nenhum convite encontrado. Crie um novo primeiro.', 'error');
     }
@@ -316,7 +354,7 @@ function compartilharWhatsApp() {
     const baseUrl = window.location.origin + window.location.pathname;
     const linkConvite = `${baseUrl}?nome=${nomeCodificado}&share=true`;
     
-    const textoConvite = `*🎉 Convite para a Gala Juvenil 2025 🎉*\n\nOlá! Recebi um convite especial para a *Gala Juvenil da Igreja Reformada*.\n\nClique no link abaixo para ver o convite personalizado:\n\n🔗 ${linkConvite}\n\n*Use o método comum do seu celular para tirar screenshot do convite!*`;
+    const textoConvite = `*🎉 Convite para a Gala Juvenil 2025 🎉*\n\nOlá! Recebi um convite especial para a *Gala Juvenil da Igreja Reformada*.\n\nClique no link abaixo para ver o convite personalizado:\n\n🔗 ${linkConvite}\n\n*Para salvar: Use o método comum do seu celular para tirar screenshot!*`;
     
     const textoCodificado = encodeURIComponent(textoConvite);
     const urlWhatsApp = `https://wa.me/?text=${textoCodificado}`;

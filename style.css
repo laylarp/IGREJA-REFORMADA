@@ -1351,3 +1351,217 @@ h3 {
 .btn-download, .btn-screenshot, .btn-quality-action {
     display: none !important;
 }
+/* ============================================== */
+/* NOTIFICAÇÃO DE SCREENSHOT */
+/* ============================================== */
+.screenshot-notification {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    width: 90%;
+    max-width: 450px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    z-index: 10000;
+    display: none;
+    animation: slideUpScreenshot 0.5s ease forwards;
+    border: 3px solid var(--accent);
+    overflow: hidden;
+}
+
+@keyframes slideUpScreenshot {
+    from {
+        transform: translateX(-50%) translateY(100px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+    }
+}
+
+.screenshot-content {
+    padding: 0;
+}
+
+.screenshot-header {
+    background: linear-gradient(135deg, var(--primary) 0%, #6d4c41 100%);
+    color: white;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+}
+
+.screenshot-header i {
+    font-size: 1.8rem;
+    color: var(--accent);
+    margin-right: 15px;
+}
+
+.screenshot-header h3 {
+    color: white !important;
+    margin: 0;
+    flex: 1;
+    font-size: 1.3rem;
+}
+
+.close-screenshot {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.3rem;
+    cursor: pointer;
+    padding: 5px;
+    transition: transform 0.3s;
+}
+
+.close-screenshot:hover {
+    transform: scale(1.2);
+}
+
+.screenshot-body {
+    padding: 25px;
+}
+
+.screenshot-body p {
+    color: #333;
+    margin-bottom: 15px;
+    line-height: 1.5;
+    font-size: 1rem;
+}
+
+.screenshot-steps {
+    margin: 20px 0;
+}
+
+.step {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 15px;
+    padding: 12px;
+    background: rgba(212, 175, 55, 0.1);
+    border-radius: 10px;
+    border-left: 4px solid var(--accent);
+}
+
+.step-number {
+    background: var(--accent);
+    color: white;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin-right: 15px;
+    flex-shrink: 0;
+}
+
+.step-text {
+    flex: 1;
+    color: #444;
+    line-height: 1.4;
+    font-size: 0.95rem;
+}
+
+.screenshot-tip {
+    background: rgba(33, 150, 243, 0.1);
+    padding: 15px;
+    border-radius: 10px;
+    border-left: 4px solid #2196F3;
+    margin-top: 20px !important;
+    font-size: 0.95rem !important;
+}
+
+.screenshot-tip i {
+    color: #2196F3;
+    margin-right: 10px;
+}
+
+/* ============================================== */
+/* NOTIFICAÇÃO NORMAL */
+/* ============================================== */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, #4CAF50 0%, #2e7d32 100%);
+    color: white;
+    padding: 15px 25px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    z-index: 9999;
+    transform: translateX(150%);
+    transition: transform 0.3s ease;
+    max-width: 350px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.notification.show {
+    transform: translateX(0);
+}
+
+.notification.error {
+    background: linear-gradient(135deg, #f44336 0%, #c62828 100%);
+}
+
+/* ============================================== */
+/* BOTÕES DE AÇÃO */
+/* ============================================== */
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 25px auto 20px;
+    width: 100%;
+    max-width: 400px;
+    padding: 0 20px;
+}
+
+.btn-action {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: none;
+    color: white;
+    font-size: 1.4rem;
+    cursor: pointer;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-action:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
+
+.btn-action:active {
+    transform: translateY(0);
+}
+
+.btn-whatsapp { 
+    background: linear-gradient(135deg, #25d366 0%, #128C7E 100%); 
+}
+.btn-edit { 
+    background: linear-gradient(135deg, var(--accent) 0%, #c19b2e 100%); 
+}
+.btn-link { 
+    background: linear-gradient(135deg, #9c27b0 0%, #7b1fa2 100%); 
+}
+.btn-share { 
+    background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%); 
+}
+
+/* Remove seção de screenshot do convite */
+.screenshot-message {
+    display: none !important;
+}

@@ -184,15 +184,6 @@
                                     </div>
                                 </div>
 
-                                <!-- MENSAGEM DE SCREENSHOT -->
-                                <div class="screenshot-message">
-                                    <i class="fas fa-mobile-alt"></i>
-                                    <p><strong>Para salvar este convite:</strong></p>
-                                    <p>Use o método comum do seu celular para tirar screenshot da tela.</p>
-                                    <small>1. Pressione os botões de volume e power ao mesmo tempo<br>
-                                           2. Ou use o gesto de três dedos (dependendo do modelo)</small>
-                                </div>
-
                                 <!-- CONTATOS -->
                                 <div class="convite-footer-branding">
                                     <p class="church-name-footer">Igreja Reformada</p>
@@ -234,9 +225,42 @@
         </section>
     </div>
 
-    <!-- NOTIFICAÇÃO -->
+    <!-- NOTIFICAÇÃO NORMAL -->
     <div id="notification" class="notification">
         <div id="notificationText"></div>
+    </div>
+
+    <!-- NOTIFICAÇÃO DE SCREENSHOT (nova) -->
+    <div id="screenshotNotification" class="screenshot-notification">
+        <div class="screenshot-content">
+            <div class="screenshot-header">
+                <i class="fas fa-camera"></i>
+                <h3>PARA SALVAR ESTE CONVITE</h3>
+                <button class="close-screenshot" onclick="closeScreenshotNotification()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="screenshot-body">
+                <p><strong>Use o método comum do seu celular:</strong></p>
+                <div class="screenshot-steps">
+                    <div class="step">
+                        <span class="step-number">1</span>
+                        <span class="step-text">Pressione os botões de <strong>volume + power</strong> ao mesmo tempo</span>
+                    </div>
+                    <div class="step">
+                        <span class="step-number">2</span>
+                        <span class="step-text">Ou use o gesto de <strong>três dedos</strong> na tela</span>
+                    </div>
+                    <div class="step">
+                        <span class="step-number">3</span>
+                        <span class="step-text">A imagem será salva na galeria do seu celular</span>
+                    </div>
+                </div>
+                <p class="screenshot-tip">
+                    <i class="fas fa-lightbulb"></i> <strong>Dica:</strong> Aumente o zoom para melhor qualidade
+                </p>
+            </div>
+        </div>
     </div>
 
     <!-- EFEITOS DE PARTÍCULAS -->
