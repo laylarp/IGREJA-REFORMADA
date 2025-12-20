@@ -14,6 +14,7 @@
 <body>
 
     <div id="app">
+        <!-- TELA 1 - INÍCIO -->
         <section id="tela1" class="screen active">
             <div class="card main-card">
                 <div class="logo-container">
@@ -35,6 +36,7 @@
             </div>
         </section>
 
+        <!-- TELA 2 - SENHA -->
         <section id="tela2" class="screen">
             <div class="card auth-card">
                 <i class="fas fa-lock access-icon"></i>
@@ -50,6 +52,7 @@
             </div>
         </section>
 
+        <!-- TELA 3 - NOME -->
         <section id="tela3" class="screen">
             <div class="card auth-card">
                 <i class="fas fa-user-edit access-icon"></i>
@@ -64,53 +67,91 @@
             </div>
         </section>
 
+        <!-- TELA 4 - CONVITE -->
         <section id="tela4" class="screen">
-            <div id="areaConvite" class="convite-container">
-                <div class="convite-header">
-                    <div class="logo-mini-container">
-                        <img src="logo.png" class="circular-logo">
-                    </div>
-                    <h1>GALA JUVENIL</h1>
-                    <p class="sub-title">Convite Especial 2025</p>
-                </div>
+            <div class="convite-wrapper">
+                <div id="areaConvite" class="status-format">
+                    <div class="convite-border">
+                        <div class="convite-content">
 
-                <div class="convite-body">
-                    <p class="invite-text">A Comissão Organizadora da Gala Juvenil tem a honra de convidar a(o) irmã(o)</p>
-                    <h2 id="displayNome" class="guest-name">NOME DO CONVIDADO</h2>
-                    <p class="motto-label">A participar da GALA, sob o lema:</p>
-                    <p class="bible-verse">“Como é bom e agradável quando os irmãos convivem em união.” <br><span>(Salmos 133:1)</span></p>
-                    <p class="invite-details">Será uma ocasião especial de comunhão, marcada por momentos de louvores, orações e confraternização. Contamos com a vossa honrosa presença.</p>
-                </div>
+                            <div class="logo-container-circular">
+                                <img src="logo.png" alt="Logo">
+                            </div>
+                            
+                            <h1 class="gala-title">GALA JUVENIL</h1>
+                            <p class="gala-subtitle">CONVITE ESPECIAL 2025</p>
 
-                <div class="info-grid">
-                    <div class="info-item">
-                        <i class="fas fa-calendar-alt"></i>
-                        <strong>Data</strong>
-                        <span>26/12/2025</span>
-                    </div>
-                    <div class="info-item">
-                        <i class="fas fa-clock"></i>
-                        <strong>Horário</strong>
-                        <span>22:00 às 04:00</span>
-                    </div>
-                    <div class="info-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <strong>Local</strong>
-                        <span>Congregação Tsakane</span>
-                    </div>
-                </div>
+                            <div class="main-text">
+                                <p>A Comissão Organizadora da Gala Juvenil tem a honra de convidar a(o) irmã(o)</p>
+                                <h2 id="displayNome" class="nome-destaque">NOME DO CONVIDADO</h2>
+                                <p class="lema-label">A participar da GALA, sob o lema:</p>
+                                <p class="versiculo">"Como é bom e agradável quando os irmãos convivem em união."</p>
+                                <p class="referencia">(Salmos 133:1)</p>
+                            </div>
 
-                <div class="convite-footer">
-                    <p>Igreja Reformada | 85 232 8379 / 84 401 2254</p>
+                            <div class="descricao-evento">
+                                <p>
+                                    Será uma ocasião especial de comunhão, marcada por momentos de louvores,
+                                    orações e confraternização. Contamos com a vossa honrosa presença.
+                                </p>
+                            </div>
+
+                            <!-- CARDS DE INFORMAÇÃO -->
+                            <div class="info-cards">
+                                <div class="info-card">
+                                    <i class="fas fa-calendar-day"></i>
+                                    <div class="info-card-content">
+                                        <span class="info-label">Data</span>
+                                        <span class="info-value">26 de Dezembro de 2025</span>
+                                    </div>
+                                </div>
+
+                                <div class="info-card">
+                                    <i class="fas fa-clock"></i>
+                                    <div class="info-card-content">
+                                        <span class="info-label">Hora</span>
+                                        <span class="info-value">22:00 às 04:00</span>
+                                    </div>
+                                </div>
+
+                                <div class="info-card">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <div class="info-card-content">
+                                        <span class="info-label">Local</span>
+                                        <span class="info-value">Congregação Tsakane<br>Machava-Sede</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- CONTATOS -->
+                            <div class="convite-footer-branding">
+                                <p>Igreja Reformada</p>
+                                <div class="contatos">
+                                    <i class="fas fa-phone-alt"></i>
+                                    <span>85 232 8379 | 84 401 2254</span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <div class="action-buttons">
-                <button onclick="baixarImagem()" class="btn-action btn-download"><i class="fas fa-download"></i></button>
-                <button onclick="compartilharWhatsApp()" class="btn-action btn-whatsapp"><i class="fab fa-whatsapp"></i></button>
-                <button onclick="navegar('tela3')" class="btn-action btn-edit"><i class="fas fa-edit"></i></button>
+                <button onclick="baixarImagem()" class="btn-action btn-download" title="Baixar Imagem">
+                    <i class="fas fa-download"></i>
+                </button>
+                <button onclick="compartilharWhatsApp()" class="btn-action btn-whatsapp" title="Enviar WhatsApp">
+                    <i class="fab fa-whatsapp"></i>
+                </button>
+                <button onclick="navegar('tela3')" class="btn-action btn-edit" title="Editar Nome">
+                    <i class="fas fa-edit"></i>
+                </button>
             </div>
-            <button onclick="navegar('tela1')" class="btn-back"><i class="fas fa-arrow-left"></i> Voltar ao Início</button>
+            
+            <button onclick="navegar('tela1')" class="btn-back">
+                <i class="fas fa-arrow-left"></i> Voltar ao Início
+            </button>
         </section>
     </div>
 
