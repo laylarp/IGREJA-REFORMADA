@@ -354,7 +354,7 @@ function compartilharWhatsApp() {
     const baseUrl = window.location.origin + window.location.pathname;
     const linkConvite = `${baseUrl}?nome=${nomeCodificado}&share=true`;
     
-    const textoConvite = `*🎉 Convite para a Gala Juvenil 2025 🎉*\n\nOlá! Recebi um convite especial para a *Gala Juvenil da Igreja Reformada*.\n\nClique no link abaixo para ver o convite personalizado:\n\n🔗 ${linkConvite}\n\n*Para salvar: Use o método comum do seu celular para tirar screenshot!*`;
+    const textoConvite = `*🎉 Convite para a Gala Juvenil 2025 🎉*\n\nGlória a Deus.Olá! Tenho um convite especial. Venha para a *Gala Juvenil da Igreja Reformada*.\n\nClicando no link abaixo poderá ver o seu convite e mais detalhes:\n\n🔗 ${linkConvite}\n\n*Para salvar: Use o método comum do seu celular para tirar screenshot!*`;
     
     const textoCodificado = encodeURIComponent(textoConvite);
     const urlWhatsApp = `https://wa.me/?text=${textoCodificado}`;
