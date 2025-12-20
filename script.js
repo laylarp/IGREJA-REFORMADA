@@ -4,99 +4,9 @@ let nomeConvidado = "";
 
 // Inicialização
 document.addEventListener('DOMContentLoaded', function() {
-    // Configura botão modo desktop
-    const desktopToggleBtn = document.getElementById('btnDesktopToggle');
-    
-    // Verifica se está em tela pequena e ativa automaticamente
-    if (window.innerWidth < 768) {
-        const hasDesktopMode = localStorage.getItem('desktopMode') === 'true';
-        if (!hasDesktopMode) {
-            // Mostra mensagem simples para mobile
-            setTimeout(() => {
-                if (confirm("Para melhor visualização em celular, recomenda-se ativar o Modo Desktop. Ativar agora?")) {
-                    toggleDesktopMode();
-                }
-            }, 1000);
-        } else {
-            document.body.classList.add('desktop-mode');
-            updateButtonText();
-        }
-    }
-    
-    // Evento do botão
-    desktopToggleBtn.addEventListener('click', toggleDesktopMode);
-    
     // Configurações da aplicação
     setupApp();
 });
-
-// Função para alternar modo desktop
-function toggleDesktopMode() {
-    const body = document.body;
-    const isDesktopMode = body.classList.contains('desktop-mode');
-    
-    if (isDesktopMode) {
-        body.classList.remove('desktop-mode');
-        localStorage.setItem('desktopMode', 'false');
-        showToast("Modo Mobile ativado");
-    } else {
-        body.classList.add('desktop-mode');
-        localStorage.setItem('desktopMode', 'true');
-        showToast("Modo Desktop ativado");
-    }
-    
-    updateButtonText();
-}
-
-// Atualiza texto do botão
-function updateButtonText() {
-    const btn = document.getElementById('btnDesktopToggle');
-    const btnText = btn.querySelector('.btn-text');
-    const isDesktopMode = document.body.classList.contains('desktop-mode');
-    
-    if (isDesktopMode) {
-        btnText.textContent = "Modo Mobile";
-        btn.innerHTML = '<i class="fas fa-mobile-alt"></i><span class="btn-text">Modo Mobile</span>';
-    } else {
-        btnText.textContent = "Modo Desktop";
-        btn.innerHTML = '<i class="fas fa-desktop"></i><span class="btn-text">Modo Desktop</span>';
-    }
-}
-
-// Mostra notificação simples
-function showToast(message) {
-    // Remove toast anterior se existir
-    const existingToast = document.querySelector('.toast-message');
-    if (existingToast) {
-        existingToast.remove();
-    }
-    
-    // Cria novo toast
-    const toast = document.createElement('div');
-    toast.className = 'toast-message';
-    toast.textContent = message;
-    toast.style.cssText = `
-        position: fixed;
-        top: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        background: var(--primary);
-        color: white;
-        padding: 12px 24px;
-        border-radius: 8px;
-        z-index: 1001;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        animation: slideDown 0.3s ease;
-    `;
-    
-    document.body.appendChild(toast);
-    
-    // Remove após 3 segundos
-    setTimeout(() => {
-        toast.style.animation = 'slideUp 0.3s ease';
-        setTimeout(() => toast.remove(), 300);
-    }, 3000);
-}
 
 // Configuração da aplicação
 function setupApp() {
@@ -207,7 +117,7 @@ function baixarImagem() {
         btnDownload.innerHTML = originalHTML;
         btnDownload.disabled = false;
         
-        showToast("Convite baixado com sucesso!");
+        alert("Convite baixado com sucesso!");
     }).catch(error => {
         console.error("Erro ao gerar imagem:", error);
         alert("Erro ao baixar a imagem. Por favor, tente novamente.");
@@ -228,21 +138,6 @@ function compartilharWhatsApp() {
     
     window.open(urlWhatsApp, '_blank');
 }
-
-// CSS para animações do toast
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes slideDown {
-        from { transform: translateX(-50%) translateY(-20px); opacity: 0; }
-        to { transform: translateX(-50%) translateY(0); opacity: 1; }
-    }
-    
-    @keyframes slideUp {
-        from { transform: translateX(-50%) translateY(0); opacity: 1; }
-        to { transform: translateX(-50%) translateY(-20px); opacity: 0; }
-    }
-`;
-document.head.appendChild(style);
 
 // Instalação PWA (mantido)
 if ('serviceWorker' in navigator) {
