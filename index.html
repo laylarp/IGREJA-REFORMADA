@@ -2,160 +2,248 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Gala Juvenil 2025 - Convites</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#5D4037">
+    <meta name="theme-color" content="#4e342e">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body>
+
+    <!-- MENSAGEM DE INSTALAÇÃO PARA MOBILE -->
+    <div id="installPrompt" class="install-prompt">
+        <div class="install-card">
+            <i class="fas fa-download install-icon"></i>
+            <h3>Instalar App</h3>
+            <p>Para melhor experiência, instale este aplicativo no seu celular. Ele abrirá automaticamente no modo desktop.</p>
+            <button onclick="installApp()" class="btn-install">
+                <i class="fas fa-mobile-alt"></i> Instalar Agora
+            </button>
+            <button onclick="dismissPrompt()" class="btn-later">Mais tarde</button>
+        </div>
+    </div>
 
     <!-- APLICAÇÃO PRINCIPAL -->
     <div id="app">
         <!-- TELA 1 - INÍCIO -->
         <section id="tela1" class="screen active">
-            <div class="card main-card">
+            <div class="card main-card animate__animated animate__fadeIn">
                 <div class="logo-container">
-                    <img src="logo.png" alt="Logo Igreja" class="circular-logo">
+                    <div class="logo-glow">
+                        <img src="logo.png" alt="Logo Igreja" class="circular-logo">
+                    </div>
                 </div>
-                <h2>IGREJA REFORMADA</h2>
-                <h3>Gala Juvenil 2025</h3>
-                <div class="date-badge">26 de Dezembro</div>
-                <p class="description">Crie seu convite personalizado para a Gala Juvenil 2025 e compartilhe com seus amigos.</p>
+                <h2 class="church-name">IGREJA REFORMADA</h2>
+                <h3 class="event-title">Gala Juvenil 2025</h3>
+                <div class="date-badge animate__animated animate__pulse animate__infinite animate__slower">
+                    <i class="fas fa-calendar-star"></i> 26 de Dezembro
+                </div>
+                <p class="description">
+                    <i class="fas fa-hands-praying"></i> Crie seu convite personalizado para a Gala Juvenil 2025 
+                    e compartilhe esta bênção com seus amigos.
+                </p>
                 
-                <button onclick="navegar('tela2')" class="btn btn-primary"><i class="fas fa-plus-circle"></i> CRIAR CONVITE</button>
-                <button onclick="verConviteExistente()" class="btn btn-secondary"><i class="fas fa-eye"></i> VER CONVITE</button>
+                <button onclick="navegar('tela2')" class="btn btn-primary animate__animated animate__bounceIn">
+                    <i class="fas fa-plus-circle"></i> CRIAR CONVITE
+                </button>
+                <button onclick="verConviteExistente()" class="btn btn-secondary animate__animated animate__bounceIn animate__delay-1s">
+                    <i class="fas fa-eye"></i> VER CONVITE
+                </button>
+
+                <div class="bible-verse">
+                    <p>"Como é bom e agradável quando os irmãos convivem em união."</p>
+                    <span class="verse-ref">Salmos 133:1</span>
+                </div>
 
                 <div class="footer-info">
                     <p><i class="fas fa-users"></i> Comissão da Gala</p>
                     <p><i class="fas fa-phone"></i> 85 232 8379 | 84 401 2254</p>
-                    <p>© 2025 Igreja Reformada</p>
+                    <p class="copyright">© 2025 Igreja Reformada - Para a Glória de Deus</p>
                 </div>
             </div>
         </section>
 
         <!-- TELA 2 - SENHA -->
         <section id="tela2" class="screen">
-            <div class="card auth-card">
-                <i class="fas fa-lock access-icon"></i>
-                <h2>Acesso</h2>
-                <p>Digite a senha para criar convites</p>
+            <div class="card auth-card animate__animated animate__fadeIn">
+                <div class="access-icon-container">
+                    <i class="fas fa-lock access-icon"></i>
+                    <div class="icon-glow"></div>
+                </div>
+                <h2>Acesso Seguro</h2>
+                <p class="access-description">Digite a senha fornecida pela comissão</p>
                 <div class="input-group">
                     <i class="fas fa-key"></i>
-                    <input type="password" id="inputSenha" placeholder="Digite a senha">
+                    <input type="password" id="inputSenha" placeholder="Digite a senha" autocomplete="off">
+                    <button class="show-password" type="button" onclick="togglePassword()">
+                        <i class="fas fa-eye"></i>
+                    </button>
                 </div>
-                <button onclick="validarSenha()" class="btn btn-primary">ACESSAR</button>
-                <button onclick="navegar('tela1')" class="btn btn-cancel">CANCELAR</button>
-                <p class="hint-text"><i class="fas fa-info-circle"></i> Senha fornecida pela comissão</p>
+                <button onclick="validarSenha()" class="btn btn-primary">
+                    <i class="fas fa-unlock"></i> ACESSAR
+                </button>
+                <button onclick="navegar('tela1')" class="btn btn-cancel">
+                    <i class="fas fa-times"></i> CANCELAR
+                </button>
+                <p class="hint-text">
+                    <i class="fas fa-info-circle"></i> Senha: gala2025
+                </p>
             </div>
         </section>
 
         <!-- TELA 3 - NOME -->
         <section id="tela3" class="screen">
-            <div class="card auth-card">
-                <i class="fas fa-user-edit access-icon"></i>
+            <div class="card auth-card animate__animated animate__fadeIn">
+                <div class="access-icon-container">
+                    <i class="fas fa-user-edit access-icon"></i>
+                    <div class="icon-glow"></div>
+                </div>
                 <h2>Seu Nome</h2>
-                <p>Digite seu nome completo para o convite</p>
+                <p class="access-description">Digite seu nome completo para o convite</p>
                 <div class="input-group">
                     <i class="fas fa-signature"></i>
-                    <input type="text" id="nomeConvidado" placeholder="Ex: Albert Watche">
+                    <input type="text" id="nomeConvidado" placeholder="Ex: Albert Watche" autocomplete="off">
                 </div>
-                <button onclick="gerarConvite()" class="btn btn-primary">GERAR CONVITE</button>
-                <button onclick="navegar('tela2')" class="btn btn-cancel">VOLTAR</button>
+                <div class="name-hint">
+                    <i class="fas fa-lightbulb"></i> Este nome aparecerá no convite personalizado
+                </div>
+                <button onclick="gerarConvite()" class="btn btn-primary">
+                    <i class="fas fa-magic"></i> GERAR CONVITE
+                </button>
+                <button onclick="navegar('tela2')" class="btn btn-cancel">
+                    <i class="fas fa-arrow-left"></i> VOLTAR
+                </button>
             </div>
         </section>
 
         <!-- TELA 4 - CONVITE -->
         <section id="tela4" class="screen">
-            <div class="convite-wrapper">
-                <div id="areaConvite" class="status-format">
-                    <div class="convite-border">
-                        <div class="convite-content">
+            <div class="convite-container">
+                <div class="convite-wrapper">
+                    <div id="areaConvite" class="status-format animate__animated animate__zoomIn">
+                        <div class="convite-border">
+                            <div class="convite-content">
 
-                            <div class="logo-container-circular">
-                                <img src="logo.png" alt="Logo">
-                            </div>
-                            
-                            <h1 class="gala-title">GALA JUVENIL</h1>
-                            <p class="gala-subtitle">CONVITE ESPECIAL 2025</p>
+                                <div class="logo-container-circular">
+                                    <div class="logo-glow-small">
+                                        <img src="logo.png" alt="Logo">
+                                    </div>
+                                </div>
+                                
+                                <h1 class="gala-title">GALA JUVENIL</h1>
+                                <p class="gala-subtitle">CONVITE ESPECIAL 2025</p>
 
-                            <div class="main-text">
-                                <p>A Comissão Organizadora da Gala Juvenil tem a honra de convidar a(o) irmã(o)</p>
-                                <h2 id="displayNome" class="nome-destaque">NOME DO CONVIDADO</h2>
-                                <p class="lema-label">A participar da GALA, sob o lema:</p>
-                                <p class="versiculo">"Como é bom e agradável quando os irmãos convivem em união."</p>
-                                <p class="referencia">(Salmos 133:1)</p>
-                            </div>
-
-                            <div class="descricao-evento">
-                                <p>
-                                    Será uma ocasião especial de comunhão, marcada por momentos de louvores,
-                                    orações e confraternização. Contamos com a vossa honrosa presença.
-                                </p>
-                            </div>
-
-                            <!-- CARDS DE INFORMAÇÃO -->
-                            <div class="info-cards">
-                                <div class="info-card">
-                                    <i class="fas fa-calendar-day"></i>
-                                    <div class="info-card-content">
-                                        <span class="info-label">Data</span>
-                                        <span class="info-value">26 de Dezembro de 2025</span>
+                                <div class="main-text">
+                                    <p class="invitation-text">
+                                        A Comissão Organizadora da Gala Juvenil tem a honra de convidar a(o) irmã(o)
+                                    </p>
+                                    <h2 id="displayNome" class="nome-destaque">NOME DO CONVIDADO</h2>
+                                    <p class="lema-label">Para participar da GALA, sob o lema:</p>
+                                    <div class="verse-container">
+                                        <p class="versiculo">"Como é bom e agradável quando os irmãos convivem em união."</p>
+                                        <p class="referencia">(Salmos 133:1)</p>
                                     </div>
                                 </div>
 
-                                <div class="info-card">
-                                    <i class="fas fa-clock"></i>
-                                    <div class="info-card-content">
-                                        <span class="info-label">Hora</span>
-                                        <span class="info-value">22:00 às 04:00</span>
+                                <div class="descricao-evento">
+                                    <i class="fas fa-cross event-icon"></i>
+                                    <p>
+                                        Será uma ocasião especial de comunhão, marcada por momentos de louvores,
+                                        orações e confraternização. Contamos com a vossa honrosa presença para 
+                                        glorificarmos juntos ao Senhor.
+                                    </p>
+                                </div>
+
+                                <!-- CARDS DE INFORMAÇÃO ORGANIZADOS -->
+                                <div class="info-cards">
+                                    <div class="info-card animate__animated animate__fadeInLeft">
+                                        <div class="info-icon">
+                                            <i class="fas fa-calendar-day"></i>
+                                        </div>
+                                        <div class="info-card-content">
+                                            <span class="info-label">Data</span>
+                                            <span class="info-value">26 de Dezembro de 2025</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="info-card animate__animated animate__fadeInUp">
+                                        <div class="info-icon">
+                                            <i class="fas fa-clock"></i>
+                                        </div>
+                                        <div class="info-card-content">
+                                            <span class="info-label">Hora</span>
+                                            <span class="info-value">22:00 às 04:00</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="info-card animate__animated animate__fadeInRight">
+                                        <div class="info-icon">
+                                            <i class="fas fa-map-marker-alt"></i>
+                                        </div>
+                                        <div class="info-card-content">
+                                            <span class="info-label">Local</span>
+                                            <span class="info-value">Congregação Tsakane<br>Machava-Sede, rua da Mulher</span>
+                                        </div>
                                     </div>
                                 </div>
 
-                                <div class="info-card">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                    <div class="info-card-content">
-                                        <span class="info-label">Local</span>
-                                        <span class="info-value">Congregação Tsakane<br>Machava-Sede, rua da Mulher</span>
+                                <!-- CONTATOS -->
+                                <div class="convite-footer-branding">
+                                    <p class="church-name-footer">Igreja Reformada</p>
+                                    <div class="contatos">
+                                        <i class="fas fa-phone"></i>
+                                        <span>85 232 8379 | 84 401 2254</span>
+                                        <i class="fas fa-hands-praying prayer-icon"></i>
                                     </div>
                                 </div>
-                            </div>
 
-                            <!-- CONTATOS -->
-                            <div class="convite-footer-branding">
-                                <p>Igreja Reformada</p>
-                                <div class="contatos">
-                                    <i class="fas fa-phone"></i>
-                                    <span>85 232 8379 | 84 401 2254</span>
-                                </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="action-buttons">
-                <button onclick="baixarImagem()" class="btn-action btn-download" title="Baixar Imagem">
-                    <i class="fas fa-download"></i>
-                </button>
-                <button onclick="compartilharWhatsApp()" class="btn-action btn-whatsapp" title="Enviar WhatsApp">
-                    <i class="fab fa-whatsapp"></i>
-                </button>
-                <button onclick="navegar('tela3')" class="btn-action btn-edit" title="Editar Nome">
-                    <i class="fas fa-edit"></i>
+                <div class="action-buttons">
+                    <button onclick="baixarImagem()" class="btn-action btn-download" title="Baixar Imagem">
+                        <i class="fas fa-download"></i>
+                        <span class="btn-tooltip">Baixar</span>
+                    </button>
+                    <button onclick="compartilharWhatsApp()" class="btn-action btn-whatsapp" title="Enviar WhatsApp">
+                        <i class="fab fa-whatsapp"></i>
+                        <span class="btn-tooltip">WhatsApp</span>
+                    </button>
+                    <button onclick="navegar('tela3')" class="btn-action btn-edit" title="Editar Nome">
+                        <i class="fas fa-edit"></i>
+                        <span class="btn-tooltip">Editar</span>
+                    </button>
+                    <button onclick="compartilharConvite()" class="btn-action btn-share" title="Compartilhar">
+                        <i class="fas fa-share-alt"></i>
+                        <span class="btn-tooltip">Compartilhar</span>
+                    </button>
+                </div>
+                
+                <button onclick="navegar('tela1')" class="btn-back">
+                    <i class="fas fa-arrow-left"></i> Voltar ao Início
                 </button>
             </div>
-            
-            <button onclick="navegar('tela1')" class="btn-back">
-                <i class="fas fa-arrow-left"></i> Voltar ao Início
-            </button>
         </section>
     </div>
 
+    <!-- EFEITOS DE PARTÍCULAS -->
+    <div id="particles-js"></div>
+    
+    <!-- NOTIFICAÇÃO FLUTUANTE -->
+    <div id="notification" class="notification">
+        <i class="fas fa-check-circle"></i>
+        <span id="notificationText"></span>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
