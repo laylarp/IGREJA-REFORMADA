@@ -5,6 +5,7 @@ let isFromLink = false;
 let isFromView = false;
 let deferredPrompt;
 let isInstalled = false;
+let conviteGerado = false;
 
 // Inicialização
 document.addEventListener('DOMContentLoaded', function() {
@@ -38,6 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
         isInstalled = true;
         hideInstallPrompt();
         showNotification('Aplicativo instalado com sucesso!');
+        localStorage.setItem('appInstalled', 'true');
     });
 });
 
@@ -51,15 +53,21 @@ function checkUrlParameters() {
         isFromLink = true;
         
         if (nomeParam) {
-            nomeConvidado = decodeURIComponent(nomeParam);
-            document.getElementById('displayNome').textContent = nomeConvidado;
-            
-            // Ir direto para tela do convite
-            setTimeout(() => {
-                navegar('tela4');
-                ocultarBotaoEditar();
-                showNotification('Convite carregado!');
-            }, 500);
+            try {
+                nomeConvidado = decodeURIComponent(nomeParam);
+                document.getElementById('displayNome').textContent = nomeConvidado;
+                conviteGerado = true;
+                
+                // Ir direto para tela do convite
+                setTimeout(() => {
+                    navegar('tela4');
+                    ocultarBotaoEditar();
+                    showNotification('Convite carregado!');
+                }, 300);
+            } catch (e) {
+                console.error('Erro ao decodificar nome:', e);
+                showNotification('Erro ao carregar convite.', 'error');
+            }
         }
     }
 }
@@ -224,6 +232,7 @@ function gerarConvite() {
     
     document.getElementById('displayNome').textContent = nomeConvidado;
     navegar('tela4');
+    conviteGerado = true;
     
     // Mostrar botão editar se não for de link
     if (!isFromLink) {
@@ -234,6 +243,7 @@ function gerarConvite() {
     }
     
     localStorage.setItem('conviteGalaNome', nomeConvidado);
+    localStorage.setItem('conviteGerado', 'true');
     showNotification('Convite gerado com sucesso!');
     
     // Efeito visual no nome
@@ -247,11 +257,13 @@ function gerarConvite() {
 // Ver convite existente
 function verConviteExistente() {
     const nomeSalvo = localStorage.getItem('conviteGalaNome');
+    const conviteCriado = localStorage.getItem('conviteGerado');
     
-    if (nomeSalvo) {
+    if (nomeSalvo && conviteCriado === 'true') {
         isFromView = true;
         nomeConvidado = nomeSalvo;
         document.getElementById('displayNome').textContent = nomeSalvo;
+        conviteGerado = true;
         navegar('tela4');
         
         // Ocultar botão editar quando vem do "Ver Convite"
@@ -270,95 +282,190 @@ function editarNome() {
     document.getElementById('nomeConvidado').focus();
 }
 
-// Download da imagem do convite
+// Download da imagem do convite - CORRIGIDO
 function baixarImagem() {
+    if (!conviteGerado) {
+        showNotification('Primeiro gere um convite!', 'error');
+        return;
+    }
+    
     const elemento = document.getElementById('areaConvite');
     
-    elemento.style.userSelect = 'auto';
-    elemento.style.webkitUserSelect = 'auto';
+    if (!elemento) {
+        showNotification('Erro: Elemento do convite não encontrado.', 'error');
+        return;
+    }
     
     const btnDownload = document.querySelector('.btn-download');
+    if (!btnDownload) return;
+    
     const originalHTML = btnDownload.innerHTML;
     btnDownload.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
     btnDownload.disabled = true;
     
     showNotification('Gerando imagem...');
     
-    html2canvas(elemento, {
-        scale: 2,
+    // Forçar reflow para garantir que tudo está renderizado
+    elemento.style.display = 'block';
+    elemento.offsetHeight;
+    
+    const options = {
+        scale: 3, // Aumentado para melhor qualidade
         useCORS: true,
-        allowTaint: true,
-        backgroundColor: null,
+        backgroundColor: '#f5f1e9', // Cor de fundo do convite
+        logging: false,
+        width: elemento.offsetWidth,
+        height: elemento.offsetHeight,
         onclone: function(clonedDoc) {
             const clonedElement = clonedDoc.getElementById('areaConvite');
+            // Garantir que o elemento clone tenha estilos corretos
             clonedElement.style.width = elemento.offsetWidth + 'px';
             clonedElement.style.height = elemento.offsetHeight + 'px';
             clonedElement.style.transform = 'none';
+            clonedElement.style.position = 'relative';
         }
-    }).then(canvas => {
-        elemento.style.userSelect = 'none';
-        elemento.style.webkitUserSelect = 'none';
-        
-        const link = document.createElement('a');
-        link.download = `Convite-Gala-Juvenil-${nomeConvidado.replace(/\s+/g, '-')}.png`;
-        link.href = canvas.toDataURL('image/png', 1.0);
-        
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        
-        btnDownload.innerHTML = originalHTML;
-        btnDownload.disabled = false;
-        
-        showNotification('Convite baixado com sucesso!');
-    }).catch(error => {
-        console.error("Erro ao gerar imagem:", error);
-        showNotification('Erro ao baixar a imagem. Tente novamente.', 'error');
-        
-        btnDownload.innerHTML = originalHTML;
-        btnDownload.disabled = false;
-        elemento.style.userSelect = 'none';
-        elemento.style.webkitUserSelect = 'none';
-    });
+    };
+    
+    html2canvas(elemento, options)
+        .then(canvas => {
+            try {
+                // Criar link para download
+                const link = document.createElement('a');
+                const nomeArquivo = `Convite-Gala-Juvenil-${nomeConvidado.replace(/\s+/g, '-')}.png`;
+                
+                // Configurar link
+                link.download = nomeArquivo;
+                link.href = canvas.toDataURL('image/png');
+                link.style.display = 'none';
+                
+                // Adicionar ao documento e clicar
+                document.body.appendChild(link);
+                link.click();
+                
+                // Limpar
+                setTimeout(() => {
+                    document.body.removeChild(link);
+                    URL.revokeObjectURL(link.href);
+                }, 100);
+                
+                showNotification('Convite baixado com sucesso!');
+                
+            } catch (error) {
+                console.error("Erro ao criar download:", error);
+                showNotification('Erro ao criar arquivo de download.', 'error');
+            }
+        })
+        .catch(error => {
+            console.error("Erro no html2canvas:", error);
+            showNotification('Erro ao gerar imagem. Tente novamente.', 'error');
+        })
+        .finally(() => {
+            // Restaurar botão
+            btnDownload.innerHTML = originalHTML;
+            btnDownload.disabled = false;
+        });
 }
 
-// Gerar link compartilhável
+// Gerar link compartilhável - CORRIGIDO
 function gerarLinkCompartilhavel() {
-    const nomeCodificado = encodeURIComponent(nomeConvidado);
-    const link = `${window.location.origin}${window.location.pathname}?nome=${nomeCodificado}&share=true`;
+    if (!conviteGerado || !nomeConvidado) {
+        showNotification('Primeiro gere um convite com seu nome!', 'error');
+        return;
+    }
     
-    // Copiar para área de transferência
-    navigator.clipboard.writeText(link).then(() => {
-        showNotification('Link copiado! Cole no WhatsApp para compartilhar.');
-    }).catch(() => {
-        // Fallback para navegadores antigos
-        const textArea = document.createElement('textarea');
-        textArea.value = link;
-        document.body.appendChild(textArea);
-        textArea.select();
-        document.execCommand('copy');
-        document.body.removeChild(textArea);
-        showNotification('Link copiado! Cole no WhatsApp para compartilhar.');
-    });
+    const nomeCodificado = encodeURIComponent(nomeConvidado);
+    // Criar URL completa com protocolo, domínio e parâmetros
+    const linkCompleto = `${window.location.origin}${window.location.pathname}?nome=${nomeCodificado}&share=true`;
+    
+    // Usar a API moderna de clipboard
+    if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(linkCompleto)
+            .then(() => {
+                showNotification('✅ Link copiado! Cole no WhatsApp.');
+            })
+            .catch(err => {
+                console.error('Erro ao copiar:', err);
+                fallbackCopy(linkCompleto);
+            });
+    } else {
+        // Fallback para navegadores mais antigos
+        fallbackCopy(linkCompleto);
+    }
 }
 
-// Compartilhar no WhatsApp
+// Função fallback para copiar texto
+function fallbackCopy(text) {
+    const textArea = document.createElement('textarea');
+    textArea.value = text;
+    textArea.style.position = 'fixed';
+    textArea.style.left = '-999999px';
+    textArea.style.top = '-999999px';
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    
+    try {
+        const successful = document.execCommand('copy');
+        if (successful) {
+            showNotification('✅ Link copiado! Cole no WhatsApp.');
+        } else {
+            showNotification('❌ Não foi possível copiar o link.', 'error');
+        }
+    } catch (err) {
+        console.error('Erro fallback copy:', err);
+        showNotification('❌ Erro ao copiar o link.', 'error');
+    }
+    
+    document.body.removeChild(textArea);
+}
+
+// Compartilhar no WhatsApp - CORRIGIDO
 function compartilharWhatsApp() {
-    const textoConvite = `*🎉 Convite para a Gala Juvenil 2025 🎉*\n\nOlá! Recebi um convite especial para a *Gala Juvenil da Igreja Reformada*.\n\nClique no link abaixo para ver o convite personalizado:\n\n🔗 ${window.location.origin}${window.location.pathname}?nome=${encodeURIComponent(nomeConvidado)}&share=true\n\n*Baixe o convite e participe desta celebração especial!*`;
+    if (!conviteGerado || !nomeConvidado) {
+        showNotification('Primeiro gere um convite com seu nome!', 'error');
+        return;
+    }
     
-    const urlWhatsApp = `https://wa.me/?text=${encodeURIComponent(textoConvite)}`;
+    const nomeCodificado = encodeURIComponent(nomeConvidado);
+    const linkConvite = `${window.location.origin}${window.location.pathname}?nome=${nomeCodificado}&share=true`;
     
-    window.open(urlWhatsApp, '_blank');
+       const textoConvite = `🎉✨ *Convite Especial – Gala Juvenil 2025* ✨🎉
+
+      🙌 *Glória a Deus!*  
+       É com grande alegria que te convido para participares da  
+       *Gala Juvenil da Igreja Reformada*.
+
+       Um momento especial de comunhão, louvor, alegria e edificação espiritual, preparado com muito carinho para ti.
+
+     👉 *Clique no link abaixo para ver o convite personalizado:*  
+     🔗 ${window.location.origin}${window.location.pathname}?nome=${encodeURIComponent(nomeConvidado)}&share=true
+
+      ⬇️ *Baixe o convite e junte-se a nós nesse grande encontro para a glória do Senhor!*  🙏✨`;
+
+    
+    const textoCodificado = encodeURIComponent(textoConvite);
+    const urlWhatsApp = `https://wa.me/?text=${textoCodificado}`;
+    
+    // Abrir em nova janela
+    window.open(urlWhatsApp, '_blank', 'noopener,noreferrer');
     showNotification('Abrindo WhatsApp...');
 }
 
 // Compartilhar convite
 function compartilharConvite() {
+    if (!conviteGerado || !nomeConvidado) {
+        showNotification('Primeiro gere um convite com seu nome!', 'error');
+        return;
+    }
+    
     if (navigator.share) {
+        const nomeCodificado = encodeURIComponent(nomeConvidado);
+        const linkConvite = `${window.location.origin}${window.location.pathname}?nome=${nomeCodificado}&share=true`;
+        
         navigator.share({
             title: 'Convite Gala Juvenil 2025',
             text: `${nomeConvidado} convida você para a Gala Juvenil! Clique no link para ver o convite:`,
-            url: `${window.location.origin}${window.location.pathname}?nome=${encodeURIComponent(nomeConvidado)}&share=true`,
+            url: linkConvite,
         })
         .then(() => showNotification('Convite compartilhado!'))
         .catch((error) => {
@@ -375,13 +482,15 @@ function showNotification(message, type = 'success') {
     const notification = document.getElementById('notification');
     const notificationText = document.getElementById('notificationText');
     
+    if (!notification || !notificationText) return;
+    
     notificationText.textContent = message;
     
     // Definir cor baseada no tipo
     if (type === 'error') {
-        notification.style.background = 'linear-gradient(135deg, var(--error) 0%, #c62828 100%)';
+        notification.style.background = 'linear-gradient(135deg, #f44336 0%, #c62828 100%)';
     } else {
-        notification.style.background = 'linear-gradient(135deg, var(--success) 0%, #2e7d32 100%)';
+        notification.style.background = 'linear-gradient(135deg, #4CAF50 0%, #2e7d32 100%)';
     }
     
     notification.classList.add('show');
@@ -404,30 +513,13 @@ if ('serviceWorker' in navigator) {
     });
 }
 
-// Adicionar ao arquivo service-worker.js (se não existir, crie um)
-/*
-// service-worker.js
-const CACHE_NAME = 'gala-juvenil-v1';
-const urlsToCache = [
-  '/',
-  '/index.html',
-  '/manifest.json',
-  '/icon-192.png',
-  '/icon-512.png'
-];
-
-self.addEventListener('install', event => {
-  event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then(cache => cache.addAll(urlsToCache))
-  );
+// Verificar se tem convite gerado ao carregar a página
+window.addEventListener('pageshow', function() {
+    const conviteCriado = localStorage.getItem('conviteGerado');
+    const nomeSalvo = localStorage.getItem('conviteGalaNome');
+    
+    if (conviteCriado === 'true' && nomeSalvo && !isFromLink) {
+        conviteGerado = true;
+        nomeConvidado = nomeSalvo;
+    }
 });
-
-self.addEventListener('fetch', event => {
-  event.respondWith(
-    caches.match(event.request)
-      .then(response => response || fetch(event.request))
-  );
-});
-*/
-
