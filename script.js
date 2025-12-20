@@ -1,11 +1,16 @@
 // Dados do aplicativo
 const SENHA_VALIDA = "gala2025";
 let nomeConvidado = "";
+let isFromLink = false;
+let isFromView = false;
 let deferredPrompt;
 let isInstalled = false;
 
 // Inicialização
 document.addEventListener('DOMContentLoaded', function() {
+    // Verificar se veio de um link compartilhado
+    checkUrlParameters();
+    
     // Configurações da aplicação
     setupApp();
     
@@ -16,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
     checkIfInstalled();
     
     // Mostrar prompt de instalação em mobile
-    if (isMobile()) {
+    if (isMobile() && !isInstalled) {
         setTimeout(() => {
             showInstallPrompt();
         }, 2000);
@@ -36,6 +41,29 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+// Verificar parâmetros da URL
+function checkUrlParameters() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const nomeParam = urlParams.get('nome');
+    const shareParam = urlParams.get('share');
+    
+    if (nomeParam || shareParam === 'true') {
+        isFromLink = true;
+        
+        if (nomeParam) {
+            nomeConvidado = decodeURIComponent(nomeParam);
+            document.getElementById('displayNome').textContent = nomeConvidado;
+            
+            // Ir direto para tela do convite
+            setTimeout(() => {
+                navegar('tela4');
+                ocultarBotaoEditar();
+                showNotification('Convite carregado!');
+            }, 500);
+        }
+    }
+}
+
 // Configuração da aplicação
 function setupApp() {
     // Enter na senha
@@ -54,7 +82,7 @@ function setupApp() {
     
     // Carrega nome salvo se existir
     const nomeSalvo = localStorage.getItem('conviteGalaNome');
-    if (nomeSalvo) {
+    if (nomeSalvo && !isFromLink) {
         document.getElementById('nomeConvidado').value = nomeSalvo;
     }
 }
@@ -80,6 +108,14 @@ function setupParticles() {
     }
 }
 
+// Ocultar botão editar
+function ocultarBotaoEditar() {
+    const btnEditar = document.getElementById('btnEditarNome');
+    if (btnEditar) {
+        btnEditar.style.display = 'none';
+    }
+}
+
 // Verificar se é mobile
 function isMobile() {
     return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
@@ -87,8 +123,11 @@ function isMobile() {
 
 // Mostrar prompt de instalação
 function showInstallPrompt() {
-    const prompt = document.getElementById('installPrompt');
-    prompt.style.display = 'flex';
+    const dismissed = localStorage.getItem('installPromptDismissed');
+    if (!dismissed && !isInstalled) {
+        const prompt = document.getElementById('installPrompt');
+        prompt.style.display = 'flex';
+    }
 }
 
 // Esconder prompt de instalação
@@ -104,11 +143,12 @@ function installApp() {
         deferredPrompt.userChoice.then((choiceResult) => {
             if (choiceResult.outcome === 'accepted') {
                 showNotification('Instalação iniciada!');
+                localStorage.setItem('appInstalled', 'true');
             }
             deferredPrompt = null;
         });
     } else {
-        showNotification('Use o menu do navegador para instalar (3 pontos → Instalar app)');
+        showNotification('Use o menu do navegador para instalar (⋮ → Instalar app)');
     }
 }
 
@@ -118,15 +158,18 @@ function dismissPrompt() {
 }
 
 function checkIfInstalled() {
+    // Verificar se já foi instalado como PWA
     if (window.matchMedia('(display-mode: standalone)').matches || 
         window.navigator.standalone ||
         document.referrer.includes('android-app://')) {
         isInstalled = true;
+        localStorage.setItem('appInstalled', 'true');
     }
     
-    const dismissed = localStorage.getItem('installPromptDismissed');
-    if (dismissed) {
-        hideInstallPrompt();
+    // Verificar se já foi instalado anteriormente
+    const appInstalled = localStorage.getItem('appInstalled');
+    if (appInstalled === 'true') {
+        isInstalled = true;
     }
 }
 
@@ -181,6 +224,15 @@ function gerarConvite() {
     
     document.getElementById('displayNome').textContent = nomeConvidado;
     navegar('tela4');
+    
+    // Mostrar botão editar se não for de link
+    if (!isFromLink) {
+        const btnEditar = document.getElementById('btnEditarNome');
+        if (btnEditar) {
+            btnEditar.style.display = 'block';
+        }
+    }
+    
     localStorage.setItem('conviteGalaNome', nomeConvidado);
     showNotification('Convite gerado com sucesso!');
     
@@ -197,13 +249,25 @@ function verConviteExistente() {
     const nomeSalvo = localStorage.getItem('conviteGalaNome');
     
     if (nomeSalvo) {
+        isFromView = true;
         nomeConvidado = nomeSalvo;
         document.getElementById('displayNome').textContent = nomeSalvo;
         navegar('tela4');
+        
+        // Ocultar botão editar quando vem do "Ver Convite"
+        ocultarBotaoEditar();
+        
         showNotification('Convite carregado!');
     } else {
         showNotification('Nenhum convite encontrado. Crie um novo primeiro.', 'error');
     }
+}
+
+// Editar nome
+function editarNome() {
+    navegar('tela3');
+    document.getElementById('nomeConvidado').value = nomeConvidado;
+    document.getElementById('nomeConvidado').focus();
 }
 
 // Download da imagem do convite
@@ -258,15 +322,34 @@ function baixarImagem() {
     });
 }
 
+// Gerar link compartilhável
+function gerarLinkCompartilhavel() {
+    const nomeCodificado = encodeURIComponent(nomeConvidado);
+    const link = `${window.location.origin}${window.location.pathname}?nome=${nomeCodificado}&share=true`;
+    
+    // Copiar para área de transferência
+    navigator.clipboard.writeText(link).then(() => {
+        showNotification('Link copiado! Cole no WhatsApp para compartilhar.');
+    }).catch(() => {
+        // Fallback para navegadores antigos
+        const textArea = document.createElement('textarea');
+        textArea.value = link;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+        showNotification('Link copiado! Cole no WhatsApp para compartilhar.');
+    });
+}
+
 // Compartilhar no WhatsApp
 function compartilharWhatsApp() {
-    const textoConvite = `*🎉 Convite para a Gala Juvenil 2025 🎉*\n\nOlá! ${nomeConvidado} está convidando você para a *Gala Juvenil da Igreja Reformada*.\n\n📅 *Data:* 26 de Dezembro de 2025\n🕙 *Hora:* 22:00 às 04:00\n📍 *Local:* Congregação Tsakane, Machava-Sede\n\n🌟 *Lema:* "Como é bom e agradável quando os irmãos convivem em união." (Salmos 133:1)\n\n🙏 Será uma ocasião especial de comunhão, louvores e confraternização.\n\n*Contamos com sua presença para glorificarmos juntos ao Senhor!*\n\n📞 Contato: 85 232 8379 | 84 401 2254`;
+    const textoConvite = `*🎉 Convite para a Gala Juvenil 2025 🎉*\n\nOlá! Recebi um convite especial para a *Gala Juvenil da Igreja Reformada*.\n\nClique no link abaixo para ver o convite personalizado:\n\n🔗 ${window.location.origin}${window.location.pathname}?nome=${encodeURIComponent(nomeConvidado)}&share=true\n\n*Baixe o convite e participe desta celebração especial!*`;
     
-    const textoCodificado = encodeURIComponent(textoConvite);
-    const urlWhatsApp = `https://wa.me/?text=${textoCodificado}`;
+    const urlWhatsApp = `https://wa.me/?text=${encodeURIComponent(textoConvite)}`;
     
     window.open(urlWhatsApp, '_blank');
-    showNotification('Compartilhando no WhatsApp...');
+    showNotification('Abrindo WhatsApp...');
 }
 
 // Compartilhar convite
@@ -274,8 +357,8 @@ function compartilharConvite() {
     if (navigator.share) {
         navigator.share({
             title: 'Convite Gala Juvenil 2025',
-            text: `${nomeConvidado} convida você para a Gala Juvenil!`,
-            url: window.location.href,
+            text: `${nomeConvidado} convida você para a Gala Juvenil! Clique no link para ver o convite:`,
+            url: `${window.location.origin}${window.location.pathname}?nome=${encodeURIComponent(nomeConvidado)}&share=true`,
         })
         .then(() => showNotification('Convite compartilhado!'))
         .catch((error) => {
@@ -320,3 +403,31 @@ if ('serviceWorker' in navigator) {
             });
     });
 }
+
+// Adicionar ao arquivo service-worker.js (se não existir, crie um)
+/*
+// service-worker.js
+const CACHE_NAME = 'gala-juvenil-v1';
+const urlsToCache = [
+  '/',
+  '/index.html',
+  '/manifest.json',
+  '/icon-192.png',
+  '/icon-512.png'
+];
+
+self.addEventListener('install', event => {
+  event.waitUntil(
+    caches.open(CACHE_NAME)
+      .then(cache => cache.addAll(urlsToCache))
+  );
+});
+
+self.addEventListener('fetch', event => {
+  event.respondWith(
+    caches.match(event.request)
+      .then(response => response || fetch(event.request))
+  );
+});
+*/
+

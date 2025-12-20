@@ -16,19 +16,6 @@
 </head>
 <body>
 
-    <!-- MENSAGEM DE INSTALAÇÃO PARA MOBILE -->
-    <div id="installPrompt" class="install-prompt">
-        <div class="install-card">
-            <i class="fas fa-download install-icon"></i>
-            <h3>Instalar App</h3>
-            <p>Para melhor experiência, instale este aplicativo no seu celular. Ele abrirá automaticamente no modo desktop.</p>
-            <button onclick="installApp()" class="btn-install">
-                <i class="fas fa-mobile-alt"></i> Instalar Agora
-            </button>
-            <button onclick="dismissPrompt()" class="btn-later">Mais tarde</button>
-        </div>
-    </div>
-
     <!-- APLICAÇÃO PRINCIPAL -->
     <div id="app">
         <!-- TELA 1 - INÍCIO -->
@@ -55,18 +42,13 @@
                 <button onclick="verConviteExistente()" class="btn btn-secondary animate__animated animate__bounceIn animate__delay-1s">
                     <i class="fas fa-eye"></i> VER CONVITE
                 </button>
-
-                <div class="bible-verse">
-                    <p>"Como é bom e agradável quando os irmãos convivem em união."</p>
-                    <span class="verse-ref">Salmos 133:1</span>
-                </div>
-
                 <div class="footer-info">
                     <p><i class="fas fa-users"></i> Comissão da Gala</p>
                     <p><i class="fas fa-phone"></i> 85 232 8379 | 84 401 2254</p>
                     <p class="copyright">© 2025 Igreja Reformada - Para a Glória de Deus</p>
                 </div>
             </div>
+            
         </section>
 
         <!-- TELA 2 - SENHA -->
@@ -155,7 +137,7 @@
                                     <i class="fas fa-cross event-icon"></i>
                                     <p>
                                         Será uma ocasião especial de comunhão, marcada por momentos de louvores,
-                                        orações e confraternização. Contamos com a vossa honrosa presença para 
+                                        orações e confraternização. Contamos com a sua honrosa presença para 
                                         glorificarmos juntos ao Senhor.
                                     </p>
                                 </div>
@@ -197,6 +179,7 @@
                                 <div class="convite-footer-branding">
                                     <p class="church-name-footer">Igreja Reformada</p>
                                     <div class="contatos">
+            
                                         <i class="fas fa-phone"></i>
                                         <span>85 232 8379 | 84 401 2254</span>
                                         <i class="fas fa-hands-praying prayer-icon"></i>
@@ -217,8 +200,12 @@
                         <i class="fab fa-whatsapp"></i>
                         <span class="btn-tooltip"></span>
                     </button>
-                    <button onclick="navegar('tela3')" class="btn-action btn-edit" title="Editar Nome">
+                     <button id="btnEditarNome" onclick="editarNome()" class="btn-action btn-edit" title="Editar Nome">
                         <i class="fas fa-edit"></i>
+                        <span class="btn-tooltip"></span>
+                    </button>
+                    <button onclick="gerarLinkCompartilhavel()" class="btn-action btn-link" title="Gerar Link">
+                        <i class="fas fa-link"></i>
                         <span class="btn-tooltip"></span>
                     </button>
                     <button onclick="compartilharConvite()" class="btn-action btn-share" title="Compartilhar">
@@ -236,12 +223,6 @@
 
     <!-- EFEITOS DE PARTÍCULAS -->
     <div id="particles-js"></div>
-    
-    <!-- NOTIFICAÇÃO FLUTUANTE -->
-    <div id="notification" class="notification">
-        <i class="fas fa-check-circle"></i>
-        <span id="notificationText"></span>
-    </div>
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="script.js"></script>
