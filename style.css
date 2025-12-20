@@ -1009,3 +1009,230 @@ h3 {
 .visible {
     display: block !important;
 }
+/* ============================================== */
+/* INSTALAÇÃO PWA */
+/* ============================================== */
+.install-prompt {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 400px;
+    background: linear-gradient(135deg, var(--primary) 0%, #5d4037 100%);
+    color: white;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+    z-index: 10000;
+    display: none;
+    animation: slideUp 0.4s ease;
+    border: 2px solid var(--accent);
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateX(-50%) translateY(100px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+    }
+}
+
+.install-content {
+    text-align: center;
+}
+
+.install-icon {
+    font-size: 3rem;
+    color: var(--accent);
+    margin-bottom: 15px;
+    display: block;
+}
+
+.install-content h3 {
+    color: white;
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+}
+
+.install-content p {
+    color: rgba(255,255,255,0.9);
+    margin-bottom: 20px;
+    font-size: 1rem;
+}
+
+.install-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.btn-install {
+    background: linear-gradient(135deg, var(--accent) 0%, #c19b2e 100%);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-cancel-install {
+    background: rgba(255,255,255,0.1);
+    color: white;
+    border: 1px solid rgba(255,255,255,0.3);
+    padding: 12px 25px;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-install:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4);
+}
+
+.btn-cancel-install:hover {
+    background: rgba(255,255,255,0.2);
+}
+
+/* Botão de screenshot */
+.btn-screenshot {
+    background: linear-gradient(135deg, #8e44ad 0%, #9b59b6 100%) !important;
+}
+
+.btn-screenshot:hover {
+    background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%) !important;
+}
+
+/* ============================================== */
+/* NOTIFICAÇÃO */
+/* ============================================== */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, #4CAF50 0%, #2e7d32 100%);
+    color: white;
+    padding: 15px 25px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    z-index: 9999;
+    transform: translateX(150%);
+    transition: transform 0.3s ease;
+    max-width: 350px;
+    font-weight: 500;
+}
+
+.notification.show {
+    transform: translateX(0);
+}
+
+.notification.error {
+    background: linear-gradient(135deg, #f44336 0%, #c62828 100%);
+}
+
+/* ============================================== */
+/* CAPTURA DE TELA - MELHOR QUALIDADE */
+/* ============================================== */
+.capture-mode {
+    width: 800px !important;
+    height: auto !important;
+    min-height: 1400px !important;
+    margin: 0 auto !important;
+    padding: 40px !important;
+    transform: none !important;
+    position: relative !important;
+    background: var(--primary) !important;
+    border-radius: 25px !important;
+    border: 10px solid var(--accent) !important;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3) !important;
+}
+
+.capture-mode .convite-border {
+    width: 100% !important;
+    min-height: 1300px !important;
+    height: auto !important;
+    margin: 0 auto !important;
+    padding: 50px 40px !important;
+    border: 3px solid var(--accent) !important;
+    background: var(--light-brown) !important;
+    border-radius: 20px !important;
+}
+
+.capture-mode .gala-title {
+    font-size: 42px !important;
+    margin-bottom: 25px !important;
+}
+
+.capture-mode .nome-destaque {
+    font-size: 32px !important;
+    padding: 20px 15px !important;
+    margin: 30px 0 !important;
+    background: linear-gradient(45deg, #f5f1e9, #fff8e1) !important;
+    border-left: 6px solid var(--primary) !important;
+    border-right: 6px solid var(--primary) !important;
+}
+
+.capture-mode .versiculo {
+    font-size: 26px !important;
+    margin: 25px 0 !important;
+}
+
+.capture-mode .info-cards {
+    gap: 30px !important;
+    margin: 40px 0 !important;
+}
+
+.capture-mode .info-card {
+    min-width: 180px !important;
+    max-width: 200px !important;
+    min-height: 160px !important;
+    padding: 25px 20px !important;
+}
+
+.capture-mode .info-card i {
+    font-size: 30px !important;
+}
+
+.capture-mode .info-label {
+    font-size: 18px !important;
+}
+
+.capture-mode .info-value {
+    font-size: 20px !important;
+}
+
+.capture-mode .convite-footer-branding {
+    margin-top: 50px !important;
+    padding-top: 30px !important;
+    border-top: 3px solid rgba(78, 52, 46, 0.2) !important;
+}
+
+.capture-mode .church-name-footer {
+    font-size: 28px !important;
+}
+
+.capture-mode .contatos {
+    font-size: 22px !important;
+}
+
+/* Remover animações durante captura */
+.capture-mode .animate__animated {
+    animation: none !important;
+    opacity: 1 !important;
+}
+
+/* Garantir que tudo seja visível */
+.capture-mode {
+    visibility: visible !important;
+    opacity: 1 !important;
+}

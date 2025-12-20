@@ -62,7 +62,22 @@
                 </div>
             </div>
             
-
+            <!-- PROMPT DE INSTALAÇÃO PWA -->
+            <div id="installPrompt" class="install-prompt">
+                <div class="install-content">
+                    <i class="fas fa-download install-icon"></i>
+                    <h3>Instalar App</h3>
+                    <p>Instale o app da Gala Juvenil para acesso rápido!</p>
+                    <div class="install-buttons">
+                        <button onclick="installApp()" class="btn-install">
+                            <i class="fas fa-plus-circle"></i> Instalar
+                        </button>
+                        <button onclick="dismissPrompt()" class="btn-cancel-install">
+                            Agora não
+                        </button>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <!-- TELA 2 - SENHA -->
@@ -209,6 +224,10 @@
                         <i class="fas fa-download"></i>
                         <span class="btn-tooltip"></span>
                     </button>
+                    <button onclick="capturarTela()" class="btn-action btn-screenshot" title="Capturar Tela">
+                        <i class="fas fa-camera"></i>
+                        <span class="btn-tooltip"></span>
+                    </button>
                     <button onclick="compartilharWhatsApp()" class="btn-action btn-whatsapp" title="Enviar WhatsApp">
                         <i class="fab fa-whatsapp"></i>
                         <span class="btn-tooltip"></span>
@@ -234,9 +253,13 @@
         </section>
     </div>
 
+    <!-- NOTIFICAÇÃO -->
+    <div id="notification" class="notification">
+        <div id="notificationText"></div>
+    </div>
+
     <!-- EFEITOS DE PARTÍCULAS -->
     <div id="particles-js"></div>
-    
     
     <!-- SCRIPTS -->
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>

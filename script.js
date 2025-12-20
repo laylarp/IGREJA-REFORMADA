@@ -165,7 +165,7 @@ function showInstallPrompt() {
     if (!dismissed && (!isInstalled && appInstalled !== 'true')) {
         const prompt = document.getElementById('installPrompt');
         if (prompt) {
-            prompt.style.display = 'flex';
+            prompt.style.display = 'block';
         }
     }
 }
@@ -300,6 +300,111 @@ function editarNome() {
     document.getElementById('nomeConvidado').focus();
 }
 
+// NOVA FUNÇÃO: CAPTURAR TELA (Screenshot)
+function capturarTela() {
+    if (!nomeConvidado) {
+        showNotification('Primeiro gere um convite!', 'error');
+        return;
+    }
+    
+    showNotification('📸 Preparando para captura...');
+    
+    // Criar um canvas do tamanho do convite
+    const conviteElement = document.getElementById('areaConvite');
+    
+    // Temporariamente aplicar estilos de alta qualidade
+    conviteElement.classList.add('capture-mode');
+    
+    // Capturar com alta qualidade
+    setTimeout(() => {
+        html2canvas(conviteElement, {
+            scale: 3,
+            useCORS: true,
+            backgroundColor: '#f5f1e9',
+            logging: false,
+            allowTaint: true,
+            onclone: function(clonedDoc, element) {
+                // Garantir que todos os estilos sejam aplicados
+                element.style.width = conviteElement.offsetWidth + 'px';
+                element.style.height = conviteElement.offsetHeight + 'px';
+            }
+        }).then(canvas => {
+            // Remover modo captura
+            conviteElement.classList.remove('capture-mode');
+            
+            // Abrir imagem em nova aba para o usuário salvar
+            const image = canvas.toDataURL('image/png', 1.0);
+            
+            // Criar uma nova janela com a imagem
+            const newWindow = window.open();
+            newWindow.document.write(`
+                <html>
+                <head>
+                    <title>Captura do Convite - ${nomeConvidado}</title>
+                    <style>
+                        body { 
+                            margin: 0; 
+                            padding: 20px; 
+                            background: #f0f0f0; 
+                            display: flex; 
+                            flex-direction: column; 
+                            align-items: center; 
+                            justify-content: center; 
+                            min-height: 100vh;
+                        }
+                        img { 
+                            max-width: 90%; 
+                            height: auto; 
+                            border-radius: 10px; 
+                            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+                            border: 2px solid #d4af37;
+                        }
+                        .instructions {
+                            margin: 20px 0;
+                            color: #333;
+                            font-family: Arial, sans-serif;
+                            text-align: center;
+                        }
+                        .button-group {
+                            margin: 20px 0;
+                        }
+                        button {
+                            background: linear-gradient(135deg, #4e342e 0%, #6d4c41 100%);
+                            color: white;
+                            border: none;
+                            padding: 12px 25px;
+                            border-radius: 8px;
+                            margin: 0 10px;
+                            cursor: pointer;
+                            font-weight: bold;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="instructions">
+                        <h3>Convite capturado com sucesso!</h3>
+                        <p>1. Clique com o botão direito na imagem abaixo</p>
+                        <p>2. Selecione "Salvar imagem como..."</p>
+                        <p>3. Escolha onde salvar no seu dispositivo</p>
+                    </div>
+                    <img src="${image}" alt="Convite Gala Juvenil">
+                    <div class="button-group">
+                        <button onclick="window.print()">🖨️ Imprimir</button>
+                        <button onclick="window.close()">✖️ Fechar</button>
+                    </div>
+                </body>
+                </html>
+            `);
+            
+            showNotification('✅ Captura pronta! Salve a imagem.');
+        }).catch(error => {
+            console.error('Erro na captura:', error);
+            conviteElement.classList.remove('capture-mode');
+            showNotification('❌ Erro na captura. Tente novamente.', 'error');
+        });
+    }, 500);
+}
+
 // FUNÇÃO PRINCIPAL DE DOWNLOAD - VERSÃO OTIMIZADA
 function baixarImagem() {
     if (!nomeConvidado) {
@@ -312,177 +417,68 @@ function baixarImagem() {
     btnDownload.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
     btnDownload.disabled = true;
     
-    showNotification('🖼️ Gerando imagem em alta qualidade...');
+    showNotification('🎨 Gerando imagem em alta qualidade...');
     
-    // Salvar estilos originais
-    const elemento = document.getElementById('areaConvite');
-    const estilosOriginais = {
-        width: elemento.style.width,
-        height: elemento.style.height,
-        position: elemento.style.position,
-        left: elemento.style.left,
-        top: elemento.style.top,
-        transform: elemento.style.transform,
-        margin: elemento.style.margin,
-        padding: elemento.style.padding,
-        backgroundColor: elemento.style.backgroundColor
-    };
+    const conviteElement = document.getElementById('areaConvite');
     
-    // Criar um container de captura
-    const captureContainer = document.createElement('div');
-    captureContainer.className = 'capture-container';
-    captureContainer.style.cssText = `
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        background: #f5f1e9;
-        z-index: 9999;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 20px;
-        box-sizing: border-box;
-        overflow: hidden;
-    `;
+    // Aplicar estilos de alta qualidade
+    conviteElement.classList.add('capture-mode');
     
-    // Clonar o convite
-    const conviteClone = elemento.cloneNode(true);
-    conviteClone.id = 'convite-capture';
-    
-    // Aplicar estilos otimizados para captura
-    conviteClone.style.cssText = `
-        width: 900px !important;
-        max-width: 90vw !important;
-        height: 1600px !important;
-        max-height: 90vh !important;
-        margin: 0 !important;
-        padding: 40px !important;
-        background: #f5f1e9 !important;
-        border-radius: 20px !important;
-        transform: none !important;
-        position: relative !important;
-        overflow: visible !important;
-        box-shadow: 0 20px 60px rgba(0,0,0,0.15) !important;
-    `;
-    
-    // Ajustar elementos internos
+    // Capturar com alta qualidade
     setTimeout(() => {
-        // Ajustar borda do convite
-        const border = conviteClone.querySelector('.convite-border');
-        if (border) {
-            border.style.cssText = `
-                width: 100% !important;
-                height: 100% !important;
-                margin: 0 !important;
-                padding: 50px !important;
-                border: 4px solid #d4af37 !important;
-                border-radius: 15px !important;
-                background: white !important;
-                box-sizing: border-box !important;
-            `;
-        }
-        
-        // Aumentar tamanho do texto
-        const aumentarTexto = (elemento, multiplicador) => {
-            const estilo = window.getComputedStyle(elemento);
-            if (estilo.fontSize) {
-                const tamanho = parseFloat(estilo.fontSize);
-                if (!isNaN(tamanho)) {
-                    elemento.style.fontSize = (tamanho * multiplicador) + 'px';
-                }
+        html2canvas(conviteElement, {
+            scale: 4, // Altíssima qualidade
+            useCORS: true,
+            backgroundColor: '#f5f1e9',
+            logging: false,
+            allowTaint: true,
+            onclone: function(clonedDoc, element) {
+                element.style.width = conviteElement.offsetWidth + 'px';
+                element.style.height = conviteElement.offsetHeight + 'px';
             }
-        };
-        
-        // Aplicar a todos os textos importantes
-        const titulos = conviteClone.querySelectorAll('h1, h2, h3');
-        titulos.forEach(titulo => aumentarTexto(titulo, 1.8));
-        
-        const paragrafos = conviteClone.querySelectorAll('p');
-        paragrafos.forEach(p => aumentarTexto(p, 1.5));
-        
-        const spans = conviteClone.querySelectorAll('span');
-        spans.forEach(span => aumentarTexto(span, 1.3));
-        
-        // Ajustar ícones
-        const icones = conviteClone.querySelectorAll('i');
-        icones.forEach(icone => {
-            const estilo = window.getComputedStyle(icone);
-            if (estilo.fontSize) {
-                const tamanho = parseFloat(estilo.fontSize);
-                if (!isNaN(tamanho)) {
-                    icone.style.fontSize = (tamanho * 1.8) + 'px';
-                }
-            }
+        }).then(canvas => {
+            // Remover modo captura
+            conviteElement.classList.remove('capture-mode');
+            
+            // Criar link para download
+            const link = document.createElement('a');
+            const nomeArquivo = `Convite_Gala_Juvenil_${nomeConvidado.replace(/[^a-zA-Z0-9]/g, '_')}.png`;
+            
+            // Otimizar canvas final
+            const canvasFinal = document.createElement('canvas');
+            canvasFinal.width = canvas.width;
+            canvasFinal.height = canvas.height;
+            const ctx = canvasFinal.getContext('2d');
+            
+            // Adicionar fundo branco
+            ctx.fillStyle = '#f5f1e9';
+            ctx.fillRect(0, 0, canvasFinal.width, canvasFinal.height);
+            
+            // Desenhar o convite
+            ctx.drawImage(canvas, 0, 0);
+            
+            link.download = nomeArquivo;
+            link.href = canvasFinal.toDataURL('image/png', 1.0);
+            link.style.display = 'none';
+            
+            document.body.appendChild(link);
+            link.click();
+            
+            setTimeout(() => {
+                document.body.removeChild(link);
+                URL.revokeObjectURL(link.href);
+            }, 100);
+            
+            showNotification('✅ Convite baixado com sucesso!');
+        }).catch(error => {
+            console.error('Erro no html2canvas:', error);
+            conviteElement.classList.remove('capture-mode');
+            showNotification('❌ Erro ao gerar imagem. Use a opção de captura.', 'error');
+        }).finally(() => {
+            btnDownload.innerHTML = originalHTML;
+            btnDownload.disabled = false;
         });
-        
-        // Adicionar ao container
-        captureContainer.appendChild(conviteClone);
-        document.body.appendChild(captureContainer);
-        
-        // Capturar após um breve delay para renderização
-        setTimeout(() => {
-            html2canvas(conviteClone, {
-                scale: 3, // Alta qualidade
-                useCORS: true,
-                backgroundColor: '#f5f1e9',
-                width: conviteClone.offsetWidth,
-                height: conviteClone.offsetHeight,
-                logging: false,
-                allowTaint: true,
-                useCORS: true,
-                onclone: function(clonedDoc, element) {
-                    // Garantir que todos os estilos sejam aplicados
-                    element.style.width = conviteClone.offsetWidth + 'px';
-                    element.style.height = conviteClone.offsetHeight + 'px';
-                    element.style.overflow = 'visible';
-                }
-            }).then(canvas => {
-                // Remover container de captura
-                document.body.removeChild(captureContainer);
-                
-                // Criar link para download
-                const link = document.createElement('a');
-                const nomeArquivo = `Convite_Gala_Juvenil_${nomeConvidado.replace(/[^a-zA-Z0-9]/g, '_')}.png`;
-                
-                // Otimizar canvas final
-                const canvasFinal = document.createElement('canvas');
-                canvasFinal.width = canvas.width;
-                canvasFinal.height = canvas.height;
-                const ctx = canvasFinal.getContext('2d');
-                
-                // Adicionar fundo branco
-                ctx.fillStyle = '#f5f1e9';
-                ctx.fillRect(0, 0, canvasFinal.width, canvasFinal.height);
-                
-                // Desenhar o convite
-                ctx.drawImage(canvas, 0, 0);
-                
-                link.download = nomeArquivo;
-                link.href = canvasFinal.toDataURL('image/png', 1.0);
-                link.style.display = 'none';
-                
-                document.body.appendChild(link);
-                link.click();
-                
-                setTimeout(() => {
-                    document.body.removeChild(link);
-                    URL.revokeObjectURL(link.href);
-                }, 100);
-                
-                showNotification('✅ Convite baixado com sucesso!');
-            }).catch(error => {
-                console.error('Erro no html2canvas:', error);
-                document.body.removeChild(captureContainer);
-                showNotification('❌ Erro ao gerar imagem. Tente novamente.', 'error');
-            }).finally(() => {
-                btnDownload.innerHTML = originalHTML;
-                btnDownload.disabled = false;
-            });
-        }, 800);
-        
-    }, 100);
+    }, 500);
 }
 
 // Gerar link compartilhável
@@ -596,9 +592,9 @@ function showNotification(message, type = 'success') {
     
     // Definir cor baseada no tipo
     if (type === 'error') {
-        notification.style.background = 'linear-gradient(135deg, #f44336 0%, #c62828 100%)';
+        notification.classList.add('error');
     } else {
-        notification.style.background = 'linear-gradient(135deg, #4CAF50 0%, #2e7d32 100%)';
+        notification.classList.remove('error');
     }
     
     notification.classList.add('show');
