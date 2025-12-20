@@ -1,22 +1,64 @@
 {
   "name": "Convite Gala Juvenil",
   "short_name": "Gala 2025",
-  "description": "Gerador de convites para a Gala Juvenil 2025",
-  "start_url": "/index.html",
+  "description": "Gerador de convites personalizados para a Gala Juvenil 2025",
+  "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#1a1a2e",
+  "background_color": "#4e342e",
   "theme_color": "#d4af37",
   "orientation": "portrait",
+  "scope": "./",
+  "lang": "pt-BR",
+  "dir": "ltr",
+  "categories": ["lifestyle", "social"],
   "icons": [
     {
       "src": "logo.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "logo.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "logo.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "logo.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "logo.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "logo.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "logo.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any"
     },
     {
       "src": "logo.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ]
 }

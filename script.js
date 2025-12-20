@@ -2,8 +2,6 @@
 const SENHA_VALIDA = "gala2025";
 let nomeConvidado = "";
 let isFromLink = false;
-let deferredPrompt;
-let isInstalled = false;
 
 // Inicialização
 (function() {
@@ -16,20 +14,29 @@ let isInstalled = false;
     // Configurar partículas
     setupParticles();
     
-    // Evento para instalação PWA
-    window.addEventListener('beforeinstallprompt', (e) => {
-        e.preventDefault();
-        deferredPrompt = e;
-        isInstalled = false;
-    });
-    
-    window.addEventListener('appinstalled', () => {
-        isInstalled = true;
-        hideInstallPrompt();
-        showNotification('Aplicativo instalado com sucesso!');
-        localStorage.setItem('appInstalled', 'true');
-    });
+    // PWA - Mostrar mensagem de instalação
+    setupPWA();
 })();
+
+// Configurar PWA
+function setupPWA() {
+    // Verificar se já está instalado
+    if (window.matchMedia('(display-mode: standalone)').matches) {
+        console.log('App já está instalado como PWA');
+        return;
+    }
+    
+    // Verificar se navegador suporta PWA
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('service-worker.js')
+            .then(registration => {
+                console.log('Service Worker registrado com sucesso:', registration.scope);
+            })
+            .catch(error => {
+                console.log('Falha ao registrar Service Worker:', error);
+            });
+    }
+}
 
 // Processar parâmetros da URL IMEDIATAMENTE
 function processUrlParametersImmediately() {
@@ -79,13 +86,6 @@ document.addEventListener('DOMContentLoaded', function() {
     } else {
         // Mostrar tela inicial normalmente
         document.getElementById('tela1').classList.add('active');
-    }
-    
-    // Mostrar prompt de instalação se for mobile
-    if (isMobile() && !isInstalled) {
-        setTimeout(() => {
-            showInstallPrompt();
-        }, 3000);
     }
 });
 
@@ -150,53 +150,6 @@ function ocultarBotaoEditar() {
     if (btnEditar) {
         btnEditar.style.display = 'none';
     }
-}
-
-// Verificar se é mobile
-function isMobile() {
-    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-}
-
-// Mostrar prompt de instalação
-function showInstallPrompt() {
-    const dismissed = localStorage.getItem('installPromptDismissed');
-    const appInstalled = localStorage.getItem('appInstalled');
-    
-    if (!dismissed && (!isInstalled && appInstalled !== 'true')) {
-        const prompt = document.getElementById('installPrompt');
-        if (prompt) {
-            prompt.style.display = 'block';
-        }
-    }
-}
-
-// Esconder prompt de instalação
-function hideInstallPrompt() {
-    const prompt = document.getElementById('installPrompt');
-    if (prompt) {
-        prompt.style.display = 'none';
-    }
-}
-
-// Instalar aplicativo
-function installApp() {
-    if (deferredPrompt) {
-        deferredPrompt.prompt();
-        deferredPrompt.userChoice.then((choiceResult) => {
-            if (choiceResult.outcome === 'accepted') {
-                showNotification('Instalação iniciada!');
-                localStorage.setItem('appInstalled', 'true');
-            }
-            deferredPrompt = null;
-        });
-    } else {
-        showNotification('Use o menu do navegador para instalar (⋮ → Instalar app)');
-    }
-}
-
-function dismissPrompt() {
-    hideInstallPrompt();
-    localStorage.setItem('installPromptDismissed', 'true');
 }
 
 // Navegação entre telas
@@ -264,7 +217,7 @@ function gerarConvite() {
     localStorage.setItem('conviteGerado', 'true');
     localStorage.removeItem('isFromLink'); // Remover marcação de link
     
-    showNotification('Convite gerado com sucesso!');
+    showNotification('Convite gerado com sucesso! Para salvar, use o método comum do seu celular para tirar screenshot.');
     
     // Efeito visual no nome
     const nomeElement = document.getElementById('displayNome');
@@ -287,7 +240,7 @@ function verConviteExistente() {
         // Ocultar botão editar quando vem do "Ver Convite"
         ocultarBotaoEditar();
         
-        showNotification('Convite carregado!');
+        showNotification('Convite carregado! Para salvar, use o método comum do seu celular para tirar screenshot.');
     } else {
         showNotification('Nenhum convite encontrado. Crie um novo primeiro.', 'error');
     }
@@ -298,187 +251,6 @@ function editarNome() {
     navegar('tela3');
     document.getElementById('nomeConvidado').value = nomeConvidado;
     document.getElementById('nomeConvidado').focus();
-}
-
-// NOVA FUNÇÃO: CAPTURAR TELA (Screenshot)
-function capturarTela() {
-    if (!nomeConvidado) {
-        showNotification('Primeiro gere um convite!', 'error');
-        return;
-    }
-    
-    showNotification('📸 Preparando para captura...');
-    
-    // Criar um canvas do tamanho do convite
-    const conviteElement = document.getElementById('areaConvite');
-    
-    // Temporariamente aplicar estilos de alta qualidade
-    conviteElement.classList.add('capture-mode');
-    
-    // Capturar com alta qualidade
-    setTimeout(() => {
-        html2canvas(conviteElement, {
-            scale: 3,
-            useCORS: true,
-            backgroundColor: '#f5f1e9',
-            logging: false,
-            allowTaint: true,
-            onclone: function(clonedDoc, element) {
-                // Garantir que todos os estilos sejam aplicados
-                element.style.width = conviteElement.offsetWidth + 'px';
-                element.style.height = conviteElement.offsetHeight + 'px';
-            }
-        }).then(canvas => {
-            // Remover modo captura
-            conviteElement.classList.remove('capture-mode');
-            
-            // Abrir imagem em nova aba para o usuário salvar
-            const image = canvas.toDataURL('image/png', 1.0);
-            
-            // Criar uma nova janela com a imagem
-            const newWindow = window.open();
-            newWindow.document.write(`
-                <html>
-                <head>
-                    <title>Captura do Convite - ${nomeConvidado}</title>
-                    <style>
-                        body { 
-                            margin: 0; 
-                            padding: 20px; 
-                            background: #f0f0f0; 
-                            display: flex; 
-                            flex-direction: column; 
-                            align-items: center; 
-                            justify-content: center; 
-                            min-height: 100vh;
-                        }
-                        img { 
-                            max-width: 90%; 
-                            height: auto; 
-                            border-radius: 10px; 
-                            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-                            border: 2px solid #d4af37;
-                        }
-                        .instructions {
-                            margin: 20px 0;
-                            color: #333;
-                            font-family: Arial, sans-serif;
-                            text-align: center;
-                        }
-                        .button-group {
-                            margin: 20px 0;
-                        }
-                        button {
-                            background: linear-gradient(135deg, #4e342e 0%, #6d4c41 100%);
-                            color: white;
-                            border: none;
-                            padding: 12px 25px;
-                            border-radius: 8px;
-                            margin: 0 10px;
-                            cursor: pointer;
-                            font-weight: bold;
-                        }
-                    </style>
-                </head>
-                <body>
-                    <div class="instructions">
-                        <h3>Convite capturado com sucesso!</h3>
-                        <p>1. Clique com o botão direito na imagem abaixo</p>
-                        <p>2. Selecione "Salvar imagem como..."</p>
-                        <p>3. Escolha onde salvar no seu dispositivo</p>
-                    </div>
-                    <img src="${image}" alt="Convite Gala Juvenil">
-                    <div class="button-group">
-                        <button onclick="window.print()">🖨️ Imprimir</button>
-                        <button onclick="window.close()">✖️ Fechar</button>
-                    </div>
-                </body>
-                </html>
-            `);
-            
-            showNotification('✅ Captura pronta! Salve a imagem.');
-        }).catch(error => {
-            console.error('Erro na captura:', error);
-            conviteElement.classList.remove('capture-mode');
-            showNotification('❌ Erro na captura. Tente novamente.', 'error');
-        });
-    }, 500);
-}
-
-// FUNÇÃO PRINCIPAL DE DOWNLOAD - VERSÃO OTIMIZADA
-function baixarImagem() {
-    if (!nomeConvidado) {
-        showNotification('Primeiro gere um convite!', 'error');
-        return;
-    }
-    
-    const btnDownload = document.querySelector('.btn-download');
-    const originalHTML = btnDownload.innerHTML;
-    btnDownload.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
-    btnDownload.disabled = true;
-    
-    showNotification('🎨 Gerando imagem em alta qualidade...');
-    
-    const conviteElement = document.getElementById('areaConvite');
-    
-    // Aplicar estilos de alta qualidade
-    conviteElement.classList.add('capture-mode');
-    
-    // Capturar com alta qualidade
-    setTimeout(() => {
-        html2canvas(conviteElement, {
-            scale: 4, // Altíssima qualidade
-            useCORS: true,
-            backgroundColor: '#f5f1e9',
-            logging: false,
-            allowTaint: true,
-            onclone: function(clonedDoc, element) {
-                element.style.width = conviteElement.offsetWidth + 'px';
-                element.style.height = conviteElement.offsetHeight + 'px';
-            }
-        }).then(canvas => {
-            // Remover modo captura
-            conviteElement.classList.remove('capture-mode');
-            
-            // Criar link para download
-            const link = document.createElement('a');
-            const nomeArquivo = `Convite_Gala_Juvenil_${nomeConvidado.replace(/[^a-zA-Z0-9]/g, '_')}.png`;
-            
-            // Otimizar canvas final
-            const canvasFinal = document.createElement('canvas');
-            canvasFinal.width = canvas.width;
-            canvasFinal.height = canvas.height;
-            const ctx = canvasFinal.getContext('2d');
-            
-            // Adicionar fundo branco
-            ctx.fillStyle = '#f5f1e9';
-            ctx.fillRect(0, 0, canvasFinal.width, canvasFinal.height);
-            
-            // Desenhar o convite
-            ctx.drawImage(canvas, 0, 0);
-            
-            link.download = nomeArquivo;
-            link.href = canvasFinal.toDataURL('image/png', 1.0);
-            link.style.display = 'none';
-            
-            document.body.appendChild(link);
-            link.click();
-            
-            setTimeout(() => {
-                document.body.removeChild(link);
-                URL.revokeObjectURL(link.href);
-            }, 100);
-            
-            showNotification('✅ Convite baixado com sucesso!');
-        }).catch(error => {
-            console.error('Erro no html2canvas:', error);
-            conviteElement.classList.remove('capture-mode');
-            showNotification('❌ Erro ao gerar imagem. Use a opção de captura.', 'error');
-        }).finally(() => {
-            btnDownload.innerHTML = originalHTML;
-            btnDownload.disabled = false;
-        });
-    }, 500);
 }
 
 // Gerar link compartilhável
@@ -544,7 +316,7 @@ function compartilharWhatsApp() {
     const baseUrl = window.location.origin + window.location.pathname;
     const linkConvite = `${baseUrl}?nome=${nomeCodificado}&share=true`;
     
-    const textoConvite = `*🎉 Convite para a Gala Juvenil 2025 🎉*\n\nOlá! Recebi um convite especial para a *Gala Juvenil da Igreja Reformada*.\n\nClique no link abaixo para ver o convite personalizado:\n\n🔗 ${linkConvite}\n\n*Baixe o convite e participe desta celebração especial!*`;
+    const textoConvite = `*🎉 Convite para a Gala Juvenil 2025 🎉*\n\nOlá! Recebi um convite especial para a *Gala Juvenil da Igreja Reformada*.\n\nClique no link abaixo para ver o convite personalizado:\n\n🔗 ${linkConvite}\n\n*Use o método comum do seu celular para tirar screenshot do convite!*`;
     
     const textoCodificado = encodeURIComponent(textoConvite);
     const urlWhatsApp = `https://wa.me/?text=${textoCodificado}`;
@@ -602,19 +374,6 @@ function showNotification(message, type = 'success') {
     setTimeout(() => {
         notification.classList.remove('show');
     }, 3000);
-}
-
-// Service Worker
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        navigator.serviceWorker.register('service-worker.js')
-            .then(registration => {
-                console.log('ServiceWorker registrado:', registration.scope);
-            })
-            .catch(error => {
-                console.log('Falha ao registrar ServiceWorker:', error);
-            });
-    });
 }
 
 // Limpar estado quando sair do modo link

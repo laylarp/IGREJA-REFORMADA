@@ -1,11 +1,12 @@
-// service-worker.js - VERSÃO SIMPLIFICADA
-const CACHE_NAME = 'gala-juvenil-v3';
+// service-worker.js - Versão simplificada e funcional
+const CACHE_NAME = 'gala-juvenil-v4';
 const urlsToCache = [
-  '/',
-  '/index.html',
-  '/style.css',
-  '/script.js',
-  '/manifest.json'
+  './',
+  './index.html',
+  './style.css',
+  './script.js',
+  './manifest.json',
+  './logo.png'
 ];
 
 // Instalação
@@ -13,7 +14,7 @@ self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => {
-        console.log('Cache instalado');
+        console.log('Cache instalado:', CACHE_NAME);
         return cache.addAll(urlsToCache);
       })
       .then(() => self.skipWaiting())
@@ -36,17 +37,15 @@ self.addEventListener('activate', event => {
   );
 });
 
-// Fetch - CORREÇÃO CRÍTICA: Não cachear URLs com parâmetros
+// Fetch
 self.addEventListener('fetch', event => {
-  const url = new URL(event.request.url);
-  
-  // NÃO cachear requisições com parâmetros (links de convite)
-  if (url.search.includes('nome=') || url.search.includes('share=')) {
+  // Não cachear URLs com parâmetros (links de convite)
+  if (event.request.url.includes('?nome=') || event.request.url.includes('?share=')) {
     event.respondWith(fetch(event.request));
     return;
   }
   
-  // Para outras requisições, usar cache com fallback
+  // Para outras requisições
   event.respondWith(
     caches.match(event.request)
       .then(response => {
@@ -73,7 +72,7 @@ self.addEventListener('fetch', event => {
           .catch(() => {
             // Fallback para página offline
             if (event.request.mode === 'navigate') {
-              return caches.match('/index.html');
+              return caches.match('./index.html');
             }
           });
       })

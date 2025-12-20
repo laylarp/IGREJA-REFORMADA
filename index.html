@@ -22,9 +22,6 @@
     <meta name="theme-color" content="#4e342e">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    
-    <!-- HTML2CANVAS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body>
 
@@ -59,23 +56,6 @@
                     <p><i class="fas fa-users"></i> Comissão da Gala</p>
                     <p><i class="fas fa-phone"></i> 85 232 8379 | 84 401 2254</p>
                     <p class="copyright">© 2025 Igreja Reformada - Para a Glória de Deus</p>
-                </div>
-            </div>
-            
-            <!-- PROMPT DE INSTALAÇÃO PWA -->
-            <div id="installPrompt" class="install-prompt">
-                <div class="install-content">
-                    <i class="fas fa-download install-icon"></i>
-                    <h3>Instalar App</h3>
-                    <p>Instale o app da Gala Juvenil para acesso rápido!</p>
-                    <div class="install-buttons">
-                        <button onclick="installApp()" class="btn-install">
-                            <i class="fas fa-plus-circle"></i> Instalar
-                        </button>
-                        <button onclick="dismissPrompt()" class="btn-cancel-install">
-                            Agora não
-                        </button>
-                    </div>
                 </div>
             </div>
         </section>
@@ -204,6 +184,15 @@
                                     </div>
                                 </div>
 
+                                <!-- MENSAGEM DE SCREENSHOT -->
+                                <div class="screenshot-message">
+                                    <i class="fas fa-mobile-alt"></i>
+                                    <p><strong>Para salvar este convite:</strong></p>
+                                    <p>Use o método comum do seu celular para tirar screenshot da tela.</p>
+                                    <small>1. Pressione os botões de volume e power ao mesmo tempo<br>
+                                           2. Ou use o gesto de três dedos (dependendo do modelo)</small>
+                                </div>
+
                                 <!-- CONTATOS -->
                                 <div class="convite-footer-branding">
                                     <p class="church-name-footer">Igreja Reformada</p>
@@ -220,14 +209,6 @@
                 </div>
 
                 <div class="action-buttons">
-                    <button onclick="baixarImagem()" class="btn-action btn-download" title="Baixar Imagem">
-                        <i class="fas fa-download"></i>
-                        <span class="btn-tooltip"></span>
-                    </button>
-                    <button onclick="capturarTela()" class="btn-action btn-screenshot" title="Capturar Tela">
-                        <i class="fas fa-camera"></i>
-                        <span class="btn-tooltip"></span>
-                    </button>
                     <button onclick="compartilharWhatsApp()" class="btn-action btn-whatsapp" title="Enviar WhatsApp">
                         <i class="fab fa-whatsapp"></i>
                         <span class="btn-tooltip"></span>

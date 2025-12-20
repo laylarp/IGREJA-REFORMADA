@@ -1236,3 +1236,118 @@ h3 {
     visibility: visible !important;
     opacity: 1 !important;
 }
+/* ============================================== */
+/* MENSAGEM DE SCREENSHOT */
+/* ============================================== */
+.screenshot-message {
+    background: rgba(33, 150, 243, 0.1);
+    border-left: 4px solid #2196F3;
+    padding: 15px;
+    margin: 25px 0;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.screenshot-message i {
+    color: #2196F3;
+    font-size: 2rem;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.screenshot-message p {
+    color: #333;
+    margin: 8px 0;
+    font-size: 1rem;
+    line-height: 1.4;
+}
+
+.screenshot-message small {
+    color: #666;
+    font-size: 0.85rem;
+    display: block;
+    margin-top: 10px;
+    line-height: 1.4;
+}
+
+/* ============================================== */
+/* NOTIFICAÇÃO */
+/* ============================================== */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, #4CAF50 0%, #2e7d32 100%);
+    color: white;
+    padding: 15px 25px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    z-index: 9999;
+    transform: translateX(150%);
+    transition: transform 0.3s ease;
+    max-width: 350px;
+    font-weight: 500;
+}
+
+.notification.show {
+    transform: translateX(0);
+}
+
+.notification.error {
+    background: linear-gradient(135deg, #f44336 0%, #c62828 100%);
+}
+
+/* ============================================== */
+/* BOTÕES SIMPLIFICADOS */
+/* ============================================== */
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 25px auto 20px;
+    width: 100%;
+    max-width: 400px;
+    padding: 0 20px;
+}
+
+.btn-action {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: none;
+    color: white;
+    font-size: 1.4rem;
+    cursor: pointer;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-action:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
+
+.btn-action:active {
+    transform: translateY(0);
+}
+
+.btn-whatsapp { 
+    background: linear-gradient(135deg, #25d366 0%, #128C7E 100%); 
+}
+.btn-edit { 
+    background: linear-gradient(135deg, var(--accent) 0%, #c19b2e 100%); 
+}
+.btn-link { 
+    background: linear-gradient(135deg, #9c27b0 0%, #7b1fa2 100%); 
+}
+.btn-share { 
+    background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%); 
+}
+
+/* Remove botões de download e screenshot */
+.btn-download, .btn-screenshot, .btn-quality-action {
+    display: none !important;
+}
